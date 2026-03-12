@@ -1,7 +1,8 @@
 # Amgi
 
 Amgi is an Anki deck builder that reads structured YAML data and generates an
-`.apkg` file.
+`.apkg` file. Because the input is plain text, it also works well with
+LLM-assisted dataset creation and cleanup.
 
 ## What You Need
 
@@ -31,6 +32,10 @@ flowchart TD
     build --> apkg
     apkg -->|Import| anki
 ```
+
+One learning note can produce multiple cards. For example, a language deck can
+generate both source-to-target cards and target-to-source cards from the same
+underlying note.
 
 ## Usage
 
@@ -64,6 +69,21 @@ Build output precedence:
    - See [Amgi v1 Schema](docs/amgi-v1-schema.md).
    - See the [JLPT example dataset](JLPT/n2_frequent_vocabulary_001).
 3. Build the `.apkg` and import it into Anki.
+
+## Example Use Case
+
+Suppose you are preparing for the JLPT and want to memorize Japanese
+vocabulary.
+
+1. Decide what each note should contain, such as the word, meaning, furigana,
+   example sentences, and extra explanation.
+2. Define that structure in `amgi.yaml` using
+   `note_schema.required_fields` and `note_schema.optional_fields`.
+3. Collect the dataset as YAML.
+   - Since the source format is text-based, it fits well with workflows such as
+     extracting text from photos and asking an LLM to structure it.
+4. Define how cards should be rendered in Anki from the same schema.
+5. Build the `.apkg`, import it into Anki, and study.
 
 ## Documentation
 
