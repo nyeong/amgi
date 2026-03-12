@@ -8,7 +8,7 @@ module Amgi
           Usage:
             amgi help
             amgi lint <deck_dir>
-            amgi build <deck_dir> [--out <output_dir>]
+            amgi build <deck_dir> [-o <output_path>]
         TEXT
 
         def call(argv)
@@ -49,21 +49,21 @@ module Amgi
         end
 
         def build(deck_path, args)
-          out_dir = parse_out_dir(args)
-          result = Application::BuildDeck.call(deck_path, out_dir: out_dir)
+          output_path = parse_output_path(args)
+          result = Application::BuildDeck.call(deck_path, output_path: output_path, cwd: Dir.pwd)
           return print_errors(result.errors) unless result.success?
 
           puts "Build OK: #{result.value.output_path} (#{result.value.card_count} cards)"
           0
         end
 
-        def parse_out_dir(args)
+        def parse_output_path(args)
           return nil unless args && !args.empty?
 
-          out_index = args.index('--out')
-          return nil unless out_index
+          option_index = args.find_index { |arg| %w[-o --out].include?(arg) }
+          return nil unless option_index
 
-          args[out_index + 1]
+          args[option_index + 1]
         end
 
         def print_errors(errors)

@@ -1,0 +1,30 @@
+schema: amgi_v1
+name: TOEIC_Vocabulary
+output: build/toeic-from-config.apkg
+global_tags:
+  - TOEIC
+note_schema:
+  required_fields:
+    - target
+    - meaning
+  optional_fields:
+    - example
+    - blankExample
+cards:
+  - name: Recall Meaning
+    default: true
+    front: |
+      <div class="target">{{target}}</div>
+    back: |
+      {{FrontSide}}
+      <hr id=answer>
+      <div class="meaning">{{meaning}}</div>
+      <div class="example">{{example}}</div>
+  - name: Cloze Example
+    front: |
+      <div class="example">{{blankExample}}</div>
+    back: |
+      {{FrontSide}}
+      <hr id=answer>
+      <div class="target">{{target}}</div>
+      <div class="meaning">{{meaning}}</div>

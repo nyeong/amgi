@@ -13,6 +13,7 @@ RSpec.describe Amgi::Application::LoadDeck do
     expect(deck.config.schema).to eq('amgi_v1')
     expect(deck.config.name).to eq('TOEIC_Vocabulary')
     expect(deck.config.css).to be_nil
+    expect(deck.config.output).to be_nil
     expect(deck.config.note_schema.required_fields).to eq(%w[target meaning])
     expect(deck.config.note_schema.optional_fields).to eq(%w[example blankExample])
     expect(deck.config.required_fields).to eq(%w[target meaning])
@@ -21,6 +22,15 @@ RSpec.describe Amgi::Application::LoadDeck do
     expect(deck.config.cards.map(&:name)).to eq(['Recall Meaning', 'Cloze Example'])
     expect(deck.note_sources.map(&:source_path)).to all(end_with('.yaml'))
     expect(deck.note_sources.flat_map(&:notes).size).to eq(2)
+  end
+
+  context 'when amgi.yaml defines an output path' do
+    let(:deck_path) { File.expand_path('../fixtures/decks/toeic_with_output', __dir__) }
+
+    it 'loads the output path' do
+      expect(result).to be_success
+      expect(result.value.config.output).to eq('build/toeic-from-config.apkg')
+    end
   end
 
   context 'when amgi.yaml is missing' do

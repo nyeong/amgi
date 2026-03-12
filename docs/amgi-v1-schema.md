@@ -5,6 +5,7 @@
 ```yaml
 schema: amgi_v1
 name: JLPT_N2_Frequent_Vocabulary_001
+output: build/jlpt.apkg
 global_tags:
   - JLPT
   - N2
@@ -55,6 +56,11 @@ Must be `amgi_v1`.
 ### `name`
 
 The Anki deck name.
+
+### `output`
+
+Optional output path for `amgi build` when `-o` is not provided.
+Relative paths are resolved from the deck directory that contains `amgi.yaml`.
 
 ### `global_tags`
 

@@ -13,7 +13,7 @@ RSpec.describe 'amgi CLI' do
       'Usage:',
       'amgi help',
       'amgi lint <deck_dir>',
-      'amgi build <deck_dir> [--out <output_dir>]'
+      'amgi build <deck_dir> [-o <output_path>]'
     ]
   end
 
@@ -56,19 +56,37 @@ RSpec.describe 'amgi CLI' do
     expect(stderr).to include('Missing required field `meaning`')
   end
 
-  it 'builds a valid deck into an apkg' do
+  it 'builds a valid deck into an apkg at the given output path' do
     Dir.mktmpdir do |dir|
+      output_path = File.join(dir, 'custom', 'toeic.apkg')
       stdout, _stderr, status = Open3.capture3(
         executable,
         'build',
         deck_path,
-        '--out',
-        dir,
+        '-o',
+        output_path,
         chdir: root
       )
 
       expect(status.exitstatus).to eq(0)
-      expect(stdout).to include('.apkg')
+      expect(stdout).to include(output_path)
+      expect(File).to exist(output_path)
+    end
+  end
+
+  it 'builds into the current working directory by default' do
+    Dir.mktmpdir do |dir|
+      output_path = File.join(dir, 'TOEIC_Vocabulary.apkg')
+      stdout, _stderr, status = Open3.capture3(
+        executable,
+        'build',
+        deck_path,
+        chdir: dir
+      )
+
+      expect(status.exitstatus).to eq(0)
+      expect(stdout).to include(output_path)
+      expect(File).to exist(output_path)
     end
   end
 end

@@ -42,11 +42,18 @@ nix run github:nyeong/amgi -- help
 # Build a deck
 nix run github:nyeong/amgi -- build <deck_dir>
 nix run github:nyeong/amgi -- build JLPT/n2_frequent_vocabulary_001
+nix run github:nyeong/amgi -- build JLPT/n2_frequent_vocabulary_001 -o /tmp/jlpt.apkg
 
 # Lint a deck
 nix run github:nyeong/amgi -- lint <deck_dir>
 nix run github:nyeong/amgi -- lint JLPT/n2_frequent_vocabulary_001
 ```
+
+Build output precedence:
+
+1. `-o <output_path>` (or `--out`)
+2. `output` in `amgi.yaml` relative to the deck directory
+3. `<current working directory>/<name>.apkg`
 
 ## Recommended Workflow
 

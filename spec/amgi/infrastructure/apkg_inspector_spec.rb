@@ -7,7 +7,10 @@ RSpec.describe Amgi::Infrastructure::ApkgInspector do
 
   it 'reads deck names and counts from a built apkg' do
     Dir.mktmpdir do |dir|
-      build_result = Amgi::Application::BuildDeck.call(deck_path, out_dir: dir)
+      build_result = Amgi::Application::BuildDeck.call(
+        deck_path,
+        output_path: File.join(dir, 'toeic.apkg')
+      )
       metadata = described_class.new.call(build_result.value.output_path)
 
       aggregate_failures do
