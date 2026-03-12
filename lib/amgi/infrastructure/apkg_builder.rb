@@ -65,6 +65,25 @@ module Amgi
           )
         SQL
       ].freeze
+      DEFAULT_MODEL_CSS = <<~CSS
+        .card {
+          font-family: arial;
+          font-size: 20px;
+          text-align: center;
+          color: black;
+          background-color: white;
+        }
+      CSS
+      DEFAULT_LATEX_PRE = <<~LATEX
+        \\documentclass[12pt]{article}
+        \\special{papersize=3in,5in}
+        \\usepackage[utf8]{inputenc}
+        \\usepackage{amssymb,amsmath}
+        \\pagestyle{empty}
+        \\setlength{\\parindent}{0in}
+        \\begin{document}
+      LATEX
+      DEFAULT_LATEX_POST = '\\end{document}'
 
       def call(validated_deck, out_dir:)
         FileUtils.mkdir_p(out_dir)
@@ -218,7 +237,7 @@ module Amgi
           '{}',
           JSON.generate(models_payload(config, model_id)),
           JSON.generate(decks_payload(config, deck_id)),
-          '{}',
+          JSON.generate(deck_config_payload),
           '{}'
         ]
       end
@@ -233,20 +252,15 @@ module Amgi
             usn: 0,
             sortf: 0,
             did: deterministic_integer("deck:#{config.name}"),
-            tmpls: config.templates.each_with_index.map do |template, index|
-              {
-                name: template.name,
-                ord: index,
-                qfmt: template.front,
-                afmt: template.back
-              }
-            end,
-            flds: config.all_fields.each_with_index.map do |field, index|
-              {
-                name: field,
-                ord: index
-              }
-            end
+            css: DEFAULT_MODEL_CSS,
+            latexPre: DEFAULT_LATEX_PRE,
+            latexPost: DEFAULT_LATEX_POST,
+            latexsvg: false,
+            req: required_fields_payload(config),
+            tags: [],
+            vers: [],
+            tmpls: template_payloads(config),
+            flds: field_payloads(config)
           }
         }
       end
@@ -258,7 +272,55 @@ module Amgi
             name: config.name,
             mod: Time.now.to_i,
             usn: 0,
-            desc: ''
+            desc: '',
+            dyn: 0,
+            collapsed: false,
+            browserCollapsed: false,
+            conf: 1,
+            extendNew: 0,
+            extendRev: 0,
+            newToday: [0, 0],
+            revToday: [0, 0],
+            lrnToday: [0, 0],
+            timeToday: [0, 0]
+          }
+        }
+      end
+
+      def deck_config_payload
+        {
+          '1' => {
+            id: 1,
+            name: 'Default',
+            mod: Time.now.to_i,
+            usn: 0,
+            maxTaken: 60,
+            autoplay: true,
+            timer: 0,
+            replayq: true,
+            new: {
+              bury: true,
+              delays: [1, 10],
+              initialFactor: 2500,
+              ints: [1, 4, 7],
+              order: 1,
+              perDay: 20
+            },
+            lapse: {
+              delays: [10],
+              leechAction: 0,
+              leechFails: 8,
+              minInt: 1,
+              mult: 0
+            },
+            rev: {
+              bury: true,
+              ease4: 1.3,
+              fuzz: 0.05,
+              ivlFct: 1,
+              maxIvl: 36_500,
+              perDay: 200
+            }
           }
         }
       end
@@ -296,6 +358,47 @@ module Amgi
 
       def sanitize(name)
         name.gsub(/[^A-Za-z0-9_-]+/, '_')
+      end
+
+      def required_fields_payload(config)
+        required_indexes = config.required_fields.map do |field|
+          config.all_fields.index(field)
+        end.compact
+        required_indexes = [0] if required_indexes.empty?
+
+        config.templates.each_index.map do |template_index|
+          [template_index, 'all', required_indexes]
+        end
+      end
+
+      def template_payloads(config)
+        config.templates.each_with_index.map do |template, index|
+          {
+            name: template.name,
+            ord: index,
+            qfmt: template.front,
+            afmt: template.back,
+            bqfmt: '',
+            bafmt: '',
+            did: nil,
+            bfont: 'Arial',
+            bsize: 20
+          }
+        end
+      end
+
+      def field_payloads(config)
+        config.all_fields.each_with_index.map do |field, index|
+          {
+            name: field,
+            ord: index,
+            sticky: false,
+            rtl: false,
+            font: 'Arial',
+            size: 20,
+            media: []
+          }
+        end
       end
     end
   end
