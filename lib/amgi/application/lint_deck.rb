@@ -6,7 +6,7 @@ module Amgi
       PLACEHOLDER_PATTERN = /{{\s*([A-Za-z][A-Za-z0-9_]*)\s*}}/
       ALLOWED_TEMPLATE_TOKENS = %w[FrontSide].freeze
       FIELD_NAME_PATTERN = /\A[a-z][A-Za-z0-9]*\z/
-      RESERVED_NOTE_KEYS = %w[tags].freeze
+      RESERVED_NOTE_KEYS = %w[_tags].freeze
 
       ValidatedDeck = Struct.new(:deck_source, :note_count, keyword_init: true)
 
@@ -109,9 +109,9 @@ module Amgi
       end
 
       def validate_tags(note, source_path, index, errors)
-        return if note['tags'].nil? || string_array?(note['tags'])
+        return if note['_tags'].nil? || string_array?(note['_tags'])
 
-        errors << "#{source_path}:note##{index + 1} `tags` must be a string array"
+        errors << "#{source_path}:note##{index + 1} `_tags` must be a string array"
       end
 
       def blank_string?(value)

@@ -117,7 +117,7 @@ notes:
     clozeContext: "_____を守る"
     translation: "환경을 지키다"
     memo: "환경 보호, 환경 개선처럼 같이 붙는 표현도 함께 외운다."
-    tags:
+    _tags:
       - Noun
 ```
 
@@ -136,8 +136,9 @@ Amgi currently enforces these rules:
 - exactly one card must have `default: true`
 - field names must use lowerCamelCase and start with a lowercase letter
 - every required field must be present in every note
-- note keys must be declared in `note_schema.required_fields` or `note_schema.optional_fields`, except `tags`
-- `tags` must be a string array when present
+- note keys must be declared in `note_schema.required_fields` or `note_schema.optional_fields`, except underscore-prefixed reserved fields such as `_tags`
+- reserved note fields must start with `_`
+- `_tags` must be a string array when present
 - card placeholders must reference declared fields or `FrontSide`
 
 ## SSoT Authoring Model

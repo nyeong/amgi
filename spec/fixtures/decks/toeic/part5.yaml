@@ -3,9 +3,9 @@ notes:
     meaning: 준수하다, 따르다
     example: All employees must comply with the rules.
     blankExample: All employees must {} with the rules.
-    tags:
+    _tags:
       - Part5
   - target: invoice
     meaning: 송장, 청구서
-    tags:
+    _tags:
       - Part7
