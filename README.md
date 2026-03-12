@@ -41,6 +41,11 @@ Each note is keyed by its `target`, so the dataset itself stays the single
 source of truth for note identity. Updating `meaning`, `memo`, or example
 fields keeps the same note; renaming the `target` creates a new one.
 
+Each dataset file can also opt into extra non-default cards with a root-level
+`_cards` list. Without `_cards`, notes in that file generate only the default
+card. Enabled non-default cards are still created only when their front-side
+fields are present on the note.
+
 ## Usage
 
 Amgi is currently packaged through Nix.
@@ -73,6 +78,7 @@ Build output precedence:
    - See [Amgi v1 Schema](docs/amgi-v1-schema.md).
    - See the [JLPT example dataset](JLPT/n2_frequent_vocabulary_001).
    - Write notes as a mapping keyed by `target`.
+   - Add `_cards` at the file root when that source file should emit extra card templates.
 3. Build the `.apkg` and import it into Anki.
 
 ## Example Use Case
@@ -89,8 +95,9 @@ vocabulary.
      extracting text from photos and asking an LLM to structure it.
    - Use `target` as the note key, for example `notes: { "痛み": { meaning: ... } }`.
 4. Define how cards should be rendered in Anki from the same schema.
-   - The default card is always generated. Non-default cards are generated only
-     when every field on their front side is present.
+   - The default card is always generated.
+   - Non-default cards must be enabled by the dataset file's `_cards` list and
+     still require every front-side field.
 5. Build the `.apkg`, import it into Anki, and study.
 
 ## Documentation

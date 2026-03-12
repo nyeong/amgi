@@ -85,15 +85,20 @@ Defines the card templates that will be derived from each note.
 Card generation rules:
 
 - the `default: true` card is always generated
-- non-default cards are generated only when every field referenced on their `front` is present
-- use optional fields on `front` to create expansion cards that appear only for richer notes
+- non-default cards must be enabled per dataset file through the root-level `_cards` list
+- an enabled non-default card is generated only when every field referenced on its `front` is present
+- use `_cards` plus optional fields on `front` to create expansion cards only in the source files that need them
 
 ## Dataset Files
 
 Dataset files are YAML files with a top-level `notes:` mapping.
 Each note key is the stable `target` and is injected into the note fields automatically.
+They may also define a root-level `_cards` string array to opt into extra non-default cards for that file.
 
 ```yaml
+_cards:
+  - "Cloze Context"
+
 notes:
   "環境":
     reading: "かんきょう"
@@ -120,3 +125,4 @@ Identity rules:
 Current reserved fields:
 
 - `_tags`: note-specific tags
+- dataset root `_cards`: card names enabled for every note in that source file

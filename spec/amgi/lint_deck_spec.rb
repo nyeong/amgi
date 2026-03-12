@@ -57,4 +57,12 @@ RSpec.describe Amgi::Application::LintDeck do
     expect(result).not_to be_success
     expect(result.errors.join("\n")).to include('At least one card is required.')
   end
+
+  it 'rejects unknown dataset-level card names' do
+    loaded = Amgi::Application::LoadDeck.call(fixture_path('invalid_source_cards'))
+    result = described_class.call(loaded.value)
+
+    expect(result).not_to be_success
+    expect(result.errors.join("\n")).to include('Unknown dataset `_cards`: Reverse')
+  end
 end

@@ -142,6 +142,7 @@ module Amgi
         card_rows = []
         validated_deck.deck_source.note_sources.each do |note_source|
           note_source.notes.each do |note|
+            active_cards = active_cards(config, note_source, note)
             note_id, guid = note_identity(note: note, deck_seed: deck_seed)
             note_rows << note_row(
               config: config,
@@ -153,7 +154,7 @@ module Amgi
             )
             due = append_card_rows(
               config: config,
-              note: note,
+              active_cards: active_cards,
               card_rows: card_rows,
               card_context: {
                 guid: guid,
@@ -412,10 +413,10 @@ module Amgi
         [note_id, guid]
       end
 
-      def append_card_rows(config:, note:, card_rows:, card_context:)
+      def append_card_rows(config:, active_cards:, card_rows:, card_context:)
         due = card_context.fetch(:due)
 
-        active_cards(config, note).each do |card|
+        active_cards.each do |card|
           ord = config.cards.index(card)
           card_rows << card_row(
             card_id: deterministic_integer("card:#{card_context.fetch(:guid)}:#{ord}"),
@@ -431,10 +432,17 @@ module Amgi
         due
       end
 
-      def active_cards(config, note)
+      def active_cards(config, note_source, note)
         config.cards.select do |card|
-          card.default? || fields_present?(note, card.front_fields)
+          card.default? || (
+            source_enabled_card?(note_source, card) &&
+            fields_present?(note, card.front_fields)
+          )
         end
+      end
+
+      def source_enabled_card?(note_source, card)
+        note_source.enabled_cards.include?(card.name)
       end
 
       def fields_present?(note, fields)
