@@ -60,8 +60,32 @@ module Amgi
           next if File.basename(path) == CONFIG_FILE
 
           data = YAML.load_file(path) || {}
-          Domain::NoteSource.new(source_path: path, notes: Array(data['notes']))
+          Domain::NoteSource.new(source_path: path, notes: normalize_notes(path, data['notes']))
         end
+      end
+
+      def normalize_notes(source_path, notes)
+        return [] if notes.nil?
+
+        unless notes.is_a?(Hash)
+          raise KeyError, "#{source_path}: `notes` must be a mapping keyed by target"
+        end
+
+        notes.map do |target, attributes|
+          normalize_note(source_path, target, attributes)
+        end
+      end
+
+      def normalize_note(source_path, target, attributes)
+        unless attributes.nil? || attributes.is_a?(Hash)
+          raise KeyError, "#{source_path}: note `#{target}` must be a mapping"
+        end
+
+        if attributes&.key?('target')
+          raise KeyError, "#{source_path}: note `#{target}` must not redefine `target` in the body"
+        end
+
+        (attributes || {}).merge('target' => target.to_s)
       end
     end
   end

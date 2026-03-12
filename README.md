@@ -9,7 +9,7 @@ LLM-assisted dataset creation and cleanup.
 Each deck directory needs at least two kinds of files:
 
 - `amgi.yaml` for deck configuration
-- one or more YAML dataset files that contain `notes:`
+- one or more YAML dataset files that contain `notes:` keyed by `target`
 
 Amgi reads them and builds an `.apkg`.
 
@@ -36,6 +36,10 @@ flowchart TD
 One learning note can produce multiple cards. For example, a language deck can
 generate both source-to-target cards and target-to-source cards from the same
 underlying note.
+
+Each note is keyed by its `target`, so the dataset itself stays the single
+source of truth for note identity. Updating `meaning`, `memo`, or example
+fields keeps the same note; renaming the `target` creates a new one.
 
 ## Usage
 
@@ -68,6 +72,7 @@ Build output precedence:
 2. Collect the dataset as structured YAML files.
    - See [Amgi v1 Schema](docs/amgi-v1-schema.md).
    - See the [JLPT example dataset](JLPT/n2_frequent_vocabulary_001).
+   - Write notes as a mapping keyed by `target`.
 3. Build the `.apkg` and import it into Anki.
 
 ## Example Use Case
@@ -82,7 +87,10 @@ vocabulary.
 3. Collect the dataset as YAML.
    - Since the source format is text-based, it fits well with workflows such as
      extracting text from photos and asking an LLM to structure it.
+   - Use `target` as the note key, for example `notes: { "痛み": { meaning: ... } }`.
 4. Define how cards should be rendered in Anki from the same schema.
+   - The default card is always generated. Non-default cards are generated only
+     when every field on their front side is present.
 5. Build the `.apkg`, import it into Anki, and study.
 
 ## Documentation

@@ -1,0 +1,13 @@
+schema: amgi_v1
+name: InvalidNotesList
+global_tags: []
+note_schema:
+  required_fields:
+    - target
+    - meaning
+  optional_fields: []
+cards:
+  - name: Recall Meaning
+    default: true
+    front: "{{target}}"
+    back: "{{meaning}}"

@@ -16,10 +16,10 @@ note_schema:
     - reading
     - meaning
     - context
-    - clozeContext
     - translation
     - memo
-  optional_fields: []
+  optional_fields:
+    - clozeContext
 
 cards:
   - name: Recall Meaning
@@ -70,7 +70,7 @@ Tags applied to all notes in the deck.
 
 Defines the allowed note fields.
 
-- `required_fields`: fields every note must have
+- `required_fields`: fields every note must have. `target` must be included and is populated from each note key.
 - `optional_fields`: fields that may appear on notes
 
 ### `cards`
@@ -82,13 +82,20 @@ Defines the card templates that will be derived from each note.
 - `back`: back-side template
 - `default`: exactly one card must be marked as the default
 
+Card generation rules:
+
+- the `default: true` card is always generated
+- non-default cards are generated only when every field referenced on their `front` is present
+- use optional fields on `front` to create expansion cards that appear only for richer notes
+
 ## Dataset Files
 
-Dataset files are YAML files with a top-level `notes:` key.
+Dataset files are YAML files with a top-level `notes:` mapping.
+Each note key is the stable `target` and is injected into the note fields automatically.
 
 ```yaml
 notes:
-  - target: "環境"
+  "環境":
     reading: "かんきょう"
     meaning: "environment, conditions"
     context: "環境を守る"
@@ -103,6 +110,12 @@ notes:
 
 Fields that start with `_` are reserved metadata fields.
 All other fields must be declared in `amgi.yaml`.
+
+Identity rules:
+
+- Amgi uses the note key, which is the `target`, as the stable note identity inside a deck
+- changing `meaning`, `memo`, `context`, or tags does not create a new note
+- renaming the note key creates a new note identity
 
 Current reserved fields:
 

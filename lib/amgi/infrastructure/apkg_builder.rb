@@ -142,7 +142,7 @@ module Amgi
         card_rows = []
         validated_deck.deck_source.note_sources.each do |note_source|
           note_source.notes.each do |note|
-            note_id, guid = note_identity(config: config, note: note, deck_seed: deck_seed)
+            note_id, guid = note_identity(note: note, deck_seed: deck_seed)
             note_rows << note_row(
               config: config,
               note: note,
@@ -360,13 +360,6 @@ module Amgi
         Digest::SHA1.hexdigest(value)[0, 8].to_i(16)
       end
 
-      def note_signature(config, note)
-        field_signature = config.all_fields.map { |field| "#{field}=#{note[field]}" }
-        meta_signature = ["_tags=#{Array(note['_tags']).join(',')}"]
-
-        (field_signature + meta_signature).join('|')
-      end
-
       def deterministic_integer(seed)
         Digest::SHA1.hexdigest(seed)[0, 15].to_i(16)
       end
@@ -412,10 +405,10 @@ module Amgi
         end
       end
 
-      def note_identity(config:, note:, deck_seed:)
-        signature = note_signature(config, note)
-        note_id = deterministic_integer("note:#{deck_seed}:#{signature}")
-        guid = Digest::SHA1.hexdigest("guid:#{deck_seed}:#{signature}")[0, 20]
+      def note_identity(note:, deck_seed:)
+        note_key = note.fetch('target').to_s
+        note_id = deterministic_integer("note:#{deck_seed}:#{note_key}")
+        guid = Digest::SHA1.hexdigest("guid:#{deck_seed}:#{note_key}")[0, 20]
         [note_id, guid]
       end
 

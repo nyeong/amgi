@@ -1,0 +1,16 @@
+schema: amgi_v1
+name: StableIdentity
+global_tags: []
+note_schema:
+  required_fields:
+    - target
+    - meaning
+  optional_fields:
+    - memo
+cards:
+  - name: Recall Meaning
+    default: true
+    front: "{{target}}"
+    back: |
+      {{meaning}}
+      <div>{{memo}}</div>
