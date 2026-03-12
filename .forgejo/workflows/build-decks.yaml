@@ -32,6 +32,7 @@ jobs:
         env:
           REPOSITORY: ${{ github.repository }}
           SERVER_URL: ${{ github.server_url }}
+          CHECKOUT_URL_OVERRIDE: ${{ vars.FORGEJO_CHECKOUT_URL }}
           EVENT_CLONE_URL: ${{ github.event.repository.clone_url }}
           EVENT_HTML_URL: ${{ github.event.repository.html_url }}
           FETCH_SHA: ${{ github.sha }}
@@ -43,7 +44,7 @@ jobs:
           # cannot reach the forwarded loopback endpoint.
           git config --global --add safe.directory "$PWD"
 
-          repo_url="${EVENT_CLONE_URL:-}"
+          repo_url="${CHECKOUT_URL_OVERRIDE:-${EVENT_CLONE_URL:-}}"
           if [[ -z "$repo_url" ]]; then
             repo_url="${EVENT_HTML_URL:-${SERVER_URL}/${REPOSITORY}}"
           fi
@@ -51,6 +52,8 @@ jobs:
             *.git) ;;
             *) repo_url="${repo_url}.git" ;;
           esac
+
+          echo "Using checkout URL: ${repo_url}"
           auth_args=()
 
           if [[ -n "${AUTH_TOKEN:-}" ]]; then
