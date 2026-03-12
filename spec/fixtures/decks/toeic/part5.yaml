@@ -3,6 +3,8 @@ notes:
     meaning: 준수하다, 따르다
     example: All employees must comply with the rules.
     blankExample: All employees must {} with the rules.
+    cardIds:
+      - clozeExample
     tags:
       - Part5
   - target: invoice

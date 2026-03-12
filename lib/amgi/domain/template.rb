@@ -3,12 +3,18 @@
 module Amgi
   module Domain
     class Template
-      attr_reader :name, :front, :back
+      attr_reader :id, :name, :front, :back
 
-      def initialize(name:, front:, back:)
+      def initialize(id:, name:, front:, back:, default: false)
+        @id = id
         @name = name
         @front = front
         @back = back
+        @default = default
+      end
+
+      def default?
+        @default
       end
     end
   end

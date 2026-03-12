@@ -24,12 +24,12 @@ RSpec.describe Amgi::Application::LintDeck do
     expect(result.errors.join("\n")).to include('Missing required field `meaning`')
   end
 
-  it 'rejects unknown template placeholders' do
+  it 'rejects unknown card placeholders' do
     loaded = Amgi::Application::LoadDeck.call(fixture_path('invalid_placeholder'))
     result = described_class.call(loaded.value)
 
     expect(result).not_to be_success
-    expect(result.errors.join("\n")).to include('Unknown template placeholder `unknownField`')
+    expect(result.errors.join("\n")).to include('Unknown card placeholder `unknownField`')
   end
 
   it 'rejects field declarations that do not start with lowercase' do
@@ -40,5 +40,29 @@ RSpec.describe Amgi::Application::LintDeck do
     expect(result.errors.join("\n")).to include(
       'Field names must start with a lowercase letter: Target'
     )
+  end
+
+  it 'rejects a deck with no required fields' do
+    loaded = Amgi::Application::LoadDeck.call(fixture_path('invalid_no_required_fields'))
+    result = described_class.call(loaded.value)
+
+    expect(result).not_to be_success
+    expect(result.errors.join("\n")).to include('At least one required field is required.')
+  end
+
+  it 'rejects a deck with no cards' do
+    loaded = Amgi::Application::LoadDeck.call(fixture_path('invalid_no_cards'))
+    result = described_class.call(loaded.value)
+
+    expect(result).not_to be_success
+    expect(result.errors.join("\n")).to include('At least one card is required.')
+  end
+
+  it 'rejects a note with an unknown card id' do
+    loaded = Amgi::Application::LoadDeck.call(fixture_path('invalid_unknown_card_id'))
+    result = described_class.call(loaded.value)
+
+    expect(result).not_to be_success
+    expect(result.errors.join("\n")).to include('Unknown card id(s) `missingCard`')
   end
 end

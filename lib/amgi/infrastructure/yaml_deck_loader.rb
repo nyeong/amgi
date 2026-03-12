@@ -5,7 +5,7 @@ require 'yaml'
 module Amgi
   module Infrastructure
     class YamlDeckLoader
-      BUILD_FILE = 'build.yaml'
+      CONFIG_FILE = 'amgi.yaml'
 
       def call(deck_path)
         Application::Result.success(
@@ -24,34 +24,40 @@ module Amgi
       private
 
       def load_build_config(deck_path)
-        build_path = File.join(deck_path, BUILD_FILE)
-        raise KeyError, "Missing #{BUILD_FILE} in #{deck_path}" unless File.exist?(build_path)
+        build_path = File.join(deck_path, CONFIG_FILE)
+        raise KeyError, "Missing #{CONFIG_FILE} in #{deck_path}" unless File.exist?(build_path)
 
         build_config_from(YAML.load_file(build_path) || {})
       end
 
       def build_config_from(data)
-        templates = Array(data.fetch('templates')).map do |template|
+        note_schema = data.fetch('note_schema')
+        cards = Array(data.fetch('cards')).map do |card|
           Domain::Template.new(
-            name: template.fetch('name'),
-            front: template.fetch('front'),
-            back: template.fetch('back')
+            id: card.fetch('id'),
+            name: card.fetch('name'),
+            front: card.fetch('front'),
+            back: card.fetch('back'),
+            default: card.fetch('default', false)
           )
         end
 
         Domain::BuildConfig.new(
           schema: data.fetch('schema'),
           name: data.fetch('name'),
-          required_fields: Array(data.fetch('required_fields')),
-          optional_fields: Array(data.fetch('optional_fields')),
+          note_schema: Domain::NoteSchema.new(
+            required_fields: Array(note_schema.fetch('required_fields')),
+            optional_fields: Array(note_schema.fetch('optional_fields'))
+          ),
           global_tags: Array(data['global_tags']),
-          templates: templates
+          cards: cards,
+          css: data['css']
         )
       end
 
       def load_note_sources(deck_path)
         Dir.glob(File.join(deck_path, '*.yaml'), sort: true).filter_map do |path|
-          next if File.basename(path) == BUILD_FILE
+          next if File.basename(path) == CONFIG_FILE
 
           data = YAML.load_file(path) || {}
           Domain::NoteSource.new(source_path: path, notes: Array(data['notes']))

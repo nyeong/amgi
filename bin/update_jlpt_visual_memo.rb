@@ -289,7 +289,7 @@ end
 dictionary = load_dictionary(DICT_PATH)
 ids = load_ids(IDS_PATH)
 cache = load_cache(KANJIPEDIA_CACHE_PATH)
-yaml_files = Dir[DECK_DIR.join("*.yaml")].reject { |path| path.end_with?("build.yaml") }.sort
+yaml_files = Dir[DECK_DIR.join("*.yaml")].reject { |path| path.end_with?('amgi.yaml') }.sort
 unique_characters = yaml_files.flat_map do |file|
   YAML.load_file(file).fetch("notes").flat_map { |note| note.fetch("target").scan(/\p{Han}/) }
 end.uniq.reject { |character| character == "々" }

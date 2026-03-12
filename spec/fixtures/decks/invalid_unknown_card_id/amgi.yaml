@@ -1,0 +1,12 @@
+schema: amgi_v1
+name: Broken_Unknown_Card_Id
+note_schema:
+  required_fields:
+    - target
+  optional_fields: []
+cards:
+  - id: recallMeaning
+    name: Recall Meaning
+    default: true
+    front: "{{target}}"
+    back: "{{FrontSide}}"

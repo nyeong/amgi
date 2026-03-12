@@ -1,0 +1,252 @@
+schema: amgi_v1
+name: JLPT_N2_Frequent_Vocabulary_001
+css: |
+  .card {
+    font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans KR", sans-serif;
+    font-size: 18px;
+    text-align: left;
+    color: #222;
+    background: #fff;
+    margin: 0;
+    padding: 16px;
+  }
+
+  .sheet {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .sheet-header {
+    position: relative;
+    padding: 0;
+    padding-right: 96px;
+  }
+
+  .deck-label {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 8px;
+  }
+
+  .target {
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .reading {
+    font-size: 16px;
+    color: #666;
+    margin-top: 4px;
+  }
+
+  .sheet-body {
+    margin-top: 16px;
+  }
+
+  .hint-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+
+  .hint-button {
+    border: 1px solid #ccc;
+    background: #f7f7f7;
+    color: #333;
+    font: inherit;
+    font-size: 14px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .hint-block {
+    display: none;
+  }
+
+  .hint-block.is-visible {
+    display: block;
+  }
+
+  .hint-button.is-hidden {
+    display: none;
+  }
+
+  .furigana-check {
+    display: none;
+  }
+
+  .furigana-toggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 13px;
+    color: #666;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .furigana-toggle input {
+    margin: 0;
+  }
+
+  .reading-toggle-target {
+    display: none;
+  }
+
+  .furigana-check:checked ~ .reading-toggle-target {
+    display: block;
+  }
+
+  .section {
+    margin-top: 16px;
+  }
+
+  .section:first-child {
+    margin-top: 0;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 6px;
+  }
+
+  .meaning {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  .context {
+    font-size: 20px;
+    line-height: 1.6;
+  }
+
+  .translation {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #333;
+  }
+
+  .memo {
+    white-space: pre-wrap;
+    font-family: "SF Mono", "Menlo", monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #444;
+  }
+
+  #answer {
+    border: 0;
+    border-top: 1px solid #ddd;
+    margin: 18px 0;
+  }
+global_tags:
+  - JLPT
+  - N2
+  - FrequentVocabulary
+note_schema:
+  required_fields:
+    - target
+    - reading
+    - meaning
+    - context
+    - translation
+    - memo
+  optional_fields: []
+cards:
+  - id: recallMeaning
+    name: Recall Meaning
+    default: true
+    front: |
+      <div class="sheet">
+        <div class="deck-label">JLPT N2 Vocabulary</div>
+        <div class="sheet-header">
+          <input id="show-reading-front" class="furigana-check" type="checkbox">
+          <label class="furigana-toggle" for="show-reading-front">✓ 후리가나</label>
+          <div class="target">{{target}}</div>
+          <div class="reading reading-toggle-target">{{reading}}</div>
+          <div class="hint-actions">
+            <button class="hint-button" onclick="document.getElementById('context-hint').classList.add('is-visible'); this.style.display='none';">예문 보기</button>
+          </div>
+        </div>
+        <div class="sheet-body">
+          <div id="context-hint" class="section hint-block">
+            <div class="section-label">Context</div>
+            <div class="context">{{context}}</div>
+          </div>
+        </div>
+      </div>
+    back: |
+      {{FrontSide}}
+      <hr id=answer>
+      <div class="section">
+        <div class="section-label">Meaning</div>
+        <div class="meaning">{{meaning}}</div>
+      </div>
+      <div class="section">
+        <div class="section-label">Context</div>
+        <div class="context">{{context}}</div>
+      </div>
+      <div class="section">
+        <div class="section-label">Translation</div>
+        <div class="translation">{{translation}}</div>
+      </div>
+      <div class="section">
+        <div class="section-label">3D Memo</div>
+        <div class="memo">{{memo}}</div>
+      </div>
+  - id: recallTarget
+    name: Recall Target
+    front: |
+      <div class="sheet">
+        <div class="deck-label">Recall Target</div>
+        <div class="sheet-header">
+          <div class="meaning">{{meaning}}</div>
+        </div>
+        <div class="sheet-body">
+          <div class="hint-actions">
+            <button class="hint-button" onclick="document.getElementById('translation-hint').classList.add('is-visible'); this.style.display='none';">번역 보기</button>
+            <button class="hint-button" onclick="document.getElementById('context-hint-reverse').classList.add('is-visible'); this.style.display='none';">예문 보기</button>
+          </div>
+          <div id="translation-hint" class="section hint-block">
+            <div class="section-label">Translation</div>
+            <div class="translation">{{translation}}</div>
+          </div>
+          <div id="context-hint-reverse" class="section hint-block">
+            <div class="section-label">Context</div>
+            <div class="context">{{context}}</div>
+          </div>
+        </div>
+      </div>
+    back: |
+      {{FrontSide}}
+      <hr id=answer>
+      <div class="section">
+        <div class="section-label">Target</div>
+        <div class="sheet-header">
+          <input id="show-reading-reverse-back" class="furigana-check" type="checkbox">
+          <label class="furigana-toggle" for="show-reading-reverse-back">✓ 후리가나</label>
+          <div class="target">{{target}}</div>
+          <div class="reading reading-toggle-target">{{reading}}</div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-label">Context</div>
+        <div class="context">{{context}}</div>
+      </div>
+      <div class="section">
+        <div class="section-label">3D Memo</div>
+        <div class="memo">{{memo}}</div>
+      </div>

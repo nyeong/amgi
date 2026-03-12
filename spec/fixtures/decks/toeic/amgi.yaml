@@ -1,0 +1,31 @@
+schema: amgi_v1
+name: TOEIC_Vocabulary
+global_tags:
+  - TOEIC
+note_schema:
+  required_fields:
+    - target
+    - meaning
+  optional_fields:
+    - example
+    - blankExample
+cards:
+  - id: recallMeaning
+    name: Recall Meaning
+    default: true
+    front: |
+      <div class="target">{{target}}</div>
+    back: |
+      {{FrontSide}}
+      <hr id=answer>
+      <div class="meaning">{{meaning}}</div>
+      <div class="example">{{example}}</div>
+  - id: clozeExample
+    name: Cloze Example
+    front: |
+      <div class="example">{{blankExample}}</div>
+    back: |
+      {{FrontSide}}
+      <hr id=answer>
+      <div class="target">{{target}}</div>
+      <div class="meaning">{{meaning}}</div>

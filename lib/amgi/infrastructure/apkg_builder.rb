@@ -140,16 +140,11 @@ module Amgi
         deck_id = deterministic_integer("deck:#{deck_seed}")
         timestamp = Time.now.to_i
         due = 1
-
         note_rows = []
         card_rows = []
-
         validated_deck.deck_source.note_sources.each do |note_source|
           note_source.notes.each do |note|
-            note_id = deterministic_integer("note:#{deck_seed}:#{note_signature(config, note)}")
-            guid_seed = "guid:#{deck_seed}:#{note_signature(config, note)}"
-            guid = Digest::SHA1.hexdigest(guid_seed)[0, 20]
-
+            note_id, guid = note_identity(config: config, note: note, deck_seed: deck_seed)
             note_rows << note_row(
               config: config,
               note: note,
@@ -158,21 +153,20 @@ module Amgi
               guid: guid,
               timestamp: timestamp
             )
-
-            config.templates.each_with_index do |_template, ord|
-              card_rows << card_row(
-                card_id: deterministic_integer("card:#{guid}:#{ord}"),
+            due = append_card_rows(
+              config: config,
+              note: note,
+              card_rows: card_rows,
+              card_context: {
+                guid: guid,
                 note_id: note_id,
                 deck_id: deck_id,
-                ord: ord,
                 due: due,
                 timestamp: timestamp
-              )
-              due += 1
-            end
+              }
+            )
           end
         end
-
         [note_rows, card_rows]
       end
 
@@ -272,7 +266,7 @@ module Amgi
             usn: 0,
             sortf: 0,
             did: deterministic_integer("deck:#{config.name}"),
-            css: DEFAULT_MODEL_CSS,
+            css: config.css || DEFAULT_MODEL_CSS,
             latexPre: DEFAULT_LATEX_PRE,
             latexPost: DEFAULT_LATEX_POST,
             latexsvg: false,
@@ -369,7 +363,13 @@ module Amgi
       end
 
       def note_signature(config, note)
-        config.all_fields.map { |field| "#{field}=#{note[field]}" }.join('|')
+        field_signature = config.all_fields.map { |field| "#{field}=#{note[field]}" }
+        meta_signature = [
+          "tags=#{Array(note['tags']).join(',')}",
+          "cardIds=#{Array(note['cardIds']).join(',')}"
+        ]
+
+        (field_signature + meta_signature).join('|')
       end
 
       def deterministic_integer(seed)
@@ -386,18 +386,18 @@ module Amgi
         end.compact
         required_indexes = [0] if required_indexes.empty?
 
-        config.templates.each_index.map do |template_index|
-          [template_index, 'all', required_indexes]
+        config.cards.each_index.map do |card_index|
+          [card_index, 'all', required_indexes]
         end
       end
 
       def template_payloads(config)
-        config.templates.each_with_index.map do |template, index|
+        config.cards.each_with_index.map do |card, index|
           {
-            name: template.name,
+            name: card.name,
             ord: index,
-            qfmt: template.front,
-            afmt: template.back,
+            qfmt: card.front,
+            afmt: card.back,
             bqfmt: '',
             bafmt: '',
             did: nil,
@@ -419,6 +419,37 @@ module Amgi
             media: []
           }
         end
+      end
+
+      def note_identity(config:, note:, deck_seed:)
+        signature = note_signature(config, note)
+        note_id = deterministic_integer("note:#{deck_seed}:#{signature}")
+        guid = Digest::SHA1.hexdigest("guid:#{deck_seed}:#{signature}")[0, 20]
+        [note_id, guid]
+      end
+
+      def append_card_rows(config:, note:, card_rows:, card_context:)
+        due = card_context.fetch(:due)
+
+        active_cards(config, note).each do |card|
+          ord = config.cards.index(card)
+          card_rows << card_row(
+            card_id: deterministic_integer("card:#{card_context.fetch(:guid)}:#{ord}"),
+            note_id: card_context.fetch(:note_id),
+            deck_id: card_context.fetch(:deck_id),
+            ord: ord,
+            due: due,
+            timestamp: card_context.fetch(:timestamp)
+          )
+          due += 1
+        end
+
+        due
+      end
+
+      def active_cards(config, note)
+        selected_ids = config.default_cards.map(&:id) + Array(note['cardIds'])
+        config.cards.select { |card| selected_ids.include?(card.id) }
       end
     end
   end
