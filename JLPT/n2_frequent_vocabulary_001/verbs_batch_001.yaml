@@ -1,5 +1,5 @@
 notes:
-  - target: "焦る"
+  "焦る":
     reading: "あせる"
     meaning: "안달하다, 초조해하다"
     context: "結果が出なくて焦る"
@@ -10,7 +10,7 @@ notes:
       [3차원/맥락] 結果・時間・焦ってしまう가 단골이다. 迷う보다 긴박감이 더 강하다.
     _tags:
       - Verb
-  - target: "祝う"
+  "祝う":
     reading: "いわう"
     meaning: "축하하다"
     context: "合格を祝う"
@@ -21,7 +21,7 @@ notes:
       [3차원/맥락] 合格・結婚・誕生日を祝う가 단골이다. 喜ぶ와 달리 상대에게 표현하는 동작이다.
     _tags:
       - Verb
-  - target: "補う"
+  "補う":
     reading: "おぎなう"
     meaning: "보충하다, 메우다"
     context: "不足分を補う"
@@ -32,7 +32,7 @@ notes:
       [3차원/맥락] 不足・欠点・栄養を補う가 단골이다. 埋める보다 기능적 보충 느낌이 강하다.
     _tags:
       - Verb
-  - target: "驚く"
+  "驚く":
     reading: "おどろく"
     meaning: "놀라다"
     context: "結果に驚く"
@@ -43,7 +43,7 @@ notes:
       [3차원/맥락] 結果・事実・驚くほどが 단골이다. 怖がる보다 surprise 쪽이다.
     _tags:
       - Verb
-  - target: "囲む"
+  "囲む":
     reading: "かこむ"
     meaning: "둘러싸다, 에워싸다"
     context: "机を囲む"
@@ -54,7 +54,7 @@ notes:
       [3차원/맥락] 机・家族・敵に囲まれる가 단골이다. surround의 대표 표현이다.
     _tags:
       - Verb
-  - target: "暮らす"
+  "暮らす":
     reading: "くらす"
     meaning: "살다, 생활하다"
     context: "家族と暮らす"
@@ -65,7 +65,7 @@ notes:
       [3차원/맥락] 家族と・一人で・田舎で暮らす가 단골이다. 생활 전반의 뉘앙스가 중요하다.
     _tags:
       - Verb
-  - target: "削る"
+  "削る":
     reading: "けずる"
     meaning: "깎다, 줄이다"
     context: "予算を削る"
@@ -76,7 +76,7 @@ notes:
       [3차원/맥락] 予算・時間・鉛筆を削る가 단골이다. cut down의 느낌이 강하다.
     _tags:
       - Verb
-  - target: "誘う"
+  "誘う":
     reading: "さそう"
     meaning: "권하다, 유혹하다"
     context: "友人を誘う"
@@ -87,7 +87,7 @@ notes:
       [3차원/맥락] 友人・参加・眠気を誘う가 단골이다. 勧誘보다 일상적이고 부드럽다.
     _tags:
       - Verb
-  - target: "優れる"
+  "優れる":
     reading: "すぐれる"
     meaning: "뛰어나다"
     context: "判断力に優れる"
@@ -98,7 +98,7 @@ notes:
       [3차원/맥락] 能力・点・技術に優れる가 단골이다. 上手だ보다 객관적 평가 느낌이 강하다.
     _tags:
       - Verb
-  - target: "属する"
+  "属する":
     reading: "ぞくする"
     meaning: "속하다"
     context: "研究会に属する"
@@ -109,7 +109,7 @@ notes:
       [3차원/맥락] 組織・グループ・分類に属する가 단골이다. belong to의 전형적 대응어다.
     _tags:
       - Verb
-  - target: "果たす"
+  "果たす":
     reading: "はたす"
     meaning: "다하다, 완수하다"
     context: "役割を果たす"
@@ -120,7 +120,7 @@ notes:
       [3차원/맥락] 役割・責任・目的を果たす가 단골이다. 単순 완료보다 '의무 완수'가 강하다.
     _tags:
       - Verb
-  - target: "触れる"
+  "触れる":
     reading: "ふれる"
     meaning: "닿다, 언급하다"
     context: "その点に触れる"
@@ -131,7 +131,7 @@ notes:
       [3차원/맥락] 話題・文化・肌に触れる가 단골이다. physical touch와 mention을 함께 잡아야 한다.
     _tags:
       - Verb
-  - target: "乱れる"
+  "乱れる":
     reading: "みだれる"
     meaning: "흐트러지다"
     context: "髪が乱れる"
@@ -142,7 +142,7 @@ notes:
       [3차원/맥락] 髪・秩序・心が乱れる가 단골이다. physical disorder와 emotional disorder 둘 다 된다.
     _tags:
       - Verb
-  - target: "恵まれる"
+  "恵まれる":
     reading: "めぐまれる"
     meaning: "풍족하다, 혜택받다"
     context: "自然に恵まれる"
@@ -153,7 +153,7 @@ notes:
       [3차원/맥락] 環境・才能・機会に恵まれる가 단골이다. 단순 많음보다 '운 좋게 주어짐'이 강하다.
     _tags:
       - Verb
-  - target: "敗れる"
+  "敗れる":
     reading: "やぶれる"
     meaning: "지다, 패배하다"
     context: "決勝で敗れる"
@@ -164,7 +164,7 @@ notes:
       [3차원/맥락] 試合・選挙・決勝で敗れる가 단골이다. 負ける보다 기사체에서 격식 있다.
     _tags:
       - Verb
-  - target: "扱う"
+  "扱う":
     reading: "あつかう"
     meaning: "취급하다, 다루다"
     context: "個人情報を扱う"
@@ -175,7 +175,7 @@ notes:
       [3차원/맥락] 情報・商品・どう扱うか가 단골이다. 다루는 대상 범위가 넓다.
     _tags:
       - Verb
-  - target: "余る"
+  "余る":
     reading: "あまる"
     meaning: "남다, 여분이 생기다"
     context: "時間が余る"
@@ -186,7 +186,7 @@ notes:
       [3차원/맥락] 時間・お金・食べ物が余る가 단골이다. 残る보다 '기준보다 많아 남음'이 강하다.
     _tags:
       - Verb
-  - target: "改める"
+  "改める":
     reading: "あらためる"
     meaning: "고치다, 새롭게 하다"
     context: "内容を改める"
@@ -197,7 +197,7 @@ notes:
       [3차원/맥락] 内容・姿勢・改めて考える가 단골이다. 수정과 재검토 느낌을 함께 가진다.
     _tags:
       - Verb
-  - target: "伺う"
+  "伺う":
     reading: "うかがう"
     meaning: "여쭙다, 찾아뵙다"
     context: "後ほど伺います"
@@ -208,7 +208,7 @@ notes:
       [3차원/맥락] ご都合・お話・会社に伺う가 단골이다. 비즈니스 일본어 핵심어다.
     _tags:
       - Verb
-  - target: "浮く"
+  "浮く":
     reading: "うく"
     meaning: "뜨다, 붕 뜨다"
     context: "水に浮く"
@@ -219,7 +219,7 @@ notes:
       [3차원/맥락] 水・費用が浮く・場に浮く가 단골이다. 물리적/비유적 의미 모두 중요하다.
     _tags:
       - Verb
-  - target: "失う"
+  "失う":
     reading: "うしなう"
     meaning: "잃다"
     context: "信用を失う"
@@ -230,7 +230,7 @@ notes:
       [3차원/맥락] 信用・機会・命を失う가 단골이다. なくす보다 문어체적이다.
     _tags:
       - Verb
-  - target: "疑う"
+  "疑う":
     reading: "うたがう"
     meaning: "의심하다"
     context: "彼の言葉を疑う"
@@ -241,7 +241,7 @@ notes:
       [3차원/맥락] 言葉・目・疑いを持つ가 단골이다. 信じる의 반대축이다.
     _tags:
       - Verb
-  - target: "促す"
+  "促す":
     reading: "うながす"
     meaning: "재촉하다, 촉구하다"
     context: "参加を促す"
@@ -252,7 +252,7 @@ notes:
       [3차원/맥락] 参加・成長・注意を促す가 단골이다. 強制보다 부드러운 압박이다.
     _tags:
       - Verb
-  - target: "追う"
+  "追う":
     reading: "おう"
     meaning: "쫓다, 뒤따르다"
     context: "犯人を追う"
@@ -263,7 +263,7 @@ notes:
       [3차원/맥락] 犯人・後を追う・変化を追う가 단골이다. physical chase와 abstract tracking 둘 다 가능하다.
     _tags:
       - Verb
-  - target: "遅れる"
+  "遅れる":
     reading: "おくれる"
     meaning: "늦다, 지연되다"
     context: "電車が遅れる"
@@ -274,7 +274,7 @@ notes:
       [3차원/맥락] 電車・予定・時代に遅れる가 단골이다. 시간과 수준 양쪽에 쓰인다.
     _tags:
       - Verb
-  - target: "怒る"
+  "怒る":
     reading: "おこる"
     meaning: "화내다"
     context: "小さなことで怒る"
@@ -285,7 +285,7 @@ notes:
       [3차원/맥락] 親が怒る・すぐ怒る가 단골이다. 腹を立てる보다 기본 동사다.
     _tags:
       - Verb
-  - target: "恐れる"
+  "恐れる":
     reading: "おそれる"
     meaning: "두려워하다"
     context: "失敗を恐れる"
@@ -296,7 +296,7 @@ notes:
       [3차원/맥락] 失敗・危険・恐れる必要はない가 단골이다. 怖がる보다 문어적이다.
     _tags:
       - Verb
-  - target: "踊る"
+  "踊る":
     reading: "おどる"
     meaning: "춤추다"
     context: "音楽に合わせて踊る"
@@ -307,7 +307,7 @@ notes:
       [3차원/맥락] 音楽・舞台・心が躍る와 연결된다. 비유 의미도 함께 기억하면 좋다.
     _tags:
       - Verb
-  - target: "覚える"
+  "覚える":
     reading: "おぼえる"
     meaning: "기억하다, 익히다"
     context: "単語を覚える"
@@ -318,7 +318,7 @@ notes:
       [3차원/맥락] 単語・名前・痛みを覚える가 단골이다. memorize와 feel이 함께 있는 동사다.
     _tags:
       - Verb
-  - target: "泳ぐ"
+  "泳ぐ":
     reading: "およぐ"
     meaning: "헤엄치다"
     context: "海で泳ぐ"
@@ -329,7 +329,7 @@ notes:
       [3차원/맥락] 海・プール・泳げるようになる가 단골이다. 운동·여행 문맥에서 자주 나온다.
     _tags:
       - Verb
-  - target: "折る"
+  "折る":
     reading: "おる"
     meaning: "접다, 꺾다"
     context: "紙を折る"
@@ -340,7 +340,7 @@ notes:
       [3차원/맥락] 紙・枝・心が折れる와 연결된다. 물리적·심리적 의미 모두 중요하다.
     _tags:
       - Verb
-  - target: "返す"
+  "返す":
     reading: "かえす"
     meaning: "되돌리다, 돌려주다"
     context: "本を返す"
@@ -351,7 +351,7 @@ notes:
       [3차원/맥락] 本・返事を返す・借りた物を返す가 단골이다. return 동사의 기본어다.
     _tags:
       - Verb
-  - target: "抱える"
+  "抱える":
     reading: "かかえる"
     meaning: "안다, 떠안다"
     context: "問題を抱える"
@@ -362,7 +362,7 @@ notes:
       [3차원/맥락] 問題・在庫・子どもを抱えるが 단골이다. hold보다 부담감이 더 있다.
     _tags:
       - Verb
-  - target: "限る"
+  "限る":
     reading: "かぎる"
     meaning: "한정하다, 제한하다"
     context: "人数を限る"
@@ -373,7 +373,7 @@ notes:
       [3차원/맥락] 人数・期間・夏に限って가 단골이다. limit 의미의 핵심 동사다.
     _tags:
       - Verb
-  - target: "貸す"
+  "貸す":
     reading: "かす"
     meaning: "빌려 주다"
     context: "本を貸す"
@@ -384,7 +384,7 @@ notes:
       [3차원/맥락] 本・部屋・金を貸す가 단골이다. lend/borrow 구분이 시험 포인트다.
     _tags:
       - Verb
-  - target: "数える"
+  "数える":
     reading: "かぞえる"
     meaning: "세다"
     context: "人数を数える"
@@ -395,7 +395,7 @@ notes:
       [3차원/맥락] 人数・回数・指で数えるが 단골이다. count의 기본 표현이다.
     _tags:
       - Verb
-  - target: "乾く"
+  "乾く":
     reading: "かわく"
     meaning: "마르다"
     context: "洗濯物が乾く"

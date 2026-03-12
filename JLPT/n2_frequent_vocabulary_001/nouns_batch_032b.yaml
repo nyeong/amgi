@@ -1,5 +1,5 @@
 notes:
-  - target: "節約"
+  "節約":
     reading: "せつやく"
     meaning: "절약, 아낌"
     context: "電気を節約する"
@@ -10,7 +10,7 @@ notes:
       [3차원/맥락] 電気・時間・お金の節約이 단골이다. 倹約과 비슷하지만 생활 전반에 넓게 쓰인다.
     _tags:
       - Noun
-  - target: "戦争"
+  "戦争":
     reading: "せんそう"
     meaning: "전쟁"
     context: "戦争の歴史を学ぶ"
@@ -21,7 +21,7 @@ notes:
       [3차원/맥락] 歴史・平和・戦争被害가 단골이다. 사회·역사 지문에서 핵심어다.
     _tags:
       - Noun
-  - target: "全部"
+  "全部":
     reading: "ぜんぶ"
     meaning: "전부, 모두"
     context: "全部読み終える"
@@ -32,7 +32,7 @@ notes:
       [3차원/맥락] 終える・食べる・全部でいくらが 단골이다. すべて보다 회화체에 가깝다.
     _tags:
       - Noun
-  - target: "相談"
+  "相談":
     reading: "そうだん"
     meaning: "상담, 상의"
     context: "先生に相談する"
@@ -43,7 +43,7 @@ notes:
       [3차원/맥락] 先生・家族・事前に相談が 단골이다. 문제 해결을 위한 대화 느낌이 강하다.
     _tags:
       - Noun
-  - target: "底"
+  "底":
     reading: "そこ"
     meaning: "밑바닥, 바닥"
     context: "箱の底を見る"
@@ -54,7 +54,7 @@ notes:
       [3차원/맥락] 底に沈む・底力・心の底が 단골이다. 가장 아래라는 공간감이 핵심이다.
     _tags:
       - Noun
-  - target: "祖父"
+  "祖父":
     reading: "そふ"
     meaning: "할아버지"
     context: "祖父と暮らす"
@@ -65,7 +65,7 @@ notes:
       [3차원/맥락] 祖父母・田舎の祖父・祖父の家가 단골이다. 家族 소개 문맥의 기본어다.
     _tags:
       - Noun
-  - target: "損得"
+  "損得":
     reading: "そんとく"
     meaning: "손득, 이해득실"
     context: "損得を考える"
@@ -76,7 +76,7 @@ notes:
       [3차원/맥락] 考える・抜きで・損得勘定が 단골이다. 감정보다 이익 계산에 초점이 있다.
     _tags:
       - Noun
-  - target: "互"
+  "互":
     reading: "たがい"
     meaning: "서로"
     context: "互いに助け合う"
@@ -87,7 +87,7 @@ notes:
       [3차원/맥락] 助け合う・理解する・互いの立場가 단골이다. 相互보다 회화적이다.
     _tags:
       - Noun
-  - target: "畳"
+  "畳":
     reading: "たたみ"
     meaning: "다다미"
     context: "畳の部屋に座る"
@@ -98,7 +98,7 @@ notes:
       [3차원/맥락] 部屋・和室・畳の上が 단골이다. 일본 문화 문맥의 대표어다.
     _tags:
       - Noun
-  - target: "谷"
+  "谷":
     reading: "たに"
     meaning: "계곡, 골짜기"
     context: "谷に川が流れる"
@@ -109,7 +109,7 @@ notes:
       [3차원/맥락] 深い谷・谷底・谷を越える가 단골이다. 지형 묘사에서 자주 보인다.
     _tags:
       - Noun
-  - target: "他人"
+  "他人":
     reading: "たにん"
     meaning: "타인, 남"
     context: "他人に頼らない"
@@ -120,7 +120,7 @@ notes:
       [3차원/맥락] 頼る・迷惑をかける・他人事が 단골이다. 身内가 아닌 남이라는 감각이 중요하다.
     _tags:
       - Noun
-  - target: "束"
+  "束":
     reading: "たば"
     meaning: "다발, 묶음"
     context: "花を一束買う"
@@ -131,7 +131,7 @@ notes:
       [3차원/맥락] 花・紙・一束が 단골이다. 여러 개를 묶은 단위를 나타낸다.
     _tags:
       - Noun
-  - target: "卵"
+  "卵":
     reading: "たまご"
     meaning: "달걀"
     context: "卵をゆでる"
@@ -142,7 +142,7 @@ notes:
       [3차원/맥락] 割る・産む・卵料理가 단골이다. 비유적으로 '신인' 뜻도 알아두면 좋다.
     _tags:
       - Noun
-  - target: "単純"
+  "単純":
     reading: "たんじゅん"
     meaning: "단순, 간단함"
     context: "構造が単純だ"
@@ -153,7 +153,7 @@ notes:
       [3차원/맥락] 構造・作業・単純計算이 단골이다. 複雑과 반대축으로 기억한다.
     _tags:
       - Noun
-  - target: "団体"
+  "団体":
     reading: "だんたい"
     meaning: "단체, 조직"
     context: "地域の団体に参加する"
@@ -164,7 +164,7 @@ notes:
       [3차원/맥락] 地域・支援団体・団体行動이 단골이다. 組織보다 집합체 느낌이 더 강하다.
     _tags:
       - Noun
-  - target: "担当"
+  "担当":
     reading: "たんとう"
     meaning: "담당, 담당자"
     context: "営業を担当する"
@@ -175,7 +175,7 @@ notes:
       [3차원/맥락] 営業・担当者・担当部署가 단골이다. 직무 분담 문맥의 핵심어다.
     _tags:
       - Noun
-  - target: "遅刻"
+  "遅刻":
     reading: "ちこく"
     meaning: "지각"
     context: "会議に遅刻する"
@@ -186,7 +186,7 @@ notes:
       [3차원/맥락] 会議・学校・遅刻の理由가 단골이다. 시간 약속 위반 문맥에서 자주 보인다.
     _tags:
       - Noun
-  - target: "兆"
+  "兆":
     reading: "ちょう"
     meaning: "조, 조짐"
     context: "一兆円を超える"
@@ -197,7 +197,7 @@ notes:
       [3차원/맥락] 円・兆候와 연결해 보기도 좋다. 경제 기사에서 큰 규모 수치에 자주 보인다.
     _tags:
       - Noun
-  - target: "超過"
+  "超過":
     reading: "ちょうか"
     meaning: "초과, 넘침"
     context: "予算を超過する"
@@ -208,7 +208,7 @@ notes:
       [3차원/맥락] 予算・時間・定員超過가 단골이다. over limit의 느낌을 정확히 담는다.
     _tags:
       - Noun
-  - target: "頂点"
+  "頂点":
     reading: "ちょうてん"
     meaning: "정점, 꼭대기"
     context: "人気が頂点に達する"
@@ -219,7 +219,7 @@ notes:
       [3차원/맥락] 人気・山・組織の頂点이 단골이다. 최고점의 이미지가 중요하다.
     _tags:
       - Noun
-  - target: "貯金"
+  "貯金":
     reading: "ちょきん"
     meaning: "저금, 저축"
     context: "毎月貯金する"
@@ -230,7 +230,7 @@ notes:
       [3차원/맥락] 毎月・将来のために・貯金箱が 단골이다. 소비와 반대되는 생활 습관어다.
     _tags:
       - Noun
-  - target: "直接"
+  "直接":
     reading: "ちょくせつ"
     meaning: "직접"
     context: "本人に直接聞く"
@@ -241,7 +241,7 @@ notes:
       [3차원/맥락] 聞く・会う・直接関係する가 단골이다. 間接과 반대축이다.
     _tags:
       - Noun
-  - target: "常"
+  "常":
     reading: "つね"
     meaning: "항시, 평소"
     context: "常に注意する"
@@ -252,7 +252,7 @@ notes:
       [3차원/맥락] 注意・意識・常識와 연결해 외우면 좋다. いつも보다 문어적이다.
     _tags:
       - Noun
-  - target: "罪"
+  "罪":
     reading: "つみ"
     meaning: "죄, 잘못"
     context: "罪を犯す"
@@ -263,7 +263,7 @@ notes:
       [3차원/맥락] 犯す・償う・重い罪가 단골이다. 법적 의미와 도덕적 의미를 함께 가진다.
     _tags:
       - Noun
-  - target: "停車"
+  "停車":
     reading: "ていしゃ"
     meaning: "정차"
     context: "次の駅で停車する"
@@ -274,7 +274,7 @@ notes:
       [3차원/맥락] 駅・各駅停車・停車位置가 단골이다. 교통 안내 문맥에서 자주 보인다.
     _tags:
       - Noun
-  - target: "鉄橋"
+  "鉄橋":
     reading: "てっきょう"
     meaning: "철교"
     context: "列車が鉄橋を渡る"
@@ -285,7 +285,7 @@ notes:
       [3차원/맥락] 列車・川・古い鉄橋が 단골이다. 풍경·철도 문맥에서 자주 나온다.
     _tags:
       - Noun
-  - target: "展開"
+  "展開":
     reading: "てんかい"
     meaning: "전개, 펼침"
     context: "話が急展開する"
@@ -296,7 +296,7 @@ notes:
       [3차원/맥락] 話・事業・展開が 단골이다. story development와 business rollout 둘 다 중요하다.
     _tags:
       - Noun
-  - target: "独立"
+  "独立":
     reading: "どくりつ"
     meaning: "독립"
     context: "親から独立する"
@@ -307,7 +307,7 @@ notes:
       [3차원/맥락] 国・会社・親から独立が 단골이다. 自立와의 차이도 알아두면 좋다.
     _tags:
       - Noun
-  - target: "泥"
+  "泥":
     reading: "どろ"
     meaning: "진흙, 진흙탕"
     context: "靴に泥がつく"
@@ -318,7 +318,7 @@ notes:
       [3차원/맥락] つく・ぬかるみ・泥だらけ가 단골이다. 오염·야외 활동 문맥에 자주 보인다.
     _tags:
       - Noun
-  - target: "内容"
+  "内容":
     reading: "ないよう"
     meaning: "내용"
     context: "説明の内容を理解する"
@@ -329,7 +329,7 @@ notes:
       [3차원/맥락] 説明・会議・記事内容가 단골이다. 形式과 대비하면 기억이 잘 남는다.
     _tags:
       - Noun
-  - target: "仲"
+  "仲":
     reading: "なか"
     meaning: "사이, 관계"
     context: "仲がいい"
@@ -340,7 +340,7 @@ notes:
       [3차원/맥락] 家族・友達・仲が悪いが 단골이다. 間보다 인간관계 뉘앙스가 더 강하다.
     _tags:
       - Noun
-  - target: "波"
+  "波":
     reading: "なみ"
     meaning: "파도, 물결"
     context: "波が高い"
@@ -351,7 +351,7 @@ notes:
       [3차원/맥락] 高い・静かな波・波がある가 단골이다. 상태 변화의 비유로도 자주 쓰인다.
     _tags:
       - Noun
-  - target: "涙"
+  "涙":
     reading: "なみだ"
     meaning: "눈물"
     context: "涙を流す"
@@ -362,7 +362,7 @@ notes:
       [3차원/맥락] 流す・こらえる・涙声가 단골이다. 슬픔뿐 아니라 감동 문맥에도 나온다.
     _tags:
       - Noun
-  - target: "人間"
+  "人間":
     reading: "にんげん"
     meaning: "인간, 사람"
     context: "人間の感情は複雑だ"
@@ -373,7 +373,7 @@ notes:
       [3차원/맥락] 感情・関係・人間社会が 단골이다. 人보다 철학적·총체적이다.
     _tags:
       - Noun
-  - target: "主"
+  "主":
     reading: "ぬし"
     meaning: "주인, 소유자"
     context: "この家の主"
@@ -384,7 +384,7 @@ notes:
       [3차원/맥락] 家の主・持ち主가 단골이다. owner의 뜻이 핵심이다.
     _tags:
       - Noun
-  - target: "熱演"
+  "熱演":
     reading: "ねつえん"
     meaning: "열연, 열정적 연기"
     context: "俳優が熱演する"
@@ -395,7 +395,7 @@ notes:
       [3차원/맥락] 俳優・舞台・見事な熱演이 단골이다. 단순出演보다 몰입감이 강하다.
     _tags:
       - Noun
-  - target: "年齢"
+  "年齢":
     reading: "ねんれい"
     meaning: "연령, 나이"
     context: "年齢を問わない"
@@ -406,7 +406,7 @@ notes:
       [3차원/맥락] 問わない・平均年齢・年齢差が 단골이다. ~歳보다 공식적이다.
     _tags:
       - Noun
-  - target: "灰色"
+  "灰色":
     reading: "はいいろ"
     meaning: "회색"
     context: "空が灰色に見える"
@@ -417,7 +417,7 @@ notes:
       [3차원/맥락] 空・雲・灰色の世界가 단골이다. 흑백 사이 중간 톤의 느낌이다.
     _tags:
       - Noun
-  - target: "配布"
+  "配布":
     reading: "はいふ"
     meaning: "배부, 배포"
     context: "資料を配布する"
@@ -428,7 +428,7 @@ notes:
       [3차원/맥락] 資料・チラシ・無料配布가 단골이다. distribute의 대표 한자어다.
     _tags:
       - Noun
-  - target: "犯罪"
+  "犯罪":
     reading: "はんざい"
     meaning: "범죄"
     context: "犯罪を防ぐ"
@@ -439,7 +439,7 @@ notes:
       [3차원/맥락] 防ぐ・増える・重大犯罪가 단골이다. 事件의 원인 행위 자체에 초점이 있다.
     _tags:
       - Noun
-  - target: "反対"
+  "反対":
     reading: "はんたい"
     meaning: "반대, 반발"
     context: "計画に反対する"
@@ -450,7 +450,7 @@ notes:
       [3차원/맥락] 計画・意見・賛成と 반대축이 단골이다. 찬반 문항에서 자주 보인다.
     _tags:
       - Noun
-  - target: "判断"
+  "判断":
     reading: "はんだん"
     meaning: "판단"
     context: "冷静に判断する"
@@ -461,7 +461,7 @@ notes:
       [3차원/맥락] 冷静・誤った判断・判断基準이 단골이다. 의사결정 문제에서 매우 빈출이다.
     _tags:
       - Noun
-  - target: "悲劇"
+  "悲劇":
     reading: "ひげき"
     meaning: "비극"
     context: "歴史的な悲劇を語る"
@@ -472,7 +472,7 @@ notes:
       [3차원/맥락] 歴史・家族・悲劇的結末이 단골이다. 단순 불행보다 드라마성이 크다.
     _tags:
       - Noun
-  - target: "皮膚"
+  "皮膚":
     reading: "ひふ"
     meaning: "피부"
     context: "皮膚が乾燥する"
@@ -483,7 +483,7 @@ notes:
       [3차원/맥락] 乾燥・敏感肌・皮膚病が 단골이다. 건강·미용 문맥에서 자주 보인다.
     _tags:
       - Noun
-  - target: "評価"
+  "評価":
     reading: "ひょうか"
     meaning: "평가, 평점"
     context: "努力を評価する"
@@ -494,7 +494,7 @@ notes:
       [3차원/맥락] 努力・能力・高く評価する가 단골이다. judge보다 가치 판단 의미가 강하다.
     _tags:
       - Noun
-  - target: "表現"
+  "表現":
     reading: "ひょうげん"
     meaning: "표현, 표현 방식"
     context: "気持ちを表現する"
@@ -505,7 +505,7 @@ notes:
       [3차원/맥락] 気持ち・自由・表現力が 단골이다. 문학·예술·대화 모두에서 빈출이다.
     _tags:
       - Noun
-  - target: "平等"
+  "平等":
     reading: "びょうどう"
     meaning: "평등"
     context: "男女平等を目指す"
@@ -516,7 +516,7 @@ notes:
       [3차원/맥락] 男女・機会・平等な扱いが 단골이다. 사회 제도 문맥에서 자주 보인다.
     _tags:
       - Noun
-  - target: "夫婦"
+  "夫婦":
     reading: "ふうふ"
     meaning: "부부"
     context: "夫婦で店を営む"
@@ -527,7 +527,7 @@ notes:
       [3차원/맥락] 仲の良い夫婦・夫婦でが 단골이다. 家族 소개·사회 문제 문맥 모두에서 나온다.
     _tags:
       - Noun
-  - target: "普及"
+  "普及":
     reading: "ふきゅう"
     meaning: "보급, 보편화"
     context: "スマホが普及する"
@@ -538,7 +538,7 @@ notes:
       [3차원/맥락] 技術・インターネット・急速に普及が 단골이다. spread in society 느낌이다.
     _tags:
       - Noun
-  - target: "付近"
+  "付近":
     reading: "ふきん"
     meaning: "부근, 근처"
     context: "駅付近で待つ"

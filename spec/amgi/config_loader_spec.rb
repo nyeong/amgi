@@ -22,6 +22,9 @@ RSpec.describe Amgi::Application::LoadDeck do
     expect(deck.config.cards.map(&:name)).to eq(['Recall Meaning', 'Cloze Example'])
     expect(deck.note_sources.map(&:source_path)).to all(end_with('.yaml'))
     expect(deck.note_sources.flat_map(&:notes).size).to eq(2)
+    expect(deck.note_sources.flat_map(&:notes).map { |note| note['target'] }).to eq(
+      %w[comply invoice]
+    )
   end
 
   context 'when amgi.yaml defines an output path' do
@@ -30,6 +33,28 @@ RSpec.describe Amgi::Application::LoadDeck do
     it 'loads the output path' do
       expect(result).to be_success
       expect(result.value.config.output).to eq('build/toeic-from-config.apkg')
+    end
+  end
+
+  context 'when a dataset file uses list-style notes' do
+    let(:deck_path) { File.expand_path('../fixtures/decks/invalid_notes_list', __dir__) }
+
+    it 'returns a load error' do
+      expect(result).not_to be_success
+      expect(result.errors).to include(
+        "#{File.join(deck_path, 'cards.yaml')}: `notes` must be a mapping keyed by target"
+      )
+    end
+  end
+
+  context 'when a dataset note redefines target in the body' do
+    let(:deck_path) { File.expand_path('../fixtures/decks/invalid_redefined_target', __dir__) }
+
+    it 'returns a load error' do
+      expect(result).not_to be_success
+      expect(result.errors).to include(
+        "#{File.join(deck_path, 'cards.yaml')}: note `pain` must not redefine `target` in the body"
+      )
     end
   end
 

@@ -1,5 +1,5 @@
 notes:
-  - target: "汗"
+  "汗":
     reading: "あせ"
     meaning: "땀"
     context: "汗を流して働く"
@@ -10,7 +10,7 @@ notes:
       [3차원/맥락] 流す・かく・汗だく가 단골이다. 노력과 긴장의 비유로도 자주 쓰인다.
     _tags:
       - Noun
-  - target: "案外"
+  "案外":
     reading: "あんがい"
     meaning: "의외, 예상 밖"
     context: "案外簡単だった"
@@ -21,7 +21,7 @@ notes:
       [3차원/맥락] 簡単・静か・多い와 자주 붙는다. 意外와 가깝지만 회화체에서 부드럽다.
     _tags:
       - Noun
-  - target: "安定"
+  "安定":
     reading: "あんてい"
     meaning: "안정, 평온"
     context: "生活が安定する"
@@ -32,7 +32,7 @@ notes:
       [3차원/맥락] 生活・経済・供給が 단골이다. 불안정과 반대축으로 외우면 좋다.
     _tags:
       - Noun
-  - target: "胃"
+  "胃":
     reading: "い"
     meaning: "위"
     context: "胃が痛む"
@@ -43,7 +43,7 @@ notes:
       [3차원/맥락] 痛む・弱い・胃薬が 단골이다. 건강 관련 지문에서 자주 보인다.
     _tags:
       - Noun
-  - target: "異常"
+  "異常":
     reading: "いじょう"
     meaning: "이상, 비정상"
     context: "機械に異常がある"
@@ -54,7 +54,7 @@ notes:
       [3차원/맥락] 発見・気づく・異常気象이 단골이다. 단순 차이가 아니라 문제성 있는 다름이다.
     _tags:
       - Noun
-  - target: "泉"
+  "泉":
     reading: "いずみ"
     meaning: "샘, 샘물"
     context: "泉の水が湧く"
@@ -65,7 +65,7 @@ notes:
       [3차원/맥락] 水・湧く・自然が 단골이다. 자연·지리 문맥에서 자주 보인다.
     _tags:
       - Noun
-  - target: "一秒"
+  "一秒":
     reading: "いちびょう"
     meaning: "1초"
     context: "一秒を争う"
@@ -76,7 +76,7 @@ notes:
       [3차원/맥락] 争う・待つ・一秒後が 자주 붙는다. 긴급 상황에서 특히 자주 나온다.
     _tags:
       - Noun
-  - target: "移転"
+  "移転":
     reading: "いてん"
     meaning: "이전, 이전함"
     context: "本社を移転する"
@@ -87,7 +87,7 @@ notes:
       [3차원/맥락] 本社・工場・事務所의 이전이 단골이다. 移動보다 장기적 장소 변경이다.
     _tags:
       - Noun
-  - target: "移動"
+  "移動":
     reading: "いどう"
     meaning: "이동, 이동함"
     context: "電車で移動する"
@@ -98,7 +98,7 @@ notes:
       [3차원/맥락] 手段・時間・移動中が 단골이다. 일시적 이동을 말할 때 기본어다.
     _tags:
       - Noun
-  - target: "違反"
+  "違反":
     reading: "いはん"
     meaning: "위반"
     context: "規則に違反する"
@@ -109,7 +109,7 @@ notes:
       [3차원/맥락] 規則・法律・交通違反이 단골이다. 단순 실수보다 규범 위배가 핵심이다.
     _tags:
       - Noun
-  - target: "飲酒"
+  "飲酒":
     reading: "いんしゅ"
     meaning: "음주, 술 마심"
     context: "飲酒運転を禁止する"
@@ -120,7 +120,7 @@ notes:
       [3차원/맥락] 運転・量・未成年の飲酒가 단골이다. 공공 규제 문맥에서 자주 보인다.
     _tags:
       - Noun
-  - target: "宇宙"
+  "宇宙":
     reading: "うちゅう"
     meaning: "우주"
     context: "宇宙の仕組みを学ぶ"
@@ -131,7 +131,7 @@ notes:
       [3차원/맥락] 開発・観測・宇宙空間이 단골이다. 과학 지문에서 자주 보인다.
     _tags:
       - Noun
-  - target: "雨量"
+  "雨量":
     reading: "うりょう"
     meaning: "우량, 강수량"
     context: "雨量を観測する"
@@ -142,7 +142,7 @@ notes:
       [3차원/맥락] 観測・増える・記録的雨量이 자주 나온다. 날씨·재해 문맥의 핵심어다.
     _tags:
       - Noun
-  - target: "永遠"
+  "永遠":
     reading: "えいえん"
     meaning: "영원"
     context: "永遠に続くわけではない"
@@ -153,7 +153,7 @@ notes:
       [3차원/맥락] 愛・命・続くと 자주 붙는다. 永久보다 감정적·철학적 뉘앙스가 더 있다.
     _tags:
       - Noun
-  - target: "永久"
+  "永久":
     reading: "えいきゅう"
     meaning: "영구, 영속"
     context: "永久に保存する"
@@ -164,7 +164,7 @@ notes:
       [3차원/맥락] 保存・保証・永久欠番이 단골이다. 永遠보다 제도·기술 문맥에 더 잘 맞는다.
     _tags:
       - Noun
-  - target: "絵具"
+  "絵具":
     reading: "えのぐ"
     meaning: "물감"
     context: "絵具で絵を描く"
@@ -175,7 +175,7 @@ notes:
       [3차원/맥락] 色・筆・水彩絵具가 단골이다. 미술 교육·취미 문맥에서 출제되기 쉽다.
     _tags:
       - Noun
-  - target: "応援"
+  "応援":
     reading: "おうえん"
     meaning: "응원, 지원"
     context: "チームを応援する"
@@ -186,7 +186,7 @@ notes:
       [3차원/맥락] チーム・声援・応援メッセージ가 단골이다. 물리적 지원과 정서적 격려 둘 다 가능하다.
     _tags:
       - Noun
-  - target: "応対"
+  "応対":
     reading: "おうたい"
     meaning: "응대, 대응"
     context: "丁寧に応対する"
@@ -197,7 +197,7 @@ notes:
       [3차원/맥락] 丁寧・電話・窓口応対가 단골이다. 対応보다 사람 대면 서비스 느낌이 강하다.
     _tags:
       - Noun
-  - target: "欧米"
+  "欧米":
     reading: "おうべい"
     meaning: "구미, 유럽과 미국"
     context: "欧米の文化に触れる"
@@ -208,7 +208,7 @@ notes:
       [3차원/맥락] 文化・市場・欧米諸国이 단골이다. 일본어 기사체에서 자주 보이는 묶음 표현이다.
     _tags:
       - Noun
-  - target: "大声"
+  "大声":
     reading: "おおごえ"
     meaning: "큰 목소리"
     context: "大声で叫ぶ"
@@ -219,7 +219,7 @@ notes:
       [3차원/맥락] 叫ぶ・笑う・注意する가 자주 붙는다. 단순한 loud voice보다 행위성과 함께 기억한다.
     _tags:
       - Noun
-  - target: "奥"
+  "奥":
     reading: "おく"
     meaning: "안쪽, 깊숙한 곳"
     context: "部屋の奥に進む"
@@ -230,7 +230,7 @@ notes:
       [3차원/맥락] 部屋・山奥・心の奥가 단골이다. 내부의 깊은 지점을 강조한다.
     _tags:
       - Noun
-  - target: "汚染"
+  "汚染":
     reading: "おせん"
     meaning: "오염"
     context: "川の水が汚染される"
@@ -241,7 +241,7 @@ notes:
       [3차원/맥락] 水・空気・環境汚染이 단골이다. 公害와 묶어 기억하면 좋다.
     _tags:
       - Noun
-  - target: "温泉"
+  "温泉":
     reading: "おんせん"
     meaning: "온천"
     context: "温泉に入る"
@@ -252,7 +252,7 @@ notes:
       [3차원/맥락] 入る・湧く・旅行と 자주 붙는다. 일본 문화·여행 지문에서 빈출이다.
     _tags:
       - Noun
-  - target: "改善"
+  "改善":
     reading: "かいぜん"
     meaning: "개선, 향상"
     context: "サービスを改善する"
@@ -263,7 +263,7 @@ notes:
       [3차원/맥락] サービス・環境・業績改善이 단골이다. 修正보다 결과 개선의 폭이 크다.
     _tags:
       - Noun
-  - target: "開封"
+  "開封":
     reading: "かいふう"
     meaning: "개봉, 봉함 해제"
     context: "封筒を開封する"
@@ -274,7 +274,7 @@ notes:
       [3차원/맥락] 封筒・商品・開封済み가 단골이다. 포장·우편 문맥에서 자주 나온다.
     _tags:
       - Noun
-  - target: "係員"
+  "係員":
     reading: "かかりいん"
     meaning: "관계자, 담당자"
     context: "係員に尋ねる"
@@ -285,7 +285,7 @@ notes:
       [3차원/맥락] 尋ねる・案内・指示する가 단골이다. 안내·서비스 현장에서 자주 보인다.
     _tags:
       - Noun
-  - target: "菓子"
+  "菓子":
     reading: "かし"
     meaning: "과자, 과자류"
     context: "お菓子を配る"
@@ -296,7 +296,7 @@ notes:
       [3차원/맥락] 買う・食べる・土産の菓子가 단골이다. 음식 중에서도 군것질 범주다.
     _tags:
       - Noun
-  - target: "肩"
+  "肩":
     reading: "かた"
     meaning: "어깨"
     context: "肩がこる"
@@ -307,7 +307,7 @@ notes:
       [3차원/맥락] こる・痛い・肩を並べる가 단골이다. 신체와 비유 의미 둘 다 중요하다.
     _tags:
       - Noun
-  - target: "仮定"
+  "仮定":
     reading: "かてい"
     meaning: "가정, 가설"
     context: "仮定の話をする"
@@ -318,7 +318,7 @@ notes:
       [3차원/맥락] 話・条件・前提が 단골이다. 사실이 아닌 전제라는 점이 중요하다.
     _tags:
       - Noun
-  - target: "可能"
+  "可能":
     reading: "かのう"
     meaning: "가능, 가능성"
     context: "実現が可能だ"
@@ -329,7 +329,7 @@ notes:
       [3차원/맥락] 実現・利用・不可能と 대비가 단골이다. 가능 여부 판단 문제에 자주 나온다.
     _tags:
       - Noun
-  - target: "壁"
+  "壁":
     reading: "かべ"
     meaning: "벽, 장벽"
     context: "壁にぶつかる"
@@ -340,7 +340,7 @@ notes:
       [3차원/맥락] 壁にぶつかる, 壁を越える가 단골이다. 문제·한계를 말할 때 자주 쓰인다.
     _tags:
       - Noun
-  - target: "革靴"
+  "革靴":
     reading: "かわぐつ"
     meaning: "가죽 구두"
     context: "革靴を磨く"
@@ -351,7 +351,7 @@ notes:
       [3차원/맥락] 磨く・履く・仕事用の革靴가 단골이다. 복장 문맥과 잘 맞는다.
     _tags:
       - Noun
-  - target: "看護"
+  "看護":
     reading: "かんご"
     meaning: "간호, 돌봄"
     context: "患者を看護する"
@@ -362,7 +362,7 @@ notes:
       [3차원/맥락] 患者・病院・在宅看護가 단골이다. 介護와의 차이도 알아두면 좋다.
     _tags:
       - Noun
-  - target: "勘定"
+  "勘定":
     reading: "かんじょう"
     meaning: "계산, 셈"
     context: "お勘定をお願いします"
@@ -373,7 +373,7 @@ notes:
       [3차원/맥락] 支払う・お勘定・損得勘定が 단골이다. 計算보다 생활 회화 느낌이 있다.
     _tags:
       - Noun
-  - target: "缶詰"
+  "缶詰":
     reading: "かんづめ"
     meaning: "통조림, 갇힘"
     context: "缶詰を開ける"
@@ -384,7 +384,7 @@ notes:
       [3차원/맥락] 開ける・保存食・ホテルに缶詰めが 단골이다. 문자적·비유적 의미 둘 다 중요하다.
     _tags:
       - Noun
-  - target: "看板"
+  "看板":
     reading: "かんばん"
     meaning: "간판"
     context: "店の看板を出す"
@@ -395,7 +395,7 @@ notes:
       [3차원/맥락] 店・目印・看板商品이 단골이다. 대표 상품 의미도 함께 기억한다.
     _tags:
       - Noun
-  - target: "機嫌"
+  "機嫌":
     reading: "きげん"
     meaning: "기분, 심기"
     context: "機嫌が悪い"
@@ -406,7 +406,7 @@ notes:
       [3차원/맥락] 悪い・直る・取る가 단골이다. 気分보다 대인관계의 분위기가 더 묻어난다.
     _tags:
       - Noun
-  - target: "気候"
+  "気候":
     reading: "きこう"
     meaning: "기후"
     context: "温暖な気候が続く"
@@ -417,7 +417,7 @@ notes:
       [3차원/맥락] 温暖・変動・地域の気候가 단골이다. 天気보다 장기적이다.
     _tags:
       - Noun
-  - target: "規制"
+  "規制":
     reading: "きせい"
     meaning: "규제, 제한"
     context: "広告を規制する"
@@ -428,7 +428,7 @@ notes:
       [3차원/맥락] 法律・広告・環境規制가 단골이다. 管理보다 제한성이 더 강하다.
     _tags:
       - Noun
-  - target: "喫茶店"
+  "喫茶店":
     reading: "きっさてん"
     meaning: "찻집, 카페"
     context: "喫茶店で休む"
@@ -439,7 +439,7 @@ notes:
       [3차원/맥락] 入る・待ち合わせ・コーヒーが 단골이다. カフェ보다 전통적인 느낌이 있다.
     _tags:
       - Noun
-  - target: "希望"
+  "希望":
     reading: "きぼう"
     meaning: "희망, 바람"
     context: "希望を持つ"
@@ -450,7 +450,7 @@ notes:
       [3차원/맥락] 持つ・失う・希望者募集가 단골이다. 꿈과 현실적 바람 두 의미를 함께 가진다.
     _tags:
       - Noun
-  - target: "客"
+  "客":
     reading: "きゃく"
     meaning: "손님, 고객"
     context: "客を迎える"
@@ -461,7 +461,7 @@ notes:
       [3차원/맥락] 迎える・相手をする・客が多い가 단골이다. business context에서 매우 기본어다.
     _tags:
       - Noun
-  - target: "救助"
+  "救助":
     reading: "きゅうじょ"
     meaning: "구조, 구출"
     context: "被災者を救助する"
@@ -472,7 +472,7 @@ notes:
       [3차원/맥락] 被災者・現場・救助活動이 단골이다. 긴급 상황 문맥에서 자주 보인다.
     _tags:
       - Noun
-  - target: "急速"
+  "急速":
     reading: "きゅうそく"
     meaning: "급속, 빠름"
     context: "人口が急速に増える"
@@ -483,7 +483,7 @@ notes:
       [3차원/맥락] 進む・増える・急速な変化가 단골이다. 突然보다 '빠른 진행'에 초점이 있다.
     _tags:
       - Noun
-  - target: "競争"
+  "競争":
     reading: "きょうそう"
     meaning: "경쟁"
     context: "価格競争が激しい"
@@ -494,7 +494,7 @@ notes:
       [3차원/맥락] 激しい・勝つ・価格競争が 단골이다. 스포츠와 비즈니스 양쪽에서 빈출이다.
     _tags:
       - Noun
-  - target: "恐怖"
+  "恐怖":
     reading: "きょうふ"
     meaning: "공포, 두려움"
     context: "恐怖を感じる"
@@ -505,7 +505,7 @@ notes:
       [3차원/맥락] 感じる・与える・恐怖心が 단골이다. 단순 불안보다 더 강한 감정이다.
     _tags:
       - Noun
-  - target: "曲線"
+  "曲線":
     reading: "きょくせん"
     meaning: "곡선"
     context: "美しい曲線を描く"
@@ -516,7 +516,7 @@ notes:
       [3차원/맥락] 描く・緩やかな・曲線美が 단골이다. 도형·디자인 문맥에서 자주 보인다.
     _tags:
       - Noun
-  - target: "禁煙"
+  "禁煙":
     reading: "きんえん"
     meaning: "금연"
     context: "この店は禁煙です"
@@ -527,7 +527,7 @@ notes:
       [3차원/맥락] 席・区域・禁煙外来が 단골이다. 喫煙과 반드시 짝으로 외워야 한다.
     _tags:
       - Noun
-  - target: "金額"
+  "金額":
     reading: "きんがく"
     meaning: "금액, 액수"
     context: "金額を確認する"
@@ -538,7 +538,7 @@ notes:
       [3차원/맥락] 確認・記入・請求金額이 단골이다. payment/estimate 문맥에서 매우 빈출이다.
     _tags:
       - Noun
-  - target: "区域"
+  "区域":
     reading: "くいき"
     meaning: "구역, 구획"
     context: "立入禁止区域"
@@ -549,7 +549,7 @@ notes:
       [3차원/맥락] 禁止・保護・危険区域が 단골이다. 地域보다 경계선이 더 분명하다.
     _tags:
       - Noun
-  - target: "偶然"
+  "偶然":
     reading: "ぐうぜん"
     meaning: "우연"
     context: "駅で偶然会う"
@@ -560,7 +560,7 @@ notes:
       [3차원/맥락] 会う・一致・偶然ではない가 단골이다. 계획이 없는 만남을 강조한다.
     _tags:
       - Noun
-  - target: "草"
+  "草":
     reading: "くさ"
     meaning: "풀, 잡초"
     context: "草を刈る"
@@ -571,7 +571,7 @@ notes:
       [3차원/맥락] 生える・刈る・草原が 단골이다. 자연·농사 문맥의 기초어다.
     _tags:
       - Noun
-  - target: "薬"
+  "薬":
     reading: "くすり"
     meaning: "약"
     context: "薬を飲む"
@@ -582,7 +582,7 @@ notes:
       [3차원/맥락] 飲む・効く・処方薬が 단골이다. 건강·병원 지문에서 매우 기본어다.
     _tags:
       - Noun
-  - target: "管"
+  "管":
     reading: "くだ"
     meaning: "관, 파이프"
     context: "水道管が破れる"

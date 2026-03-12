@@ -1,5 +1,5 @@
 notes:
-  - target: "明らかだ"
+  "明らかだ":
     reading: "あきらかだ"
     meaning: "분명하다, 명백하다"
     context: "原因は明らかだ"
@@ -10,7 +10,7 @@ notes:
       [3차원/맥락] 原因・違い・明らかになる가 단골이다. はっきり보다 문어체적이다.
     _tags:
       - Adjective
-  - target: "浅い"
+  "浅い":
     reading: "あさい"
     meaning: "얕다, 깊지 않다"
     context: "川が浅い"
@@ -21,7 +21,7 @@ notes:
       [3차원/맥락] 川・知識が浅い가 단골이다. 深い의 반대축으로 기억한다.
     _tags:
       - Adjective
-  - target: "温かい"
+  "温かい":
     reading: "あたたかい"
     meaning: "따뜻하다"
     context: "温かい飲み物を飲む"
@@ -32,7 +32,7 @@ notes:
       [3차원/맥락] 飲み物・言葉・温かい雰囲気가 단골이다. physical warmth와 emotional warmth 둘 다 중요하다.
     _tags:
       - Adjective
-  - target: "甘い"
+  "甘い":
     reading: "あまい"
     meaning: "달다, 안일하다"
     context: "見通しが甘い"
@@ -43,7 +43,7 @@ notes:
       [3차원/맥락] お菓子・考えが甘い가 단골이다. strict의 반대 느낌으로도 자주 나온다.
     _tags:
       - Adjective
-  - target: "新た"
+  "新た":
     reading: "あらた"
     meaning: "새롭다, 새롭고 다르다"
     context: "新たな課題だ"
@@ -54,7 +54,7 @@ notes:
       [3차원/맥락] 課題・計画・新たに始める가 단골이다. 新しい보다 문어체적이다.
     _tags:
       - Adjective
-  - target: "薄い"
+  "薄い":
     reading: "うすい"
     meaning: "얇다, 엷다"
     context: "味が薄い"
@@ -65,7 +65,7 @@ notes:
       [3차원/맥락] 紙・味・色が薄い가 단골이다. context에 따라 thin, weak, pale로 나뉜다.
     _tags:
       - Adjective
-  - target: "美しい"
+  "美しい":
     reading: "うつくしい"
     meaning: "아름답다"
     context: "美しい景色だ"
@@ -76,7 +76,7 @@ notes:
       [3차원/맥락] 景色・音・心が美しい가 단골이다. きれい보다 문어적·격조 높다.
     _tags:
       - Adjective
-  - target: "偉い"
+  "偉い":
     reading: "えらい"
     meaning: "훌륭하다, 대단하다"
     context: "よく頑張って偉い"
@@ -87,7 +87,7 @@ notes:
       [3차원/맥락] 立派・社長・偉い人가 단골이다. casual praise와 status meaning 둘 다 기억한다.
     _tags:
       - Adjective
-  - target: "幼い"
+  "幼い":
     reading: "おさない"
     meaning: "어리다"
     context: "まだ幼い子ども"
@@ -98,7 +98,7 @@ notes:
       [3차원/맥락] 子ども・考えが幼い가 단골이다. 若い보다 미성숙 의미가 더 강하다.
     _tags:
       - Adjective
-  - target: "主だ"
+  "主だ":
     reading: "おもだ"
     meaning: "주되다, 중심이다"
     context: "主な原因だ"
@@ -109,7 +109,7 @@ notes:
       [3차원/맥락] 原因・目的・主な内容が 단골이다. 主要보다 회화와 문장에서 모두 자연스럽다.
     _tags:
       - Adjective
-  - target: "賢い"
+  "賢い":
     reading: "かしこい"
     meaning: "현명하다, 똑똑하다"
     context: "賢い選択だ"
@@ -120,7 +120,7 @@ notes:
       [3차원/맥락] 選択・子ども・賢い方法が 단골이다. 頭がいい보다 판단력 뉘앙스가 강하다.
     _tags:
       - Adjective
-  - target: "固い"
+  "固い":
     reading: "かたい"
     meaning: "단단하다, 딱딱하다"
     context: "考えが固い"
@@ -131,7 +131,7 @@ notes:
       [3차원/맥락] 石・表情・考えが固い가 단골이다. physical hardness와 stiffness 둘 다 중요하다.
     _tags:
       - Adjective
-  - target: "汚い"
+  "汚い":
     reading: "きたない"
     meaning: "더럽다"
     context: "部屋が汚い"
@@ -142,7 +142,7 @@ notes:
       [3차원/맥락] 部屋・手・汚い言葉가 단골이다. literal dirt and figurative ugliness 둘 다 된다.
     _tags:
       - Adjective
-  - target: "厳しい"
+  "厳しい":
     reading: "きびしい"
     meaning: "엄하다, 엄격하다"
     context: "条件が厳しい"
@@ -153,7 +153,7 @@ notes:
       [3차원/맥락] 条件・先生・厳しい現実が 단골이다. hard/strict both possible by context.
     _tags:
       - Adjective
-  - target: "逆だ"
+  "逆だ":
     reading: "ぎゃくだ"
     meaning: "거꾸로다, 반대다"
     context: "順番が逆だ"
@@ -164,7 +164,7 @@ notes:
       [3차원/맥락] 順番・意味・逆の結果が 단골이다. opposite direction or opposite outcome both matter.
     _tags:
       - Adjective
-  - target: "暗い"
+  "暗い":
     reading: "くらい"
     meaning: "어둡다"
     context: "部屋が暗い"
@@ -175,7 +175,7 @@ notes:
       [3차원/맥락] 部屋・夜道・気分が暗い가 단골이다. literal darkness와 mood both matter.
     _tags:
       - Adjective
-  - target: "苦しい"
+  "苦しい":
     reading: "くるしい"
     meaning: "괴롭다, 힘들다"
     context: "息が苦しい"
@@ -186,7 +186,7 @@ notes:
       [3차원/맥락] 息・生活・苦しい立場が 단골이다. painful and difficult 모두 가능하다.
     _tags:
       - Adjective
-  - target: "詳しい"
+  "詳しい":
     reading: "くわしい"
     meaning: "상세하다, 잘 알다"
     context: "事情に詳しい"
@@ -197,7 +197,7 @@ notes:
       [3차원/맥락] 事情・歴史・機械に詳しい가 단골이다. knowledgeable 뜻으로 자주 나온다.
     _tags:
       - Adjective
-  - target: "険しい"
+  "険しい":
     reading: "けわしい"
     meaning: "험하다"
     context: "険しい山道だ"
@@ -208,7 +208,7 @@ notes:
       [3차원/맥락] 山道・表情・険しい状況が 단골이다. harsh and difficult mood both matter.
     _tags:
       - Adjective
-  - target: "濃い"
+  "濃い":
     reading: "こい"
     meaning: "진하다"
     context: "味が濃い"
@@ -219,7 +219,7 @@ notes:
       [3차원/맥락] 味・色・関係が濃い가 단골이다. density and intensity both possible.
     _tags:
       - Adjective
-  - target: "快い"
+  "快い":
     reading: "こころよい"
     meaning: "기분 좋다, 쾌적하다"
     context: "快い返事をもらう"
@@ -230,7 +230,7 @@ notes:
       [3차원/맥락] 返事・承諾・快い気分が 단골이다. pleasant and agreeable nuance is key.
     _tags:
       - Adjective
-  - target: "細かい"
+  "細かい":
     reading: "こまかい"
     meaning: "자잘하다, 세밀하다"
     context: "細かい作業だ"
@@ -241,7 +241,7 @@ notes:
       [3차원/맥락] 作業・説明・細かい気配り가 단골이다. tiny and meticulous 둘 다 된다.
     _tags:
       - Adjective
-  - target: "細やかだ"
+  "細やかだ":
     reading: "こまやかだ"
     meaning: "자잘하다, 섬세하다"
     context: "細やかな配慮だ"
@@ -252,7 +252,7 @@ notes:
       [3차원/맥락] 配慮・気配り・感情描写が 단골이다. 細かい보다 정서적 섬세함이 강하다.
     _tags:
       - Adjective
-  - target: "幸いだ"
+  "幸いだ":
     reading: "さいわいだ"
     meaning: "다행이다"
     context: "被害がなくて幸いだ"
@@ -263,7 +263,7 @@ notes:
       [3차원/맥락] 〜なくて幸いだ가 단골이다. relief nuance가 매우 강하다.
     _tags:
       - Adjective
-  - target: "盛んだ"
+  "盛んだ":
     reading: "さかんだ"
     meaning: "성하다, 활발하다"
     context: "交流が盛んだ"
@@ -274,7 +274,7 @@ notes:
       [3차원/맥락] 交流・議論・商業が盛んだ가 단골이다. lively and active nuance가 핵심이다.
     _tags:
       - Adjective
-  - target: "寒い"
+  "寒い":
     reading: "さむい"
     meaning: "춥다"
     context: "朝は寒い"
@@ -285,7 +285,7 @@ notes:
       [3차원/맥락] 朝・冬・寒い日が 단골이다. 天候·환경의 차가움에 주로 쓴다.
     _tags:
       - Adjective
-  - target: "静かだ"
+  "静かだ":
     reading: "しずかだ"
     meaning: "조용하다"
     context: "教室が静かだ"
@@ -296,7 +296,7 @@ notes:
       [3차원/맥락] 教室・夜・静かな町が 단골이다. silence and calm atmosphere both matter.
     _tags:
       - Adjective
-  - target: "親しい"
+  "親しい":
     reading: "したしい"
     meaning: "친하다, 가까운"
     context: "親しい友人だ"
@@ -307,7 +307,7 @@ notes:
       [3차원/맥락] 友人・関係・親しい間柄が 단골이다. close relationship nuance가 핵심이다.
     _tags:
       - Adjective
-  - target: "真剣だ"
+  "真剣だ":
     reading: "しんけんだ"
     meaning: "진지하다"
     context: "真剣な表情だ"

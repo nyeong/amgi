@@ -1,5 +1,5 @@
 notes:
-  - target: "願う"
+  "願う":
     reading: "ねがう"
     meaning: "바라다, 원하다"
     context: "成功を願う"
@@ -10,7 +10,7 @@ notes:
       [3차원/맥락] 成功・回復・お願い申し上げます가 단골이다. 望む보다 정중·기원 느낌이 있다.
     _tags:
       - Verb
-  - target: "残る"
+  "残る":
     reading: "のこる"
     meaning: "남다"
     context: "記憶に残る"
@@ -21,7 +21,7 @@ notes:
       [3차원/맥락] 記憶・時間・あと少し残る가 단골이다. 余る보다 단순 잔존 의미가 강하다.
     _tags:
       - Verb
-  - target: "述べる"
+  "述べる":
     reading: "のべる"
     meaning: "말하다, 진술하다"
     context: "意見を述べる"
@@ -32,7 +32,7 @@ notes:
       [3차원/맥락] 意見・感想・理由を述べるが 단골이다. 言う보다 문어체적이고 정돈된 느낌이다.
     _tags:
       - Verb
-  - target: "昇る"
+  "昇る":
     reading: "のぼる"
     meaning: "오르다"
     context: "階段を昇る"
@@ -43,7 +43,7 @@ notes:
       [3차원/맥락] 階段・太陽・天に昇る가 단골이다. 상승 이미지가 핵심이다.
     _tags:
       - Verb
-  - target: "生える"
+  "生える":
     reading: "はえる"
     meaning: "나다"
     context: "草が生える"
@@ -54,7 +54,7 @@ notes:
       [3차원/맥락] 草・ひげ・カビが生える가 단골이다. 자연 발생적 생성이 핵심이다.
     _tags:
       - Verb
-  - target: "働く"
+  "働く":
     reading: "はたらく"
     meaning: "일하다, 작용하다"
     context: "銀行で働く"
@@ -65,7 +65,7 @@ notes:
       [3차원/맥락] 会社で働く・薬が働く가 단골이다. work and function 둘 다 기억한다.
     _tags:
       - Verb
-  - target: "広がる"
+  "広がる":
     reading: "ひろがる"
     meaning: "퍼지다, 넓어지다"
     context: "景色が広がる"
@@ -76,7 +76,7 @@ notes:
       [3차원/맥락] 景色・被害・可能性が広がる가 단골이다. physical spread와 abstract expansion 모두 중요하다.
     _tags:
       - Verb
-  - target: "増える"
+  "増える":
     reading: "ふえる"
     meaning: "늘다"
     context: "利用者が増える"
@@ -87,7 +87,7 @@ notes:
       [3차원/맥락] 利用者・機会・年々増える가 단골이다. growth/change 문맥의 핵심 동사다.
     _tags:
       - Verb
-  - target: "吹く"
+  "吹く":
     reading: "ふく"
     meaning: "불다"
     context: "風が吹く"
@@ -98,7 +98,7 @@ notes:
       [3차원/맥락] 風・笛・息を吹きかける가 단골이다. movement of air의 기본 동사다.
     _tags:
       - Verb
-  - target: "掘る"
+  "掘る":
     reading: "ほる"
     meaning: "파다"
     context: "穴を掘る"
@@ -109,7 +109,7 @@ notes:
       [3차원/맥락] 穴・井戸・深く掘る가 단골이다. dig의 대표 표현이다.
     _tags:
       - Verb
-  - target: "巻く"
+  "巻く":
     reading: "まく"
     meaning: "말다, 감다"
     context: "マフラーを巻く"
@@ -120,7 +120,7 @@ notes:
       [3차원/맥락] マフラー・包帯・寿司を巻く가 단골이다. bind and wrap 의미가 중심이다.
     _tags:
       - Verb
-  - target: "増す"
+  "増す":
     reading: "ます"
     meaning: "늘다, 더하다"
     context: "不安が増す"
@@ -131,7 +131,7 @@ notes:
       [3차원/맥락] 不安・重要性・勢いが増す가 단골이다. 감정·추상 정도 상승에 강하다.
     _tags:
       - Verb
-  - target: "招く"
+  "招く":
     reading: "まねく"
     meaning: "초래하다, 초대하다"
     context: "混乱を招く"
@@ -142,7 +142,7 @@ notes:
       [3차원/맥락] 混乱・危険・客を招く가 단골이다. invite와 cause 둘 다 중요하다.
     _tags:
       - Verb
-  - target: "迷う"
+  "迷う":
     reading: "まよう"
     meaning: "헤매다, 망설이다"
     context: "進路に迷う"
@@ -153,7 +153,7 @@ notes:
       [3차원/맥락] 道・進路・選択に迷う가 단골이다. physical lost와 mental hesitation 둘 다 있다.
     _tags:
       - Verb
-  - target: "磨く"
+  "磨く":
     reading: "みがく"
     meaning: "갈고닦다, 닦다"
     context: "技術を磨く"
@@ -164,7 +164,7 @@ notes:
       [3차원/맥락] 歯・技術・腕を磨くが 단골이다. polish literal and figurative senses both matter.
     _tags:
       - Verb
-  - target: "実る"
+  "実る":
     reading: "みのる"
     meaning: "결실을 맺다"
     context: "努力が実る"
@@ -175,7 +175,7 @@ notes:
       [3차원/맥락] 努力・成果・秋に実る가 단골이다. 노력→성과 흐름의 핵심 동사다.
     _tags:
       - Verb
-  - target: "迎える"
+  "迎える":
     reading: "むかえる"
     meaning: "맞이하다"
     context: "客を迎える"
@@ -186,7 +186,7 @@ notes:
       [3차원/맥락] 客・朝・最終日を迎えるが 단골이다. receive and reach a stage 둘 다 중요하다.
     _tags:
       - Verb
-  - target: "結ぶ"
+  "結ぶ":
     reading: "むすぶ"
     meaning: "묶다, 맺다"
     context: "協定を結ぶ"
@@ -197,7 +197,7 @@ notes:
       [3차원/맥락] 協定・縁・リボンを結ぶが 단골이다. tie and conclude agreement both matter.
     _tags:
       - Verb
-  - target: "燃える"
+  "燃える":
     reading: "もえる"
     meaning: "타다"
     context: "木が燃える"
@@ -208,7 +208,7 @@ notes:
       [3차원/맥락] 木・家・闘志が燃える가 단골이다. literal fire and passion both matter.
     _tags:
       - Verb
-  - target: "用いる"
+  "用いる":
     reading: "もちいる"
     meaning: "쓰다, 이용하다"
     context: "新しい方法を用いる"
@@ -219,7 +219,7 @@ notes:
       [3차원/맥락] 方法・表現・例を用いる가 단골이다. formal use의 느낌이 강하다.
     _tags:
       - Verb
-  - target: "戻す"
+  "戻す":
     reading: "もどす"
     meaning: "되돌리다"
     context: "元の位置に戻す"
@@ -230,7 +230,7 @@ notes:
       [3차원/맥락] 位置・元に戻す・気持ちを取り戻す가 단골이다. restore 의미가 핵심이다.
     _tags:
       - Verb
-  - target: "催す"
+  "催す":
     reading: "もよおす"
     meaning: "개최하다, 불러일으키다"
     context: "展示会を催す"
@@ -241,7 +241,7 @@ notes:
       [3차원/맥락] 展示会・眠気・吐き気を催す가 단골이다. invite/cause 범주의 문어체 동사다.
     _tags:
       - Verb
-  - target: "焼ける"
+  "焼ける":
     reading: "やける"
     meaning: "타다"
     context: "パンが焼ける"
@@ -252,7 +252,7 @@ notes:
       [3차원/맥락] パン・日焼け・焼け跡が 단골이다. cook/burn both depending on context.
     _tags:
       - Verb
-  - target: "破る"
+  "破る":
     reading: "やぶる"
     meaning: "찢다, 깨뜨리다"
     context: "記録を破る"
@@ -263,7 +263,7 @@ notes:
       [3차원/맥락] 紙・約束を破る・記録を破るが 단골이다. break literal and figurative senses.
     _tags:
       - Verb
-  - target: "辞める"
+  "辞める":
     reading: "やめる"
     meaning: "그만두다"
     context: "会社を辞める"
@@ -274,7 +274,7 @@ notes:
       [3차원/맥락] 会社・仕事・部活を辞める가 단골이다. quit employment/activity meaning.
     _tags:
       - Verb
-  - target: "沸く"
+  "沸く":
     reading: "わく"
     meaning: "끓다"
     context: "お湯が沸く"
@@ -285,7 +285,7 @@ notes:
       [3차원/맥락] お湯・風呂・興味が沸く가 단골이다. literal boiling and interest arising both matter.
     _tags:
       - Verb
-  - target: "渡す"
+  "渡す":
     reading: "わたす"
     meaning: "건네주다"
     context: "資料を渡す"
@@ -296,7 +296,7 @@ notes:
       [3차원/맥락] 資料・お金・橋を渡すが 단골이다. give/hand over and move across nuances exist.
     _tags:
       - Verb
-  - target: "笑う"
+  "笑う":
     reading: "わらう"
     meaning: "웃다"
     context: "子どもが笑う"

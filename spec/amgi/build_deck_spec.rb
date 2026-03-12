@@ -116,4 +116,48 @@ RSpec.describe Amgi::Application::BuildDeck do
       end
     end
   end
+
+  it 'keeps note and card identities stable when non-target fields change' do
+    original_deck_path = File.expand_path('../fixtures/decks/stable_identity_original', __dir__)
+    updated_deck_path = File.expand_path('../fixtures/decks/stable_identity_updated', __dir__)
+
+    Dir.mktmpdir do |dir|
+      original = described_class.call(
+        original_deck_path,
+        output_path: File.join(dir, 'original.apkg')
+      )
+      updated = described_class.call(updated_deck_path, output_path: File.join(dir, 'updated.apkg'))
+
+      original_collection = extract_collection(original.value.output_path, dir, 'original.anki2')
+      updated_collection = extract_collection(updated.value.output_path, dir, 'updated.anki2')
+
+      original_db = SQLite3::Database.new(original_collection)
+      updated_db = SQLite3::Database.new(updated_collection)
+
+      original_note = original_db.get_first_row('SELECT id, guid, flds FROM notes')
+      updated_note = updated_db.get_first_row('SELECT id, guid, flds FROM notes')
+      original_card_id = original_db.get_first_value('SELECT id FROM cards')
+      updated_card_id = updated_db.get_first_value('SELECT id FROM cards')
+
+      aggregate_failures do
+        expect(original).to be_success
+        expect(updated).to be_success
+        expect(original_note[0]).to eq(updated_note[0])
+        expect(original_note[1]).to eq(updated_note[1])
+        expect(original_card_id).to eq(updated_card_id)
+        expect(original_note[2]).not_to eq(updated_note[2])
+      end
+    ensure
+      original_db&.close
+      updated_db&.close
+    end
+  end
+
+  def extract_collection(apkg_path, dir, filename)
+    collection_path = File.join(dir, filename)
+    Zip::File.open(apkg_path) do |zip_file|
+      zip_file.extract('collection.anki2', collection_path)
+    end
+    collection_path
+  end
 end

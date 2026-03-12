@@ -1,5 +1,5 @@
 notes:
-  - target: "忙しい"
+  "忙しい":
     reading: "いそがしい"
     meaning: "바쁘다, 분주하다"
     context: "仕事で忙しい"
@@ -10,7 +10,7 @@ notes:
       [3차원/맥락] 仕事・年末・毎日と 잘 붙는다. 単순히 할 일 많음을 말하는 기본어다.
     _tags:
       - Adjective
-  - target: "涼しい"
+  "涼しい":
     reading: "すずしい"
     meaning: "선선하다, 시원하다"
     context: "涼しい風が吹く"
@@ -21,7 +21,7 @@ notes:
       [3차원/맥락] 風・朝・気候와 잘 붙는다. 冷たい보다 '기분 좋은 서늘함'이다.
     _tags:
       - Adjective
-  - target: "乏しい"
+  "乏しい":
     reading: "とぼしい"
     meaning: "부족하다, 결핍되다"
     context: "資源が乏しい"
@@ -32,7 +32,7 @@ notes:
       [3차원/맥락] 資源・経験・表情に乏しい가 단골이다. 少ない보다 질적 빈약함이 강하다.
     _tags:
       - Adjective
-  - target: "貧しい"
+  "貧しい":
     reading: "まずしい"
     meaning: "가난하다, 빈곤하다"
     context: "貧しい家庭に育つ"
@@ -43,7 +43,7 @@ notes:
       [3차원/맥락] 家庭・地域・暮らし와 자주 결합한다. 乏しい보다 생활 형편의 빈곤에 가깝다.
     _tags:
       - Adjective
-  - target: "珍しい"
+  "珍しい":
     reading: "めずらしい"
     meaning: "드물다, 희귀하다"
     context: "珍しい例だ"

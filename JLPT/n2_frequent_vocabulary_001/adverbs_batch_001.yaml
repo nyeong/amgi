@@ -1,5 +1,5 @@
 notes:
-  - target: "再び"
+  "再び":
     reading: "ふたたび"
     meaning: "재차, 다시"
     context: "再び確認する"
@@ -10,7 +10,7 @@ notes:
       [3차원/맥락] 確認・挑戦・再び会う가 단골이다. もう一度보다 문어체적이다.
     _tags:
       - Adverb
-  - target: "次々と"
+  "次々と":
     reading: "つぎつぎと"
     meaning: "계속해서, 잇달아"
     context: "問題が次々と起こる"
@@ -21,7 +21,7 @@ notes:
       [3차원/맥락] 起こる・現れる・次々と売れる가 단골이다. one after another nuance가 핵심이다.
     _tags:
       - Adverb
-  - target: "突然に"
+  "突然に":
     reading: "とつぜんに"
     meaning: "돌연, 갑자기"
     context: "突然に雨が降り出す"

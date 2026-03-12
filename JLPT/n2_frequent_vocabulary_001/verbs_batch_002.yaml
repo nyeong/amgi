@@ -1,5 +1,5 @@
 notes:
-  - target: "消える"
+  "消える":
     reading: "きえる"
     meaning: "꺼지다, 사라지다"
     context: "電気が消える"
@@ -10,7 +10,7 @@ notes:
       [3차원/맥락] 電気・記憶・姿が消える가 단골이다. physical disappearance와 abstract disappearance 둘 다 중요하다.
     _tags:
       - Verb
-  - target: "比べる"
+  "比べる":
     reading: "くらべる"
     meaning: "비교하다"
     context: "二つを比べる"
@@ -21,7 +21,7 @@ notes:
       [3차원/맥락] 二つ・去年と比べる・比較して가 단골이다. contrast/compare 문항에서 빈출이다.
     _tags:
       - Verb
-  - target: "超える"
+  "超える":
     reading: "こえる"
     meaning: "넘다, 초과하다"
     context: "予想を超える"
@@ -32,7 +32,7 @@ notes:
       [3차원/맥락] 予想・一万・国境を超える가 단골이다. surpass 의미로 자주 출제된다.
     _tags:
       - Verb
-  - target: "断る"
+  "断る":
     reading: "ことわる"
     meaning: "거절하다, 미리 알리다"
     context: "依頼を断る"
@@ -43,7 +43,7 @@ notes:
       [3차원/맥락] 依頼・誘い・あらかじめ断る가 단골이다. 拒否する보다 일상적이다.
     _tags:
       - Verb
-  - target: "困る"
+  "困る":
     reading: "こまる"
     meaning: "곤란하다, 난처하다"
     context: "返事がなくて困る"
@@ -54,7 +54,7 @@ notes:
       [3차원/맥락] お金・返事・何に困るか가 단골이다. 객관적 불편보다 주관적 난처함이 강하다.
     _tags:
       - Verb
-  - target: "探す"
+  "探す":
     reading: "さがす"
     meaning: "찾다"
     context: "仕事を探す"
@@ -65,7 +65,7 @@ notes:
       [3차원/맥락] 仕事・鍵・方法を探す가 단골이다. actively search의 느낌이 강하다.
     _tags:
       - Verb
-  - target: "咲く"
+  "咲く":
     reading: "さく"
     meaning: "피다"
     context: "花が咲く"
@@ -76,7 +76,7 @@ notes:
       [3차원/맥락] 花・桜・笑顔が咲く가 단골이다. bloom의 대표 표현이다.
     _tags:
       - Verb
-  - target: "叫ぶ"
+  "叫ぶ":
     reading: "さけぶ"
     meaning: "외치다, 소리치다"
     context: "助けを求めて叫ぶ"
@@ -87,7 +87,7 @@ notes:
       [3차원/맥락] 助け・大声・叫び声가 단골이다. cry out의 긴박감이 중요하다.
     _tags:
       - Verb
-  - target: "支える"
+  "支える":
     reading: "ささえる"
     meaning: "받치다, 지탱하다"
     context: "家族を支える"
@@ -98,7 +98,7 @@ notes:
       [3차원/맥락] 家族・生活・社会を支える가 단골이다. support의 핵심 동사다.
     _tags:
       - Verb
-  - target: "刺す"
+  "刺す":
     reading: "さす"
     meaning: "찌르다"
     context: "指を刺す"
@@ -109,7 +109,7 @@ notes:
       [3차원/맥락] 虫・針・胸に刺さる言葉가 단골이다. literal and figurative both matter.
     _tags:
       - Verb
-  - target: "騒ぐ"
+  "騒ぐ":
     reading: "さわぐ"
     meaning: "소란 피우다"
     context: "夜中に騒ぐ"
@@ -120,7 +120,7 @@ notes:
       [3차원/맥락] 夜中・大勢で・騒ぎになる가 단골이다. noisy action 자체를 말한다.
     _tags:
       - Verb
-  - target: "沈む"
+  "沈む":
     reading: "しずむ"
     meaning: "가라앉다"
     context: "船が沈む"
@@ -131,7 +131,7 @@ notes:
       [3차원/맥락] 船・太陽・気分が沈む가 단골이다. 물리적 침몰과 우울함 둘 다 중요하다.
     _tags:
       - Verb
-  - target: "示す"
+  "示す":
     reading: "しめす"
     meaning: "가리키다, 나타내다"
     context: "結果を示す"
@@ -142,7 +142,7 @@ notes:
       [3차원/맥락] 結果・方針・可能性を示す가 단골이다. point out와 indicate 양쪽 의미를 가진다.
     _tags:
       - Verb
-  - target: "占める"
+  "占める":
     reading: "しめる"
     meaning: "차지하다, 점하다"
     context: "売上の多くを占める"
@@ -153,7 +153,7 @@ notes:
       [3차원/맥락] 大部分・一位・重要な位置を占める가 단골이다. percentage 문항에서 자주 나온다.
     _tags:
       - Verb
-  - target: "調べる"
+  "調べる":
     reading: "しらべる"
     meaning: "조사하다, 알아보다"
     context: "原因を調べる"
@@ -164,7 +164,7 @@ notes:
       [3차원/맥락] 原因・意味・インターネットで調べる가 단골이다. research의 기본 동사다.
     _tags:
       - Verb
-  - target: "捨てる"
+  "捨てる":
     reading: "すてる"
     meaning: "버리다"
     context: "ごみを捨てる"
@@ -175,7 +175,7 @@ notes:
       [3차원/맥락] ごみ・夢を捨てる・捨て場が 단골이다. discard의 기본 표현이다.
     _tags:
       - Verb
-  - target: "座る"
+  "座る":
     reading: "すわる"
     meaning: "앉다"
     context: "席に座る"
@@ -186,7 +186,7 @@ notes:
       [3차원/맥락] 席・床・前に座る가 단골이다. 위치 이동 동사와 함께 자주 나온다.
     _tags:
       - Verb
-  - target: "絶える"
+  "絶える":
     reading: "たえる"
     meaning: "끊어지다, 끊기다"
     context: "客足が絶える"
@@ -197,7 +197,7 @@ notes:
       [3차원/맥락] 客足・会話・絶えることがない가 단골이다. completely cease의 느낌이다.
     _tags:
       - Verb
-  - target: "倒す"
+  "倒す":
     reading: "たおす"
     meaning: "쓰러뜨리다"
     context: "相手を倒す"
@@ -208,7 +208,7 @@ notes:
       [3차원/맥락] 相手・敵・木を倒す가 단골이다. defeat와 knock down 둘 다 중요하다.
     _tags:
       - Verb
-  - target: "達する"
+  "達する":
     reading: "たっする"
     meaning: "도달하다"
     context: "気温が三十度に達する"
@@ -219,7 +219,7 @@ notes:
       [3차원/맥락] 三十度・限界・目的に達する가 단골이다. formal reach 표현이다.
     _tags:
       - Verb
-  - target: "頼む"
+  "頼む":
     reading: "たのむ"
     meaning: "부탁하다"
     context: "友人に頼む"
@@ -230,7 +230,7 @@ notes:
       [3차원/맥락] 友人・手伝い・お願いだから頼む가 단골이다. request의 기본 표현이다.
     _tags:
       - Verb
-  - target: "捕まえる"
+  "捕まえる":
     reading: "つかまえる"
     meaning: "붙잡다"
     context: "犯人を捕まえる"
@@ -241,7 +241,7 @@ notes:
       [3차원/맥락] 犯人・虫・タクシーを捕まえる가 단골이다. catch meaning이 넓다.
     _tags:
       - Verb
-  - target: "勤める"
+  "勤める":
     reading: "つとめる"
     meaning: "근무하다"
     context: "会社に勤める"
@@ -252,7 +252,7 @@ notes:
       [3차원/맥락] 会社・銀行・長く勤めるが 단골이다. work for의 의미가 핵심이다.
     _tags:
       - Verb
-  - target: "解く"
+  "解く":
     reading: "とく"
     meaning: "풀다"
     context: "問題を解く"
@@ -263,7 +263,7 @@ notes:
       [3차원/맥락] 問題・謎・誤解を解く가 단골이다. solve와 untie 뜻을 함께 가진다.
     _tags:
       - Verb
-  - target: "閉じる"
+  "閉じる":
     reading: "とじる"
     meaning: "닫다"
     context: "本を閉じる"
@@ -274,7 +274,7 @@ notes:
       [3차원/맥락] 本・目・会議を閉じる가 단골이다. physically close and conclude both possible.
     _tags:
       - Verb
-  - target: "整う"
+  "整う":
     reading: "ととのう"
     meaning: "정돈되다, 갖추어지다"
     context: "準備が整う"
@@ -285,7 +285,7 @@ notes:
       [3차원/맥락] 準備・体制・条件が整う가 단골이다. ready state에 초점이 있다.
     _tags:
       - Verb
-  - target: "飛ぶ"
+  "飛ぶ":
     reading: "とぶ"
     meaning: "날다"
     context: "鳥が空を飛ぶ"
@@ -296,7 +296,7 @@ notes:
       [3차원/맥락] 鳥・飛行機・うわさが飛ぶ가 단골이다. physical movement와 rumor spread 둘 다 중요하다.
     _tags:
       - Verb
-  - target: "泊まる"
+  "泊まる":
     reading: "とまる"
     meaning: "묵다"
     context: "旅館に泊まる"
@@ -307,7 +307,7 @@ notes:
       [3차원/맥락] ホテル・一泊・友人の家に泊まるが 단골이다. stay overnight 의미가 핵심이다.
     _tags:
       - Verb
-  - target: "並ぶ"
+  "並ぶ":
     reading: "ならぶ"
     meaning: "늘어서다"
     context: "店の前に並ぶ"
@@ -318,7 +318,7 @@ notes:
       [3차원/맥락] 店の前・商品が並ぶ・肩を並べる가 단골이다. queue and be lined up 둘 다 중요하다.
     _tags:
       - Verb
-  - target: "慣れる"
+  "慣れる":
     reading: "なれる"
     meaning: "익숙해지다"
     context: "新しい環境に慣れる"
@@ -329,7 +329,7 @@ notes:
       [3차원/맥락] 環境・仕事・生活に慣れる가 단골이다. 익숙해짐의 과정 자체가 핵심이다.
     _tags:
       - Verb
-  - target: "煮る"
+  "煮る":
     reading: "にる"
     meaning: "끓이다, 조리다"
     context: "野菜を煮る"
@@ -340,7 +340,7 @@ notes:
       [3차원/맥락] 野菜・肉・よく煮る가 단골이다. boil/simmer 의미가 중심이다.
     _tags:
       - Verb
-  - target: "抜く"
+  "抜く":
     reading: "ぬく"
     meaning: "빼다, 뽑다"
     context: "カードを抜く"
@@ -351,7 +351,7 @@ notes:
       [3차원/맥락] 歯・力を抜く・線を抜く가 단골이다. remove와 omit 두 축이 있다.
     _tags:
       - Verb
-  - target: "盗む"
+  "盗む":
     reading: "ぬすむ"
     meaning: "훔치다"
     context: "財布を盗む"
