@@ -5,6 +5,7 @@ Updated: 2026-03-12
 ## Verification Checklist
 
 - [x] `nix develop -c bin/lint` completed successfully on 2026-03-12
+- [x] `ruby bin/lint-yaml` completed successfully after YAML lint integration on 2026-03-12
 - [x] `nix develop -c bin/test` completed successfully on 2026-03-12
 - [x] `nix develop -c bin/check` completed successfully on 2026-03-12
 - [x] `amgi.yaml` rename verified across fixtures and example decks on 2026-03-12

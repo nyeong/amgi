@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'psych'
+
+yaml_paths = Dir.glob(['*.yml', '*.yaml', '.*.yml', '.*.yaml', '**/*.yml', '**/*.yaml'])
+                .reject { |path| path.include?('/.') }
+                .uniq
+                .sort
+
+errors = yaml_paths.filter_map do |path|
+  Psych.parse_file(path)
+  nil
+rescue Psych::SyntaxError => e
+  "#{path}: #{e.message.lines.first.strip}"
+end
+
+if errors.empty?
+  puts "YAML OK: #{yaml_paths.size} file(s)"
+  exit 0
+end
+
+errors.each { |error| warn error }
+exit 1

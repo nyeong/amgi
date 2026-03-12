@@ -4,6 +4,7 @@ AllCops:
   TargetRubyVersion: 3.3
   Exclude:
     - "vendor/**/*"
+    - "bin/update_jlpt_visual_memo.rb"
 
 Style/Documentation:
   Enabled: false
