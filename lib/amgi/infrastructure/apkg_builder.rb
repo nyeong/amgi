@@ -104,6 +104,18 @@ module Amgi
         \\begin{document}
       LATEX
       DEFAULT_LATEX_POST = '\\end{document}'
+      DERIVED_FIELD_BUILDERS = {
+        'rubyTarget' => lambda { |note, formatter|
+          formatter.ruby(text: note['target'], reading: note['reading'])
+        },
+        'rubyContext' => lambda { |note, formatter|
+          formatter.annotate(
+            text: note['context'],
+            phrase: note['target'],
+            phrase_reading: note['reading']
+          )
+        }
+      }.freeze
 
       def call(validated_deck, output_path:)
         FileUtils.mkdir_p(File.dirname(output_path))
@@ -171,7 +183,7 @@ module Amgi
 
       def note_row(config:, note:, note_id:, model_id:, guid:, timestamp:)
         tags = merged_tags(config.global_tags, note['_tags'])
-        joined_fields = config.all_fields.map { |field| note[field].to_s }.join("\x1F")
+        joined_fields = config.all_fields.map { |field| field_value(note, field) }.join("\x1F")
         sort_field = note[config.required_fields.first].to_s
 
         [
@@ -351,6 +363,19 @@ module Amgi
         (Array(global_tags) + Array(local_tags)).uniq
       end
 
+      def field_value(note, field)
+        return note[field].to_s if note.key?(field) && !note[field].nil?
+
+        derived_field_value(note, field)
+      end
+
+      def derived_field_value(note, field)
+        builder = DERIVED_FIELD_BUILDERS[field]
+        return '' unless builder
+
+        builder.call(note, furigana_formatter)
+      end
+
       def format_tags(tags)
         return '' if tags.empty?
 
@@ -432,6 +457,10 @@ module Amgi
         due
       end
 
+      def furigana_formatter
+        @furigana_formatter ||= FuriganaFormatter.new
+      end
+
       def active_cards(config, note_source, note)
         config.cards.select do |card|
           card.default? || (
@@ -447,8 +476,7 @@ module Amgi
 
       def fields_present?(note, fields)
         fields.all? do |field|
-          value = note[field]
-          !value.nil? && !value.to_s.strip.empty?
+          !field_value(note, field).strip.empty?
         end
       end
     end

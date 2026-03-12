@@ -1,0 +1,20 @@
+schema: amgi_v1
+name: JLPT_Ruby_Fixture
+note_schema:
+  required_fields:
+    - target
+    - reading
+    - context
+    - meaning
+  optional_fields:
+    - rubyTarget
+    - rubyContext
+cards:
+  - name: Recall Meaning
+    default: true
+    front: |
+      <div class="target">{{rubyTarget}}</div>
+    back: |
+      {{FrontSide}}
+      <div class="context">{{rubyContext}}</div>
+      <div class="meaning">{{meaning}}</div>
