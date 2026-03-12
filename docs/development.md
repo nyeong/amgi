@@ -59,6 +59,6 @@ nix develop -c bin/smoke-import-anki path/to/deck.apkg
 
 ## Related Docs
 
-- [CLI Commands](/Users/nyeong/Repos/anki-deck/docs/cli-commands.md)
-- [Dependencies and Installation](/Users/nyeong/Repos/anki-deck/docs/dependencies.md)
-- [Project Status](/Users/nyeong/Repos/anki-deck/TODO.md)
+- [CLI Commands](cli-commands.md)
+- [Dependencies and Installation](dependencies.md)
+- [Project Status](../TODO.md)

@@ -51,17 +51,17 @@ nix run github:nyeong/amgi -- lint JLPT/n2_frequent_vocabulary_001
 ## Recommended Workflow
 
 1. Plan the deck in `amgi.yaml`.
-   - See [Amgi v1 Schema](/Users/nyeong/Repos/anki-deck/docs/amgi-v1-schema.md).
-   - See the [JLPT example deck](/Users/nyeong/Repos/anki-deck/JLPT/n2_frequent_vocabulary_001/amgi.yaml).
+   - See [Amgi v1 Schema](docs/amgi-v1-schema.md).
+   - See the [JLPT example deck](JLPT/n2_frequent_vocabulary_001/amgi.yaml).
 2. Collect the dataset as structured YAML files.
-   - See [Amgi v1 Schema](/Users/nyeong/Repos/anki-deck/docs/amgi-v1-schema.md).
-   - See the [JLPT example dataset](/Users/nyeong/Repos/anki-deck/JLPT/n2_frequent_vocabulary_001).
+   - See [Amgi v1 Schema](docs/amgi-v1-schema.md).
+   - See the [JLPT example dataset](JLPT/n2_frequent_vocabulary_001).
 3. Build the `.apkg` and import it into Anki.
 
 ## Documentation
 
-- [Amgi v1 Schema](/Users/nyeong/Repos/anki-deck/docs/amgi-v1-schema.md)
-- [CLI Commands](/Users/nyeong/Repos/anki-deck/docs/cli-commands.md)
-- [Dependencies and Installation](/Users/nyeong/Repos/anki-deck/docs/dependencies.md)
-- [Development Workflow](/Users/nyeong/Repos/anki-deck/docs/development.md)
-- [Project Status](/Users/nyeong/Repos/anki-deck/TODO.md)
+- [Amgi v1 Schema](docs/amgi-v1-schema.md)
+- [CLI Commands](docs/cli-commands.md)
+- [Dependencies and Installation](docs/dependencies.md)
+- [Development Workflow](docs/development.md)
+- [Project Status](TODO.md)

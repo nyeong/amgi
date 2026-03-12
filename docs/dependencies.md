@@ -30,5 +30,5 @@ Ruby dependencies are locked through:
 
 ## Related Docs
 
-- [CLI Commands](/Users/nyeong/Repos/anki-deck/docs/cli-commands.md)
-- [Development Workflow](/Users/nyeong/Repos/anki-deck/docs/development.md)
+- [CLI Commands](cli-commands.md)
+- [Development Workflow](development.md)
