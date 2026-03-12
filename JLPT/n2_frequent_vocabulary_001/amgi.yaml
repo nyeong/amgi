@@ -40,6 +40,10 @@ css: |
     color: #666;
   }
 
+  .card.is-furigana-hidden ruby rt {
+    display: none;
+  }
+
   .sheet-body {
     margin-top: 16px;
   }
@@ -60,6 +64,12 @@ css: |
     padding: 6px 10px;
     border-radius: 6px;
     cursor: pointer;
+  }
+
+  .furigana-toggle.is-active {
+    background: #333;
+    color: #fff;
+    border-color: #333;
   }
 
   .hint-block {
@@ -146,6 +156,7 @@ cards:
           <div class="target">{{rubyTarget}}</div>
           <div class="hint-actions">
             <button class="hint-button" onclick="document.getElementById('context-hint').classList.add('is-visible'); this.style.display='none';">예문 보기</button>
+            <button class="hint-button furigana-toggle" data-furigana-toggle="true" type="button">후리가나 숨기기</button>
           </div>
         </div>
         <div class="sheet-body">
@@ -155,6 +166,67 @@ cards:
           </div>
         </div>
       </div>
+      <script>
+        (function() {
+          var storageKey = 'amgi.jlpt.showFurigana';
+          var card = document.querySelector('.card');
+          var buttons = Array.prototype.slice.call(
+            document.querySelectorAll('[data-furigana-toggle]')
+          );
+
+          if (!card || buttons.length === 0) {
+            return;
+          }
+
+          function apply(visible) {
+            if (visible) {
+              card.classList.remove('is-furigana-hidden');
+            } else {
+              card.classList.add('is-furigana-hidden');
+            }
+
+            buttons.forEach(function(button) {
+              button.textContent = visible ? '후리가나 숨기기' : '후리가나 보기';
+              button.setAttribute('aria-pressed', visible ? 'false' : 'true');
+              if (visible) {
+                button.classList.remove('is-active');
+              } else {
+                button.classList.add('is-active');
+              }
+            });
+          }
+
+          function visibleByDefault() {
+            try {
+              return localStorage.getItem(storageKey) !== 'hidden';
+            } catch (error) {
+              return !card.classList.contains('is-furigana-hidden');
+            }
+          }
+
+          function persist(visible) {
+            try {
+              localStorage.setItem(storageKey, visible ? 'shown' : 'hidden');
+            } catch (error) {
+            }
+          }
+
+          apply(visibleByDefault());
+
+          buttons.forEach(function(button) {
+            if (button.dataset.furiganaBound === 'true') {
+              return;
+            }
+
+            button.dataset.furiganaBound = 'true';
+            button.addEventListener('click', function() {
+              var nextVisible = card.classList.contains('is-furigana-hidden');
+              apply(nextVisible);
+              persist(nextVisible);
+            });
+          });
+        })();
+      </script>
     back: |
       {{FrontSide}}
       <hr id=answer>
@@ -189,6 +261,7 @@ cards:
           <div class="hint-actions">
             <button class="hint-button" onclick="document.getElementById('translation-hint').classList.add('is-visible'); this.style.display='none';">번역 보기</button>
             <button class="hint-button" onclick="document.getElementById('context-hint-reverse').classList.add('is-visible'); this.style.display='none';">예문 보기</button>
+            <button class="hint-button furigana-toggle" data-furigana-toggle="true" type="button">후리가나 숨기기</button>
           </div>
           <div id="translation-hint" class="section hint-block">
             <div class="section-label">Translation</div>
@@ -200,6 +273,67 @@ cards:
           </div>
         </div>
       </div>
+      <script>
+        (function() {
+          var storageKey = 'amgi.jlpt.showFurigana';
+          var card = document.querySelector('.card');
+          var buttons = Array.prototype.slice.call(
+            document.querySelectorAll('[data-furigana-toggle]')
+          );
+
+          if (!card || buttons.length === 0) {
+            return;
+          }
+
+          function apply(visible) {
+            if (visible) {
+              card.classList.remove('is-furigana-hidden');
+            } else {
+              card.classList.add('is-furigana-hidden');
+            }
+
+            buttons.forEach(function(button) {
+              button.textContent = visible ? '후리가나 숨기기' : '후리가나 보기';
+              button.setAttribute('aria-pressed', visible ? 'false' : 'true');
+              if (visible) {
+                button.classList.remove('is-active');
+              } else {
+                button.classList.add('is-active');
+              }
+            });
+          }
+
+          function visibleByDefault() {
+            try {
+              return localStorage.getItem(storageKey) !== 'hidden';
+            } catch (error) {
+              return !card.classList.contains('is-furigana-hidden');
+            }
+          }
+
+          function persist(visible) {
+            try {
+              localStorage.setItem(storageKey, visible ? 'shown' : 'hidden');
+            } catch (error) {
+            }
+          }
+
+          apply(visibleByDefault());
+
+          buttons.forEach(function(button) {
+            if (button.dataset.furiganaBound === 'true') {
+              return;
+            }
+
+            button.dataset.furiganaBound = 'true';
+            button.addEventListener('click', function() {
+              var nextVisible = card.classList.contains('is-furigana-hidden');
+              apply(nextVisible);
+              persist(nextVisible);
+            });
+          });
+        })();
+      </script>
     back: |
       {{FrontSide}}
       <hr id=answer>
