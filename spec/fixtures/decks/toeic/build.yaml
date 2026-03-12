@@ -1,0 +1,19 @@
+schema: amgi_v1
+name: TOEIC_Vocabulary
+required_fields:
+  - Target
+  - Meaning
+optional_fields:
+  - Example
+  - BlankExample
+global_tags:
+  - TOEIC
+templates:
+  - name: Card 1
+    front: |
+      <div class="target">{{Target}}</div>
+    back: |
+      {{FrontSide}}
+      <hr id=answer>
+      <div class="meaning">{{Meaning}}</div>
+      <div class="example">{{Example}}</div>

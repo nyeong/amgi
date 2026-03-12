@@ -5,9 +5,24 @@ AllCops:
   Exclude:
     - "vendor/**/*"
 
+Style/Documentation:
+  Enabled: false
+
 Layout/LineLength:
   Max: 100
+
+Metrics/AbcSize:
+  Max: 30
 
 Metrics/BlockLength:
   Exclude:
     - "spec/**/*"
+
+Metrics/MethodLength:
+  Max: 35
+
+Metrics/ParameterLists:
+  Max: 6
+
+Metrics/ClassLength:
+  Enabled: false

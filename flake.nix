@@ -28,6 +28,8 @@
               pkgs.rubyPackages.rspec
               pkgs.rubyPackages.rubocop
               pkgs.rubyPackages."rubocop-performance"
+              pkgs.rubyPackages.rubyzip
+              pkgs.rubyPackages.sqlite3
             ];
           };
         }
