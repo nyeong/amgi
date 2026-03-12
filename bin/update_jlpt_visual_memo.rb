@@ -2,12 +2,15 @@
 # frozen_string_literal: true
 
 require "json"
+require "net/http"
 require "pathname"
+require "uri"
 require "yaml"
 
 DECK_DIR = Pathname("JLPT/n2_frequent_vocabulary_001")
 DICT_PATH = Pathname(ENV.fetch("MAKEMEHANZI_DICTIONARY", "/tmp/makemeahanzi-dictionary.txt"))
 IDS_PATH = Pathname(ENV.fetch("CJKVI_IDS", "/tmp/cjkvi-ids.txt"))
+KANJIPEDIA_CACHE_PATH = Pathname(ENV.fetch("KANJIPEDIA_CACHE", "/tmp/kanjipedia_cache.json"))
 
 VARIANT_MAP = {
   "両" => "兩",
@@ -72,40 +75,25 @@ VARIANT_MAP = {
 }.freeze
 
 MANUAL_OVERRIDES = {
-  "働" => {
-    radical: "亻",
-    type_label: "회의겸형성자",
-    decomposition: "亻+動"
-  },
-  "咲" => {
-    radical: "口",
-    type_label: "국자",
-    decomposition: "口+关"
-  },
-  "喫" => {
-    radical: "口",
-    type_label: "회의겸형성자",
-    decomposition: "口+契"
-  },
-  "菓" => {
-    radical: "艸",
-    type_label: "형성자",
-    semantic: "艸",
-    phonetic: "果"
-  },
-  "扱" => {
-    radical: "扌",
-    qualifier: "일본 상용 약자",
-    decomposition: "扌+及"
-  },
-  "査" => {
-    type_label: "표의계 글자",
-    decomposition: "木+旦"
-  }
+  "働" => { radical: "亻" },
+  "咲" => { radical: "口" },
+  "喫" => { radical: "口" },
+  "菓" => { radical: "艸" },
+  "扱" => { radical: "扌" }
 }.freeze
 
-IDS_OPERATORS = /[⿰⿱⿲⿳⿴⿵⿶⿷⿸⿹⿺⿻]/.freeze
-ANNOTATION = /\[[^\]]+\]/.freeze
+TYPE_LABELS = {
+  "形声" => "형성자",
+  "会意" => "회의자",
+  "象形" => "상형자",
+  "指事" => "지사자",
+  "会意兼形声" => "회의겸형성자",
+  "会意形声" => "회의겸형성자",
+  "形声兼会意" => "형성겸회의자",
+  "象形兼会意" => "상형겸회의자",
+  "会意兼指事" => "회의겸지사자"
+}.freeze
+
 TARGET_LINE = /^  - target: "(.*)"$/.freeze
 MEMO_START_LINE = /^    memo: \|$/.freeze
 VISUAL_LINE = /^      \[1차원\/시각\]/.freeze
@@ -138,12 +126,94 @@ def load_ids(path)
   end
 end
 
+def load_cache(path)
+  return {} unless path.exist?
+
+  JSON.parse(path.read)
+end
+
+def save_cache(path, cache)
+  path.write(JSON.pretty_generate(cache))
+end
+
+def fetch_html(url)
+  uri = URI(url)
+
+  3.times do |index|
+    response = Net::HTTP.get_response(uri)
+    if response.is_a?(Net::HTTPSuccess)
+      return response.body.force_encoding("UTF-8").encode("UTF-8", invalid: :replace, undef: :replace)
+    end
+
+    sleep(0.5 * (index + 1))
+  end
+
+  raise "failed to fetch #{url}"
+end
+
+def normalize_text(html)
+  html
+    .gsub(/<br\s*\/?>/i, " ")
+    .gsub(/<[^>]+>/, " ")
+    .gsub(/&nbsp;/, " ")
+    .gsub(/\s+/, " ")
+    .strip
+end
+
+def fetch_kanjipedia_entry(character, cache)
+  if cache.key?(character)
+    cached = cache[character]
+    if cached && cached["naritachi"]
+      cached["type_raw"] = cached["naritachi"][/会意兼形声|形声兼会意|会意形声|象形兼会意|会意兼指事|形声|会意|象形|指事/, 0]
+    end
+    return cached
+  end
+
+  query = URI.encode_www_form_component(character)
+  search_html = fetch_html("https://www.kanjipedia.jp/search?k=#{query}&kt=1&sk=perfect")
+  page_path = search_html[/<a href="(\/kanji\/\d+)">#{Regexp.escape(character)}<\/a>/, 1]
+
+  if page_path.nil?
+    cache[character] = nil
+    return nil
+  end
+
+  article_html = fetch_html("https://www.kanjipedia.jp#{page_path}")
+  naritachi_html = article_html[%r{<li class="naritachi">.*?<div>\s*<p>\s*(.*?)\s*</p>\s*</div>}m, 1]
+  naritachi = normalize_text(naritachi_html.to_s)
+  type_raw = naritachi[/会意兼形声|形声兼会意|会意形声|象形兼会意|会意兼指事|形声|会意|象形|指事/, 0]
+
+  cache[character] = {
+    "page_path" => page_path,
+    "naritachi" => naritachi,
+    "type_raw" => type_raw
+  }
+end
+
 def resolved_character(character)
   VARIANT_MAP.fetch(character, character)
 end
 
-def type_label_for(type)
-  case type
+def radical_for(character, dictionary, ids)
+  override = MANUAL_OVERRIDES[character]
+  return override[:radical] if override&.dig(:radical)
+
+  resolved = resolved_character(character)
+  dictionary.dig(character, "radical") ||
+    dictionary.dig(resolved, "radical")
+end
+
+def type_label_for(type_raw)
+  return nil if type_raw.nil? || type_raw.empty?
+
+  TYPE_LABELS.fetch(type_raw, "#{type_raw} 계열")
+end
+
+def fallback_type_label(character, dictionary)
+  resolved = resolved_character(character)
+  entry = dictionary[character] || dictionary[resolved] || {}
+
+  case entry.dig("etymology", "type")
   when "pictographic"
     "상형자"
   when "ideographic"
@@ -153,76 +223,43 @@ def type_label_for(type)
   end
 end
 
-def clean_decomposition(value)
-  return nil if value.nil? || value.empty?
-
-  cleaned = value.gsub(ANNOTATION, "").gsub(IDS_OPERATORS, "")
-  pieces = cleaned.each_char.reject { |piece| piece.empty? || piece == "？" }
-  return nil if pieces.empty?
-
-  pieces.join("+")
-end
-
-def char_info(character, dictionary, ids)
-  override = MANUAL_OVERRIDES[character] || {}
-  resolved = override.fetch(:source, resolved_character(character))
-  entry = dictionary[resolved] || {}
-
-  decomposition =
-    override[:decomposition] ||
-    clean_decomposition(entry["decomposition"]) ||
-    clean_decomposition(ids[character]) ||
-    clean_decomposition(ids[resolved])
+def char_info(character, dictionary, ids, cache)
+  entry = fetch_kanjipedia_entry(character, cache)
+  type_raw = entry&.fetch("type_raw", nil)
+  type_label = type_label_for(type_raw) || fallback_type_label(character, dictionary)
 
   {
     original: character,
-    resolved: resolved,
-    radical: override[:radical] || entry["radical"],
-    type_label: override[:type_label] || type_label_for(entry.dig("etymology", "type")),
-    semantic: override[:semantic] || entry.dig("etymology", "semantic"),
-    phonetic: override[:phonetic] || entry.dig("etymology", "phonetic"),
-    decomposition: decomposition,
-    qualifier: override[:qualifier]
+    radical: radical_for(character, dictionary, ids),
+    type_raw: type_raw,
+    type_label: type_label
   }
 end
 
-def component_detail(info)
-  if info[:decomposition] &&
-      (info[:qualifier] || info[:type_label].nil? || ["국자", "회의겸형성자"].include?(info[:type_label]))
-    "(자형 #{info[:decomposition]})"
-  end
-end
-
 def char_fragment(info)
-  phrases = []
-  phrases << "#{info[:original]}:"
-  phrases << "신자체라 구자체 #{info[:resolved]} 기준," if info[:resolved] != info[:original]
-  phrases << "#{info[:qualifier]}," if info[:qualifier]
-  phrases << "#{info[:radical]} 부수" if info[:radical]
-  phrases << info[:type_label] if info[:type_label]
+  fragment = +"#{info[:original]}:"
+  fragment << " #{info[:radical]} 부수" if info[:radical]
 
-  detail = component_detail(info)
-  fragment = phrases.join(" ")
-  detail ? "#{fragment}#{detail}" : fragment
+  if info[:type_label] && info[:type_raw]
+    fragment << ", #{info[:type_label]}(#{info[:type_raw]})"
+  elsif info[:type_label]
+    fragment << ", #{info[:type_label]}"
+  end
+
+  fragment
 end
 
-def visual_line_for(note, dictionary, ids)
+def visual_line_for(note, dictionary, ids, cache)
   characters = note.fetch("target").scan(/\p{Han}/).reject { |character| character == "々" }
-  snippets = characters.first(2).map { |character| char_fragment(char_info(character, dictionary, ids)) }
-  lead =
-    if snippets.length == 1
-      "#{snippets.first}로 본다."
-    else
-      "#{snippets.join(', ')}로 쪼개 본다."
-    end
+  snippets = characters.map { |character| char_fragment(char_info(character, dictionary, ids, cache)) }
 
-  "[1차원/시각] #{lead} 부수와 제자 원리를 먼저 붙이면 '#{note.fetch('meaning')}' 뜻이 글자 모양째 고정된다."
+  "[1차원/시각] #{snippets.join('. ')}. 먼저 각 글자의 부수와 성립부터 붙여 본다."
 end
 
-def note_lines_by_target(path, dictionary, ids)
+def note_lines_by_target(path, dictionary, ids, cache)
   notes = YAML.load_file(path).fetch("notes")
   notes.to_h do |note|
-    [note.fetch("target"), visual_line_for(note, dictionary, ids)]
+    [note.fetch("target"), visual_line_for(note, dictionary, ids, cache)]
   end
 end
 
@@ -251,11 +288,22 @@ end
 
 dictionary = load_dictionary(DICT_PATH)
 ids = load_ids(IDS_PATH)
+cache = load_cache(KANJIPEDIA_CACHE_PATH)
 yaml_files = Dir[DECK_DIR.join("*.yaml")].reject { |path| path.end_with?("build.yaml") }.sort
+unique_characters = yaml_files.flat_map do |file|
+  YAML.load_file(file).fetch("notes").flat_map { |note| note.fetch("target").scan(/\p{Han}/) }
+end.uniq.reject { |character| character == "々" }
+
+unique_characters.each_with_index do |character, index|
+  fetch_kanjipedia_entry(character, cache)
+  warn "[#{index + 1}/#{unique_characters.length}] #{character}" if ((index + 1) % 50).zero?
+end
+
+save_cache(KANJIPEDIA_CACHE_PATH, cache)
 
 yaml_files.each do |file|
   path = Pathname(file)
-  replacements = note_lines_by_target(path, dictionary, ids)
+  replacements = note_lines_by_target(path, dictionary, ids, cache)
   rewrite_file(path, replacements)
 end
 
