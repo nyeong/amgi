@@ -42,7 +42,7 @@ module Amgi
             data text not null
           )
         SQL
-        <<~SQL
+        <<~SQL,
           CREATE TABLE cards (
             id integer primary key,
             nid integer not null,
@@ -62,6 +62,26 @@ module Amgi
             odid integer not null,
             flags integer not null,
             data text not null
+          )
+        SQL
+        <<~SQL,
+          CREATE TABLE revlog (
+            id integer primary key,
+            cid integer not null,
+            usn integer not null,
+            ease integer not null,
+            ivl integer not null,
+            lastIvl integer not null,
+            factor integer not null,
+            time integer not null,
+            type integer not null
+          )
+        SQL
+        <<~SQL
+          CREATE TABLE graves (
+            usn integer not null,
+            oid integer not null,
+            type integer not null
           )
         SQL
       ].freeze

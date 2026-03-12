@@ -111,6 +111,22 @@ nix develop -c bin/test
 nix develop -c bin/check
 ```
 
+Optional local GUI smoke test with Anki Desktop:
+
+```bash
+nix develop -c bin/smoke-import-anki path/to/deck.apkg
+```
+
+This command is intentionally separate from `bin/check`. It assumes:
+
+- Anki Desktop is installed locally
+- Anki is not already running
+- the machine can launch the GUI app
+
+By default it looks for `/Applications/Anki.app`, launches Anki with a temporary
+base/profile, imports the provided `.apkg`, verifies the imported deck and
+note/card counts, and then quits Anki.
+
 Application commands:
 
 ```bash
