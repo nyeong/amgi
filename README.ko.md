@@ -39,6 +39,8 @@ flowchart TD
 
 또한 각 dataset 파일은 루트의 `_cards` 배열로 non-default 카드를 opt-in할 수 있습니다. `_cards`가 없으면 그 파일의 note들은 default 카드만 생성되고, `_cards`에 포함된 카드는 해당 note의 front 필드가 모두 있을 때만 추가 생성됩니다.
 
+이 규칙은 파일 단위로 적용됩니다. 예를 들어 `a.yaml`은 `_cards` 없이 default 카드만 만들고, `b.yaml`은 `_cards: ["Recall Target"]`를 두어 default 카드와 `Recall Target`을 함께 만들 수 있습니다. 실제 JLPT 예시에서도 [verbs.yaml](JLPT/n2_frequent_vocabulary_001/verbs.yaml)은 `Recall Target`을 opt-in하고, `_cards`가 없는 파일들은 default 카드만 생성합니다.
+
 ## 사용
 
 현재는 Nix를 통해서만 패키징되어 있습니다.
@@ -83,6 +85,7 @@ JLPT 시험을 준비하며 일본어 단어를 암기한다고 가정해 보겠
 3. 스키마에 맞는 데이터셋을 YAML로 수집합니다.
    - 텍스트 기반 형식이므로, 사진에서 텍스트를 추출한 뒤 LLM으로 구조화하는 식의 작업에도 잘 맞습니다.
    - 예: `notes: { "痛み": { meaning: "통증, 아픔" } }`
+   - 추가 카드는 필요한 파일에만 `_cards`를 넣어 켭니다.
 4. 같은 스키마를 바탕으로 Anki에서 어떤 카드가 생성될지 정의합니다.
    - default 카드는 항상 생성됩니다.
    - non-default 카드는 dataset 파일의 `_cards`에 이름이 있어야 하고, front에 참조된 필드가 모두 있을 때만 생성됩니다.

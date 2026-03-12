@@ -111,6 +111,30 @@ notes:
       - Noun
 ```
 
+You can use different card sets per source file. For example:
+
+```yaml
+# a.yaml
+notes:
+  "痛み":
+    reading: "いたみ"
+    meaning: "pain"
+```
+
+```yaml
+# b.yaml
+_cards:
+  - "Recall Target"
+
+notes:
+  "症状":
+    reading: "しょうじょう"
+    meaning: "symptom"
+```
+
+With the example above, `a.yaml` generates only the default card, while `b.yaml`
+generates the default card plus `Recall Target`.
+
 ## Note Rules
 
 Fields that start with `_` are reserved metadata fields.
