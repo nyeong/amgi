@@ -60,8 +60,19 @@ module Amgi
           next if File.basename(path) == CONFIG_FILE
 
           data = YAML.load_file(path) || {}
-          Domain::NoteSource.new(source_path: path, notes: normalize_notes(path, data['notes']))
+          Domain::NoteSource.new(
+            source_path: path,
+            notes: normalize_notes(path, data['notes']),
+            enabled_cards: normalize_enabled_cards(data['_cards'])
+          )
         end
+      end
+
+      def normalize_enabled_cards(enabled_cards)
+        return [] if enabled_cards.nil?
+        raise KeyError, '`_cards` must be a string array' unless enabled_cards.is_a?(Array)
+
+        enabled_cards.map(&:to_s)
       end
 
       def normalize_notes(source_path, notes)

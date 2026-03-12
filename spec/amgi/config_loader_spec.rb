@@ -25,6 +25,7 @@ RSpec.describe Amgi::Application::LoadDeck do
     expect(deck.note_sources.flat_map(&:notes).map { |note| note['target'] }).to eq(
       %w[comply invoice]
     )
+    expect(deck.note_sources.first.enabled_cards).to eq(['Cloze Example'])
   end
 
   context 'when amgi.yaml defines an output path' do
@@ -55,6 +56,15 @@ RSpec.describe Amgi::Application::LoadDeck do
       expect(result.errors).to include(
         "#{File.join(deck_path, 'cards.yaml')}: note `pain` must not redefine `target` in the body"
       )
+    end
+  end
+
+  context 'when a dataset file defines `_cards` as a scalar' do
+    let(:deck_path) { File.expand_path('../fixtures/decks/invalid_source_cards_scalar', __dir__) }
+
+    it 'returns a load error' do
+      expect(result).not_to be_success
+      expect(result.errors).to include('`_cards` must be a string array')
     end
   end
 

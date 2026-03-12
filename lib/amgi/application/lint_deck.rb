@@ -20,7 +20,7 @@ module Amgi
 
         validate_schema(config, errors)
         validate_cards(config, errors)
-        validate_notes(config, deck_source.note_sources, errors)
+        validate_note_sources(config, deck_source.note_sources, errors)
 
         return Result.failure(errors) unless errors.empty?
 
@@ -79,12 +79,27 @@ module Amgi
         errors << 'Exactly one default card is required.'
       end
 
-      def validate_notes(config, note_sources, errors)
+      def validate_note_sources(config, note_sources, errors)
         note_sources.each do |note_source|
+          validate_note_source(config, note_source, errors)
           note_source.notes.each_with_index do |note, index|
             validate_note(config, note_source.source_path, note, index, errors)
           end
         end
+      end
+
+      def validate_note_source(config, note_source, errors)
+        unless string_array?(note_source.enabled_cards)
+          errors << "#{note_source.source_path}: `_cards` must be a string array"
+          return
+        end
+
+        unknown_cards = note_source.enabled_cards - config.cards.map(&:name)
+        return if unknown_cards.empty?
+
+        errors << (
+          "#{note_source.source_path}: Unknown dataset `_cards`: #{unknown_cards.join(', ')}"
+        )
       end
 
       def validate_note(config, source_path, note, index, errors)

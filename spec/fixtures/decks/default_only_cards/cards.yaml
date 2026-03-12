@@ -1,0 +1,7 @@
+notes:
+  alpha:
+    meaning: "A"
+    blankExample: "a _"
+  beta:
+    meaning: "B"
+    blankExample: "b _"

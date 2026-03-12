@@ -153,6 +153,17 @@ RSpec.describe Amgi::Application::BuildDeck do
     end
   end
 
+  it 'builds only default cards when a dataset file does not opt into extra cards' do
+    deck_path = File.expand_path('../fixtures/decks/default_only_cards', __dir__)
+
+    Dir.mktmpdir do |dir|
+      result = described_class.call(deck_path, output_path: File.join(dir, 'default_only.apkg'))
+
+      expect(result).to be_success
+      expect(result.value.card_count).to eq(2)
+    end
+  end
+
   def extract_collection(apkg_path, dir, filename)
     collection_path = File.join(dir, filename)
     Zip::File.open(apkg_path) do |zip_file|

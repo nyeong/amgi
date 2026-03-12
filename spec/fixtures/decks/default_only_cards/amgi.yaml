@@ -1,0 +1,17 @@
+schema: amgi_v1
+name: DefaultOnlyCards
+global_tags: []
+note_schema:
+  required_fields:
+    - target
+    - meaning
+  optional_fields:
+    - blankExample
+cards:
+  - name: Recall Meaning
+    default: true
+    front: "{{target}}"
+    back: "{{meaning}}"
+  - name: Cloze Example
+    front: "{{blankExample}}"
+    back: "{{meaning}}"
