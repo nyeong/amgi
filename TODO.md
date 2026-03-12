@@ -7,6 +7,8 @@ Updated: 2026-03-12
 - [x] `nix develop -c bin/lint` completed successfully on 2026-03-12
 - [x] `nix develop -c bin/test` completed successfully on 2026-03-12
 - [x] `nix develop -c bin/check` completed successfully on 2026-03-12
+- [x] `amgi.yaml` rename verified across fixtures and example decks on 2026-03-12
+- [x] `note_schema` + top-level `cards` schema verified through specs on 2026-03-12
 - [x] CLI lint path verified with `nix develop -c bin/amgi lint spec/fixtures/decks/toeic`
 - [x] CLI build path verified through automated spec coverage
 - [x] minimal `.apkg` output verified through integration test
@@ -17,9 +19,10 @@ Updated: 2026-03-12
 - [x] Nix-based Ruby development environment
 - [x] RuboCop formatter/lint harness
 - [x] RSpec test harness
-- [x] `amgi_v1` schema loading
+- [x] `amgi_v1` deck loading through `amgi.yaml`
 - [x] deck lint pipeline
 - [x] minimal `.apkg` build pipeline
+- [x] SSoT dataset with default-plus-expansion card derivation
 - [x] direct CLI entrypoint `bin/amgi`
 
 ## Known Gaps

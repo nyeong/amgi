@@ -37,7 +37,7 @@ RSpec.describe Amgi::Application::BuildDeck do
 
       aggregate_failures do
         expect(note_count).to eq(2)
-        expect(card_count).to eq(2)
+        expect(card_count).to eq(3)
         expect(tables).to include('col', 'notes', 'cards', 'revlog', 'graves')
         expect(JSON.parse(media_json)).to eq({})
         expect(model.fetch('css')).to be_a(String)
@@ -45,6 +45,7 @@ RSpec.describe Amgi::Application::BuildDeck do
         expect(model.fetch('latexPost')).to be_a(String)
         expect(model.fetch('latexsvg')).to eq(false)
         expect(model.fetch('req')).to be_an(Array)
+        expect(model.fetch('tmpls').size).to eq(2)
         expect(model.fetch('flds').first).to include(
           'sticky' => false,
           'rtl' => false,
@@ -67,6 +68,25 @@ RSpec.describe Amgi::Application::BuildDeck do
         )
         expect(dconf.fetch('name')).to eq('Default')
       end
+    end
+  end
+
+  it 'uses deck css when provided by the build config' do
+    Dir.mktmpdir do |dir|
+      deck_path = File.expand_path('../fixtures/decks/jlpt_css', __dir__)
+      result = described_class.call(deck_path, out_dir: dir)
+
+      expect(result).to be_success
+
+      collection_path = File.join(dir, 'collection.anki2')
+      Zip::File.open(result.value.output_path) do |zip_file|
+        zip_file.extract('collection.anki2', collection_path)
+      end
+
+      db = SQLite3::Database.new(collection_path)
+      model = JSON.parse(db.get_first_value('SELECT models FROM col')).values.first
+
+      expect(model.fetch('css')).to include('.memo')
     end
   end
 end

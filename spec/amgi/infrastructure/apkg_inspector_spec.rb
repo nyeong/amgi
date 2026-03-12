@@ -14,7 +14,7 @@ RSpec.describe Amgi::Infrastructure::ApkgInspector do
         expect(build_result).to be_success
         expect(metadata.deck_names).to include('TOEIC_Vocabulary')
         expect(metadata.note_count).to eq(2)
-        expect(metadata.card_count).to eq(2)
+        expect(metadata.card_count).to eq(3)
       end
     end
   end
