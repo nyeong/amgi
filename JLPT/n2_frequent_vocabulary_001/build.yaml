@@ -1,0 +1,34 @@
+schema: amgi_v1
+name: JLPT_N2_Frequent_Vocabulary_001
+required_fields:
+  - Target
+  - Reading
+  - Meaning
+  - PartOfSpeech
+optional_fields:
+  - Notes
+global_tags:
+  - JLPT
+  - N2
+  - FrequentVocabulary
+templates:
+  - name: JP to KO
+    front: |
+      <div class="prompt prompt-jp">{{Target}}</div>
+    back: |
+      {{FrontSide}}
+      <hr id=answer>
+      <div class="reading">{{Reading}}</div>
+      <div class="meaning">{{Meaning}}</div>
+      <div class="part-of-speech">{{PartOfSpeech}}</div>
+      <div class="notes">{{Notes}}</div>
+  - name: KO to JP
+    front: |
+      <div class="prompt prompt-ko">{{Meaning}}</div>
+      <div class="part-of-speech">{{PartOfSpeech}}</div>
+    back: |
+      {{FrontSide}}
+      <hr id=answer>
+      <div class="target">{{Target}}</div>
+      <div class="reading">{{Reading}}</div>
+      <div class="notes">{{Notes}}</div>
