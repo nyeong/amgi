@@ -1,0 +1,59 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'optparse'
+
+$LOAD_PATH.unshift(File.expand_path('../lib', __dir__))
+
+require 'amgi'
+
+options = {
+  anki_app: ENV.fetch('ANKI_APP', Amgi::Development::AnkiImportSmoke::DEFAULT_ANKI_APP),
+  profile: Amgi::Development::AnkiImportSmoke::DEFAULT_PROFILE,
+  timeout: Amgi::Development::AnkiImportSmoke::DEFAULT_TIMEOUT,
+  settle: Amgi::Development::AnkiImportSmoke::DEFAULT_SETTLE_SECONDS,
+  keep_temp: false
+}
+
+parser = OptionParser.new do |opts|
+  opts.banner = 'Usage: bin/smoke-import-anki [options] path/to/deck.apkg'
+
+  opts.on('--anki-app PATH', 'Path to Anki.app') { |value| options[:anki_app] = value }
+  opts.on('--base DIR', 'Temporary Anki base directory to use') do |value|
+    options[:base_dir] = value
+  end
+  opts.on('--profile NAME', 'Profile name to load/create') { |value| options[:profile] = value }
+  opts.on('--timeout SECONDS', Integer, 'Import timeout in seconds') do |value|
+    options[:timeout] = value
+  end
+  opts.on('--settle SECONDS', Integer, 'Extra wait after Anki main loop starts') do |value|
+    options[:settle] = value
+  end
+  opts.on('--keep-temp', 'Keep the temporary base directory after success') do
+    options[:keep_temp] = true
+  end
+end
+
+parser.parse!
+apkg_path = ARGV[0]
+
+if apkg_path.nil?
+  warn parser
+  exit 1
+end
+
+result = Amgi::Development::AnkiImportSmoke.new.call(
+  apkg_path,
+  anki_app: options[:anki_app],
+  timeout_seconds: options[:timeout],
+  settle_seconds: options[:settle],
+  base_dir: options[:base_dir],
+  profile: options[:profile],
+  keep_temp: options[:keep_temp]
+)
+
+puts "Import OK: #{result.apkg_path}"
+puts "Expected notes/cards: #{result.expected.note_count}/#{result.expected.card_count}"
+puts "Imported notes/cards: #{result.actual.note_count}/#{result.actual.card_count}"
+puts "Imported decks: #{result.actual.deck_names.join(', ')}" unless result.actual.deck_names.empty?
+puts "Base dir: #{result.base_dir}" if options[:keep_temp] || options[:base_dir]

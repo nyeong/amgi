@@ -10,6 +10,7 @@ Updated: 2026-03-12
 - [x] CLI lint path verified with `nix develop -c bin/amgi lint spec/fixtures/decks/toeic`
 - [x] CLI build path verified through automated spec coverage
 - [x] minimal `.apkg` output verified through integration test
+- [x] local Anki Desktop import smoke test command implemented and manually verified on 2026-03-12
 
 ## Current Status
 
@@ -25,6 +26,7 @@ Updated: 2026-03-12
 
 - [ ] media asset packaging
 - [ ] richer Anki metadata compatibility
+- [x] run and confirm the new Anki Desktop smoke test against the latest generated `.apkg`
 - [ ] multiple note types
 - [ ] repository-wide deck discovery
 - [ ] clearer end-user error messages with more precise YAML locations
