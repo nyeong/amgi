@@ -4,6 +4,8 @@ Amgi is an Anki deck builder that reads structured YAML data and generates an
 `.apkg` file. Because the input is plain text, it also works well with
 LLM-assisted dataset creation and cleanup.
 
+- [한국어 설명](README.ko.md)
+
 ## What You Need
 
 Each deck directory needs at least two kinds of files:
