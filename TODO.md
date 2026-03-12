@@ -4,6 +4,10 @@ Updated: 2026-03-12
 
 ## Verification Checklist
 
+- [x] `nix develop -c bundix` generated `gemset.nix` on 2026-03-12
+- [x] `nix develop` installs the `git-hooks.nix` pre-commit hook on 2026-03-12
+- [x] `nix develop -c bin/check` completed successfully through pre-commit on 2026-03-12
+- [x] `nix flake check` completed successfully on 2026-03-12
 - [x] `nix develop -c bin/lint` completed successfully on 2026-03-12
 - [x] `ruby bin/lint-yaml` completed successfully after YAML lint integration on 2026-03-12
 - [x] `nix develop -c bin/test` completed successfully on 2026-03-12
@@ -17,7 +21,9 @@ Updated: 2026-03-12
 
 ## Current Status
 
-- [x] Nix-based Ruby development environment
+- [x] `ruby-nix` workflow + `bundlerEnv`-backed Ruby development environment
+- [x] `gemset.nix` committed as the Nix-side gem source of truth
+- [x] `git-hooks.nix`-managed repository validation
 - [x] RuboCop formatter/lint harness
 - [x] RSpec test harness
 - [x] `amgi_v1` deck loading through `amgi.yaml`
@@ -30,6 +36,7 @@ Updated: 2026-03-12
 
 - [ ] media asset packaging
 - [ ] richer Anki metadata compatibility
+- [ ] decide whether the RSpec hook should stay on `pre-commit` or move to `pre-push` if commit latency grows
 - [x] run and confirm the new Anki Desktop smoke test against the latest generated `.apkg`
 - [ ] multiple note types
 - [ ] repository-wide deck discovery

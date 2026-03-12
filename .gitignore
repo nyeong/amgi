@@ -1,4 +1,5 @@
 .bundle/
+.pre-commit-config.yaml
 *.apkg
 result
 vendor/bundle/

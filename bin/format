@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-exec bundle exec rubocop -A "$@"
+exec rubocop -A "$@"
