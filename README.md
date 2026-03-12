@@ -39,10 +39,6 @@ One learning note can produce multiple cards. For example, a language deck can
 generate both source-to-target cards and target-to-source cards from the same
 underlying note.
 
-Each note is keyed by its `target`, so the dataset itself stays the single
-source of truth for note identity. Updating `meaning`, `memo`, or example
-fields keeps the same note; renaming the `target` creates a new one.
-
 Each dataset file can also opt into extra non-default cards with a root-level
 `_cards` list. Without `_cards`, notes in that file generate only the default
 card. Enabled non-default cards are still created only when their front-side
@@ -85,7 +81,6 @@ Build output precedence:
 2. Collect the dataset as structured YAML files.
    - See [Amgi v1 Schema](docs/amgi-v1-schema.md).
    - See the [JLPT example dataset](JLPT/n2_frequent_vocabulary_001).
-   - Write notes as a mapping keyed by `target`.
    - Add `_cards` at the file root when that source file should emit extra card templates.
 3. Build the `.apkg` and import it into Anki.
 
