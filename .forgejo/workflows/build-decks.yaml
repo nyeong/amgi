@@ -28,7 +28,31 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: https://data.forgejo.org/actions/checkout@v4
+        shell: bash
+        env:
+          REPOSITORY: ${{ github.repository }}
+          SERVER_URL: ${{ github.server_url }}
+          FETCH_SHA: ${{ github.sha }}
+          AUTH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          # Avoid the runner-local checkout proxy because some docker runners
+          # cannot reach the forwarded loopback endpoint.
+          git config --global --add safe.directory "$PWD"
+
+          repo_url="${SERVER_URL}/${REPOSITORY}.git"
+          auth_args=()
+
+          if [[ -n "${AUTH_TOKEN:-}" ]]; then
+            basic_auth="$(printf 'x-access-token:%s' "$AUTH_TOKEN" | base64 | tr -d '\n')"
+            auth_args=(-c "http.extraHeader=Authorization: Basic ${basic_auth}")
+          fi
+
+          git init .
+          git remote add origin "$repo_url"
+          git "${auth_args[@]}" fetch --depth=1 --no-tags origin "$FETCH_SHA"
+          git checkout --detach FETCH_HEAD
 
       - name: Install Nix
         shell: bash
