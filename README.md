@@ -46,6 +46,12 @@ Each dataset file can also opt into extra non-default cards with a root-level
 card. Enabled non-default cards are still created only when their front-side
 fields are present on the note.
 
+That rule is file-scoped. For example, `a.yaml` can omit `_cards` and produce
+only the default card, while `b.yaml` can set `_cards: ["Recall Target"]` and
+produce the default card plus `Recall Target`. The JLPT example deck follows
+that pattern: [verbs.yaml](JLPT/n2_frequent_vocabulary_001/verbs.yaml) opts into
+`Recall Target`, while files without `_cards` stay default-only.
+
 ## Usage
 
 Amgi is currently packaged through Nix.
@@ -94,6 +100,7 @@ vocabulary.
    - Since the source format is text-based, it fits well with workflows such as
      extracting text from photos and asking an LLM to structure it.
    - Use `target` as the note key, for example `notes: { "痛み": { meaning: ... } }`.
+   - Add `_cards` only to the files that should emit extra templates.
 4. Define how cards should be rendered in Anki from the same schema.
    - The default card is always generated.
    - Non-default cards must be enabled by the dataset file's `_cards` list and
