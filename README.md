@@ -1,108 +1,86 @@
 # Amgi
 
-Goal-oriented Anki deck builder.
+Amgi is a Ruby-based Anki deck builder.
 
-The repository now includes the first working v1 slice:
+Its current v1 scope is intentionally small:
 
-- load deck YAML
-- lint schema and note data
+- load deck data from YAML
+- lint schema and note structure
 - build a minimal `.apkg`
 
-The implementation is intentionally small. It focuses on a stable schema,
-repeatable local development, and TDD-friendly iteration speed.
+The project is designed around reproducible local development with Nix and
+test-first iteration in Ruby.
 
-## Current Result
+## What It Does Today
 
-- `nix develop -c` provides the Ruby development environment.
-- `bin/lint`, `bin/format`, `bin/test`, `bin/check` are ready.
-- `bin/amgi lint <deck_dir>` validates a deck.
-- `bin/amgi build <deck_dir> [--out DIR]` writes a minimal `.apkg`.
-- Ruby quality checks use `RuboCop + RSpec`.
-- The repository is prepared for small, test-first iterations.
+Amgi currently supports:
+
+- `amgi_v1` deck schema
+- explicit single-deck linting
+- explicit single-deck build
+- minimal `.apkg` export with `collection.anki2` and `media`
+
+Amgi does not yet support:
+
+- media assets
+- multiple note types in one deck
+- repository-wide deck discovery
+- full Anki feature parity
 
 ## Quick Start
 
-Run the full local quality gate:
+Enter the reproducible development environment through Nix:
 
 ```bash
 nix develop -c bin/check
 ```
 
-Run each tool separately:
-
-```bash
-nix develop -c bin/lint
-nix develop -c bin/format
-nix develop -c bin/test
-```
-
-Lint and build a deck:
+Lint a sample deck:
 
 ```bash
 nix develop -c bin/amgi lint spec/fixtures/decks/toeic
+```
+
+Build a sample deck:
+
+```bash
 nix develop -c bin/amgi build spec/fixtures/decks/toeic
 ```
 
-## Development Workflow
+The built package is written to the deck's `dist/` directory by default.
 
-This repository follows a small-loop workflow:
+## Schema
 
-1. Define a small goal.
-2. Add a failing test first.
-3. Implement the minimum change.
-4. Run `nix develop -c bin/check`.
-5. Refactor.
-6. Commit immediately when that unit of work is complete.
+Each deck directory contains:
 
-## Working Rules
+- `build.yaml`
+- one or more note YAML files
 
-- Use `nix develop -c` for every Ruby command.
-- Use `nix develop -c bin/check` as the default validation command.
-- Use `nix develop -c bin/format` for safe auto-fixes.
-- Keep files and responsibilities separated by layer.
-- Prefer clean structure, but avoid unnecessary over-engineering.
-- Use gitmoji in commit messages.
-- Make one commit per meaningful unit of completed work.
-
-## Repository Layout
-
-```text
-bin/        executable development commands
-exe/        Ruby CLI entry point
-lib/        Ruby entry points and application code
-spec/       RSpec tests
-flake.nix   Nix development shell
-Gemfile     Ruby dependencies for local tooling
-```
-
-## v1 Schema
-
-`build.yaml`
+Example `build.yaml`:
 
 ```yaml
 schema: amgi_v1
-name: JLPT_Vocabulary
+name: TOEIC_Vocabulary
 required_fields:
-  - target
-  - meaning
+  - Target
+  - Meaning
 optional_fields:
-  - reading
-  - context
-  - translation
-  - memo
+  - Example
+  - BlankExample
 global_tags:
-  - JLPT
+  - TOEIC
 templates:
   - name: Card 1
     front: |
-      <div class="jp-target">{{Target}}</div>
+      <div class="target">{{Target}}</div>
     back: |
       {{FrontSide}}
       <hr id=answer>
       <div class="meaning">{{Meaning}}</div>
+      <div class="example">{{Example}}</div>
 ```
 
-`notes` YAML
+Example note file:
 
 ```yaml
 notes:
@@ -114,16 +92,42 @@ notes:
       - Part5
 ```
 
-Rules:
+Validation rules:
 
 - `schema` must be `amgi_v1`
-- `required_fields` are mandatory in every note
-- `optional_fields` may be omitted
-- note keys outside declared fields and `tags` are rejected
+- every required field must be present in every note
+- note keys must be declared in `required_fields` or `optional_fields`, except `tags`
+- `tags` must be a string array when present
 - template placeholders must reference declared fields or `FrontSide`
 
-## Current Limits
+## Commands
 
-- media files are not supported yet
-- output `.apkg` is a minimal package, not a feature-complete Anki exporter
-- multi-deck discovery and multiple note types are not implemented yet
+Development quality commands:
+
+```bash
+nix develop -c bin/lint
+nix develop -c bin/format
+nix develop -c bin/test
+nix develop -c bin/check
+```
+
+Application commands:
+
+```bash
+nix develop -c bin/amgi lint <deck_dir>
+nix develop -c bin/amgi build <deck_dir>
+nix develop -c bin/amgi build <deck_dir> --out <output_dir>
+```
+
+## Project Layout
+
+```text
+bin/        shell entrypoints for development and CLI usage
+exe/        Ruby CLI entrypoint
+lib/        application, domain, infrastructure, and interface code
+spec/       RSpec tests and fixture decks
+flake.nix   Nix development shell definition
+Gemfile     Ruby dependencies
+TODO.md     implementation tracking and verification checklist
+AGENTS.md   working instructions for future coding sessions
+```
