@@ -64,14 +64,13 @@ jobs:
           git checkout --detach FETCH_HEAD
 
       - name: Install Nix
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          apt-get update
-          apt-get install -y --no-install-recommends curl git xz-utils
-
-          curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
+        uses: https://github.com/cachix/install-nix-action@1ca7d21a94afc7c957383a2d217460d980de4934
+        env:
+          # Forgejo also exposes GITHUB_TOKEN, but it is not a GitHub token.
+          # Blank it here so the action does not inject an invalid token into nix.conf.
+          GITHUB_TOKEN: ""
+        with:
+          install_options: --no-daemon
 
       - name: Build decks from JLPT and TOEIC
         shell: bash
@@ -79,8 +78,6 @@ jobs:
           NIX_CONFIG: experimental-features = nix-command flakes
         run: |
           set -euo pipefail
-
-          . "$HOME/.nix-profile/etc/profile.d/nix.sh"
 
           mkdir -p forgejo-artifacts
           built_count=0
