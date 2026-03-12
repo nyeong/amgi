@@ -10,10 +10,12 @@ RSpec.describe Amgi::Application::BuildDeck do
 
   it 'builds an apkg with collection and media entries' do
     Dir.mktmpdir do |dir|
-      result = described_class.call(deck_path, out_dir: dir)
+      output_path = File.join(dir, 'toeic.apkg')
+      result = described_class.call(deck_path, output_path: output_path)
 
       expect(result).to be_success
       expect(File).to exist(result.value.output_path)
+      expect(result.value.output_path).to eq(output_path)
 
       entries = Zip::File.open(result.value.output_path, &:entries).map(&:name)
       expect(entries).to include('collection.anki2', 'media')
@@ -74,7 +76,7 @@ RSpec.describe Amgi::Application::BuildDeck do
   it 'uses deck css when provided by the build config' do
     Dir.mktmpdir do |dir|
       deck_path = File.expand_path('../fixtures/decks/jlpt_css', __dir__)
-      result = described_class.call(deck_path, out_dir: dir)
+      result = described_class.call(deck_path, output_path: File.join(dir, 'jlpt_css.apkg'))
 
       expect(result).to be_success
 
@@ -87,6 +89,31 @@ RSpec.describe Amgi::Application::BuildDeck do
       model = JSON.parse(db.get_first_value('SELECT models FROM col')).values.first
 
       expect(model.fetch('css')).to include('.memo')
+    end
+  end
+
+  it 'uses amgi.yaml output when no explicit output path is given' do
+    deck_path = File.expand_path('../fixtures/decks/toeic_with_output', __dir__)
+    result = described_class.call(deck_path, cwd: Dir.tmpdir)
+
+    aggregate_failures do
+      expect(result).to be_success
+      expect(result.value.output_path).to eq(
+        File.join(deck_path, 'build', 'toeic-from-config.apkg')
+      )
+      expect(File).to exist(result.value.output_path)
+    end
+  end
+
+  it 'writes to the current working directory when no output is configured' do
+    Dir.mktmpdir do |dir|
+      result = described_class.call(deck_path, cwd: dir)
+
+      aggregate_failures do
+        expect(result).to be_success
+        expect(result.value.output_path).to eq(File.join(dir, 'TOEIC_Vocabulary.apkg'))
+        expect(File).to exist(result.value.output_path)
+      end
     end
   end
 end

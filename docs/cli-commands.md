@@ -40,16 +40,20 @@ Example:
 nix run github:nyeong/amgi -- build JLPT/n2_frequent_vocabulary_001
 ```
 
-By default, the output is written to the deck directory's `dist/` folder.
+Output path precedence:
 
-## Build With Custom Output Directory
+1. `-o <output_path>` or `--out <output_path>`
+2. `output` in `amgi.yaml` relative to the deck directory
+3. `<current-working-directory>/<name>.apkg`
+
+## Build With Custom Output Path
 
 ```bash
-nix run github:nyeong/amgi -- build <deck_dir> --out <output_dir>
+nix run github:nyeong/amgi -- build <deck_dir> -o <output_path>
 ```
 
 Example:
 
 ```bash
-nix run github:nyeong/amgi -- build JLPT/n2_frequent_vocabulary_001 --out /tmp/amgi-output
+nix run github:nyeong/amgi -- build JLPT/n2_frequent_vocabulary_001 -o /tmp/amgi-output/jlpt.apkg
 ```

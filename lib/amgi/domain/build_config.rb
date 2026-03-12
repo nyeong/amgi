@@ -3,7 +3,7 @@
 module Amgi
   module Domain
     class BuildConfig
-      attr_reader :schema, :name, :note_schema, :global_tags, :cards, :css
+      attr_reader :schema, :name, :note_schema, :global_tags, :cards, :css, :output
 
       def initialize(attributes)
         @schema = attributes.fetch(:schema)
@@ -12,6 +12,7 @@ module Amgi
         @global_tags = attributes.fetch(:global_tags)
         @cards = attributes.fetch(:cards)
         @css = attributes[:css]
+        @output = attributes[:output]
       end
 
       def required_fields

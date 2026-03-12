@@ -105,10 +105,8 @@ module Amgi
       LATEX
       DEFAULT_LATEX_POST = '\\end{document}'
 
-      def call(validated_deck, out_dir:)
-        FileUtils.mkdir_p(out_dir)
-
-        output_path = File.join(out_dir, "#{sanitize(validated_deck.deck_source.config.name)}.apkg")
+      def call(validated_deck, output_path:)
+        FileUtils.mkdir_p(File.dirname(output_path))
         note_rows, card_rows = build_rows(validated_deck)
 
         Dir.mktmpdir('amgi-build') do |tmp_dir|
@@ -371,10 +369,6 @@ module Amgi
 
       def deterministic_integer(seed)
         Digest::SHA1.hexdigest(seed)[0, 15].to_i(16)
-      end
-
-      def sanitize(name)
-        name.gsub(/[^A-Za-z0-9_-]+/, '_')
       end
 
       def required_fields_payload(config)

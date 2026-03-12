@@ -50,7 +50,8 @@ module Amgi
           ),
           global_tags: Array(data['global_tags']),
           cards: cards,
-          css: data['css']
+          css: data['css'],
+          output: data['output']
         )
       end
 

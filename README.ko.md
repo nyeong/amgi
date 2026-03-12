@@ -45,11 +45,18 @@ nix run github:nyeong/amgi -- <subcommands>
 # build
 nix run github:nyeong/amgi -- build <amgi.yaml이 있는 디렉토리>
 nix run github:nyeong/amgi -- build JLPT/n2_frequent_vocabulary_001
+nix run github:nyeong/amgi -- build JLPT/n2_frequent_vocabulary_001 -o /tmp/jlpt.apkg
 
 # check
 nix run github:nyeong/amgi -- lint <amgi.yaml이 있는 디렉토리>
 nix run github:nyeong/amgi -- lint JLPT/n2_frequent_vocabulary_001
 ```
+
+빌드 결과 경로 우선순위는 다음과 같습니다.
+
+1. `-o <output_path>` 또는 `--out <output_path>`
+2. `amgi.yaml`의 `output` 필드. 상대경로는 덱 디렉토리 기준
+3. `<현재 작업 디렉토리>/<name>.apkg`
 
 아래의 세 가지 단계로 활용하도록 설계하였습니다:
 
