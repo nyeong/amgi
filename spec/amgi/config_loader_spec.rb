@@ -37,6 +37,23 @@ RSpec.describe Amgi::Application::LoadDeck do
     end
   end
 
+  context 'when loading the JLPT example deck' do
+    let(:deck_path) { File.expand_path('../../JLPT/n2_frequent_vocabulary_001', __dir__) }
+
+    it 'includes the furigana toggle UI in the card templates' do
+      expect(result).to be_success
+
+      css = result.value.config.css
+      card_fronts = result.value.config.cards.map(&:front)
+
+      aggregate_failures do
+        expect(css).to include('.card.is-furigana-hidden ruby rt')
+        expect(card_fronts).to all(include('data-furigana-toggle'))
+        expect(card_fronts).to all(include('amgi.jlpt.showFurigana'))
+      end
+    end
+  end
+
   context 'when a dataset file uses list-style notes' do
     let(:deck_path) { File.expand_path('../fixtures/decks/invalid_notes_list', __dir__) }
 
