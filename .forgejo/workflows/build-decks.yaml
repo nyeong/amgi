@@ -33,8 +33,11 @@ jobs:
           REPOSITORY: ${{ github.repository }}
           SERVER_URL: ${{ github.server_url }}
           CHECKOUT_URL_OVERRIDE: ${{ vars.FORGEJO_CHECKOUT_URL }}
+          CHECKOUT_SSH_KEY: ${{ secrets.FORGEJO_CHECKOUT_SSH_KEY }}
+          CHECKOUT_SSH_KNOWN_HOSTS: ${{ secrets.FORGEJO_CHECKOUT_SSH_KNOWN_HOSTS }}
           EVENT_CLONE_URL: ${{ github.event.repository.clone_url }}
           EVENT_HTML_URL: ${{ github.event.repository.html_url }}
+          EVENT_SSH_URL: ${{ github.event.repository.ssh_url }}
           FETCH_SHA: ${{ github.sha }}
           AUTH_TOKEN: ${{ github.token }}
         run: |
@@ -44,7 +47,13 @@ jobs:
           # cannot reach the forwarded loopback endpoint.
           git config --global --add safe.directory "$PWD"
 
-          repo_url="${CHECKOUT_URL_OVERRIDE:-${EVENT_CLONE_URL:-}}"
+          repo_url="${CHECKOUT_URL_OVERRIDE:-}"
+          if [[ -z "$repo_url" && -n "${CHECKOUT_SSH_KEY:-}" && -n "${EVENT_SSH_URL:-}" ]]; then
+            repo_url="${EVENT_SSH_URL}"
+          fi
+          if [[ -z "$repo_url" ]]; then
+            repo_url="${EVENT_CLONE_URL:-}"
+          fi
           if [[ -z "$repo_url" ]]; then
             repo_url="${EVENT_HTML_URL:-${SERVER_URL}/${REPOSITORY}}"
           fi
@@ -55,8 +64,27 @@ jobs:
 
           echo "Using checkout URL: ${repo_url}"
           auth_args=()
+          if [[ "$repo_url" == ssh://* || "$repo_url" == git@* ]]; then
+            mkdir -p "$HOME/.ssh"
+            chmod 700 "$HOME/.ssh"
 
-          if [[ -n "${AUTH_TOKEN:-}" ]]; then
+            if [[ -n "${CHECKOUT_SSH_KEY:-}" ]]; then
+              printf '%s\n' "$CHECKOUT_SSH_KEY" > "$HOME/.ssh/forgejo_checkout"
+              chmod 600 "$HOME/.ssh/forgejo_checkout"
+              export GIT_SSH_COMMAND="ssh -i $HOME/.ssh/forgejo_checkout -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes"
+            else
+              export GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=yes"
+            fi
+
+            if [[ -n "${CHECKOUT_SSH_KNOWN_HOSTS:-}" ]]; then
+              printf '%s\n' "$CHECKOUT_SSH_KNOWN_HOSTS" > "$HOME/.ssh/known_hosts"
+            else
+              ssh_host="$(printf '%s' "$repo_url" | sed -E 's#^ssh://([^@]+@)?([^/:]+).*#\2#; s#^[^@]+@([^:]+):.*#\1#')"
+              ssh-keyscan -H "$ssh_host" >> "$HOME/.ssh/known_hosts" 2>/dev/null
+            fi
+          fi
+
+          if [[ "$repo_url" != ssh://* && "$repo_url" != git@* && -n "${AUTH_TOKEN:-}" ]]; then
             basic_auth="$(printf 'x-access-token:%s' "$AUTH_TOKEN" | base64 | tr -d '\n')"
             auth_args=(-c "http.extraHeader=Authorization: Basic ${basic_auth}")
           fi
