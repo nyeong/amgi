@@ -4,31 +4,37 @@ required_fields:
   - target
   - reading
   - meaning
-  - partOfSpeech
-optional_fields:
-  - notes
+  - context
+  - translation
+  - memo
+optional_fields: []
 global_tags:
   - JLPT
   - N2
   - FrequentVocabulary
 templates:
-  - name: JP to KO
+  - name: Recall Meaning
     front: |
-      <div class="prompt prompt-jp">{{target}}</div>
+      <div class="target">{{target}}</div>
+      <div class="reading">{{reading}}</div>
+      <hr>
+      <div class="context">{{context}}</div>
     back: |
       {{FrontSide}}
       <hr id=answer>
       <div class="reading">{{reading}}</div>
       <div class="meaning">{{meaning}}</div>
-      <div class="part-of-speech">{{partOfSpeech}}</div>
-      <div class="notes">{{notes}}</div>
-  - name: KO to JP
+      <div class="translation">{{translation}}</div>
+      <pre class="memo">{{memo}}</pre>
+  - name: Recall Target
     front: |
       <div class="prompt prompt-ko">{{meaning}}</div>
-      <div class="part-of-speech">{{partOfSpeech}}</div>
+      <hr>
+      <div class="translation">{{translation}}</div>
     back: |
       {{FrontSide}}
       <hr id=answer>
       <div class="target">{{target}}</div>
       <div class="reading">{{reading}}</div>
-      <div class="notes">{{notes}}</div>
+      <div class="context">{{context}}</div>
+      <pre class="memo">{{memo}}</pre>
