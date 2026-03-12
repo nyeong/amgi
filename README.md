@@ -246,6 +246,7 @@ nix develop -c bin/amgi build <deck_dir> --out <output_dir>
 ### Development Commands
 
 ```bash
+nix run . -- help
 nix run . -- lint <deck_dir>
 nix run . -- build <deck_dir>
 nix develop -c bundle-lock

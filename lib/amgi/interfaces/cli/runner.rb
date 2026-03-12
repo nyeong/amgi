@@ -4,22 +4,38 @@ module Amgi
   module Interfaces
     module CLI
       class Runner
+        HELP_TEXT = <<~TEXT
+          Usage:
+            amgi help
+            amgi lint <deck_dir>
+            amgi build <deck_dir> [--out <output_dir>]
+        TEXT
+
         def call(argv)
           command = argv[0]
           deck_path = argv[1]
 
           case command
+          when nil, 'help', '--help', '-h'
+            print_help
           when 'lint'
             lint(deck_path)
           when 'build'
             build(deck_path, argv[2..])
           else
             warn "Unknown command: #{command}"
+            warn
+            warn HELP_TEXT
             1
           end
         end
 
         private
+
+        def print_help
+          puts HELP_TEXT
+          0
+        end
 
         def lint(deck_path)
           load_result = Application::LoadDeck.call(deck_path)
