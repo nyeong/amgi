@@ -21,7 +21,7 @@ RSpec.describe 'amgi CLI' do
     _stdout, stderr, status = Open3.capture3(executable, 'lint', invalid_path, chdir: root)
 
     expect(status.exitstatus).to eq(1)
-    expect(stderr).to include('Missing required field `Meaning`')
+    expect(stderr).to include('Missing required field `meaning`')
   end
 
   it 'builds a valid deck into an apkg' do

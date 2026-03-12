@@ -12,9 +12,9 @@ RSpec.describe Amgi::Application::LoadDeck do
 
     expect(deck.config.schema).to eq('amgi_v1')
     expect(deck.config.name).to eq('TOEIC_Vocabulary')
-    expect(deck.config.required_fields).to eq(%w[Target Meaning])
-    expect(deck.config.optional_fields).to eq(%w[Example BlankExample])
-    expect(deck.config.all_fields).to eq(%w[Target Meaning Example BlankExample])
+    expect(deck.config.required_fields).to eq(%w[target meaning])
+    expect(deck.config.optional_fields).to eq(%w[example blankExample])
+    expect(deck.config.all_fields).to eq(%w[target meaning example blankExample])
     expect(deck.note_sources.map(&:source_path)).to all(end_with('.yaml'))
     expect(deck.note_sources.flat_map(&:notes).size).to eq(2)
   end

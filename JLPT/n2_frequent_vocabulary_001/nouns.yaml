@@ -1,469 +1,469 @@
 notes:
-  - Target: "痛み"
-    Reading: "いたみ"
-    Meaning: "아픔"
-    PartOfSpeech: "명사"
+  - target: "痛み"
+    reading: "いたみ"
+    meaning: "아픔"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "印刷"
-    Reading: "いんさつ"
-    Meaning: "인쇄"
-    PartOfSpeech: "명사"
+  - target: "印刷"
+    reading: "いんさつ"
+    meaning: "인쇄"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "腕"
-    Reading: "うで"
-    Meaning: "팔"
-    PartOfSpeech: "명사"
+  - target: "腕"
+    reading: "うで"
+    meaning: "팔"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "延期"
-    Reading: "えんき"
-    Meaning: "(기간, 시간 등의) 연기"
-    PartOfSpeech: "명사"
+  - target: "延期"
+    reading: "えんき"
+    meaning: "(기간, 시간 등의) 연기"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "~億"
-    Reading: "おく"
-    Meaning: "억"
-    PartOfSpeech: "명사"
+  - target: "~億"
+    reading: "おく"
+    meaning: "억"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "改札口"
-    Reading: "かいさつぐち"
-    Meaning: "개찰구"
-    PartOfSpeech: "명사"
+  - target: "改札口"
+    reading: "かいさつぐち"
+    meaning: "개찰구"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "回復"
-    Reading: "かいふく"
-    Meaning: "회복"
-    PartOfSpeech: "명사"
+  - target: "回復"
+    reading: "かいふく"
+    meaning: "회복"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "火山"
-    Reading: "かざん"
-    Meaning: "화산"
-    PartOfSpeech: "명사"
+  - target: "火山"
+    reading: "かざん"
+    meaning: "화산"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "環境"
-    Reading: "かんきょう"
-    Meaning: "환경"
-    PartOfSpeech: "명사"
+  - target: "環境"
+    reading: "かんきょう"
+    meaning: "환경"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "観察"
-    Reading: "かんさつ"
-    Meaning: "관찰"
-    PartOfSpeech: "명사"
+  - target: "観察"
+    reading: "かんさつ"
+    meaning: "관찰"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "乾燥"
-    Reading: "かんそう"
-    Meaning: "건조"
-    PartOfSpeech: "명사"
+  - target: "乾燥"
+    reading: "かんそう"
+    meaning: "건조"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "観測"
-    Reading: "かんそく"
-    Meaning: "관측"
-    PartOfSpeech: "명사"
+  - target: "観測"
+    reading: "かんそく"
+    meaning: "관측"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "記事"
-    Reading: "きじ"
-    Meaning: "기사"
-    PartOfSpeech: "명사"
+  - target: "記事"
+    reading: "きじ"
+    meaning: "기사"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "規模"
-    Reading: "きぼ"
-    Meaning: "규모"
-    PartOfSpeech: "명사"
+  - target: "規模"
+    reading: "きぼ"
+    meaning: "규모"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "行事"
-    Reading: "ぎょうじ"
-    Meaning: "행사"
-    PartOfSpeech: "명사"
+  - target: "行事"
+    reading: "ぎょうじ"
+    meaning: "행사"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "許可"
-    Reading: "きょか"
-    Meaning: "허가"
-    PartOfSpeech: "명사"
+  - target: "許可"
+    reading: "きょか"
+    meaning: "허가"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "記録"
-    Reading: "きろく"
-    Meaning: "기록"
-    PartOfSpeech: "명사"
+  - target: "記録"
+    reading: "きろく"
+    meaning: "기록"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "禁止"
-    Reading: "きんし"
-    Meaning: "금지"
-    PartOfSpeech: "명사"
+  - target: "禁止"
+    reading: "きんし"
+    meaning: "금지"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "空港"
-    Reading: "くうこう"
-    Meaning: "공항"
-    PartOfSpeech: "명사"
+  - target: "空港"
+    reading: "くうこう"
+    meaning: "공항"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "経済"
-    Reading: "けいざい"
-    Meaning: "경제"
-    PartOfSpeech: "명사"
+  - target: "経済"
+    reading: "けいざい"
+    meaning: "경제"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "警備"
-    Reading: "けいび"
-    Meaning: "경비"
-    PartOfSpeech: "명사"
+  - target: "警備"
+    reading: "けいび"
+    meaning: "경비"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "景色"
-    Reading: "けしき"
-    Meaning: "경치"
-    PartOfSpeech: "명사"
+  - target: "景色"
+    reading: "けしき"
+    meaning: "경치"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "下宿"
-    Reading: "げしゅく"
-    Meaning: "하숙"
-    PartOfSpeech: "명사"
+  - target: "下宿"
+    reading: "げしゅく"
+    meaning: "하숙"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "欠点"
-    Reading: "けってん"
-    Meaning: "결점"
-    PartOfSpeech: "명사"
+  - target: "欠点"
+    reading: "けってん"
+    meaning: "결점"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "原因"
-    Reading: "げんいん"
-    Meaning: "원인"
-    PartOfSpeech: "명사"
+  - target: "原因"
+    reading: "げんいん"
+    meaning: "원인"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "検査"
-    Reading: "けんさ"
-    Meaning: "검사"
-    PartOfSpeech: "명사"
+  - target: "検査"
+    reading: "けんさ"
+    meaning: "검사"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "講義"
-    Reading: "こうぎ"
-    Meaning: "강의"
-    PartOfSpeech: "명사"
+  - target: "講義"
+    reading: "こうぎ"
+    meaning: "강의"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "強盗"
-    Reading: "ごうとう"
-    Meaning: "강도"
-    PartOfSpeech: "명사"
+  - target: "強盗"
+    reading: "ごうとう"
+    meaning: "강도"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "候補"
-    Reading: "こうほ"
-    Meaning: "후보"
-    PartOfSpeech: "명사"
+  - target: "候補"
+    reading: "こうほ"
+    meaning: "후보"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "誤解"
-    Reading: "ごかい"
-    Meaning: "오해"
-    PartOfSpeech: "명사"
+  - target: "誤解"
+    reading: "ごかい"
+    meaning: "오해"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "混乱"
-    Reading: "こんらん"
-    Meaning: "혼란"
-    PartOfSpeech: "명사"
+  - target: "混乱"
+    reading: "こんらん"
+    meaning: "혼란"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "作業"
-    Reading: "さぎょう"
-    Meaning: "작업"
-    PartOfSpeech: "명사"
+  - target: "作業"
+    reading: "さぎょう"
+    meaning: "작업"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "雑誌"
-    Reading: "ざっし"
-    Meaning: "잡지"
-    PartOfSpeech: "명사"
+  - target: "雑誌"
+    reading: "ざっし"
+    meaning: "잡지"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "参加"
-    Reading: "さんか"
-    Meaning: "참가"
-    PartOfSpeech: "명사"
+  - target: "参加"
+    reading: "さんか"
+    meaning: "참가"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "地震"
-    Reading: "じしん"
-    Meaning: "지진"
-    PartOfSpeech: "명사"
+  - target: "地震"
+    reading: "じしん"
+    meaning: "지진"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "失敗"
-    Reading: "しっぱい"
-    Meaning: "실패"
-    PartOfSpeech: "명사"
+  - target: "失敗"
+    reading: "しっぱい"
+    meaning: "실패"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "指摘"
-    Reading: "してき"
-    Meaning: "지적"
-    PartOfSpeech: "명사"
+  - target: "指摘"
+    reading: "してき"
+    meaning: "지적"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "首相"
-    Reading: "しゅしょう"
-    Meaning: "수상"
-    PartOfSpeech: "명사"
+  - target: "首相"
+    reading: "しゅしょう"
+    meaning: "수상"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "出版"
-    Reading: "しゅっぱん"
-    Meaning: "출판"
-    PartOfSpeech: "명사"
+  - target: "出版"
+    reading: "しゅっぱん"
+    meaning: "출판"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "順番"
-    Reading: "じゅんばん"
-    Meaning: "순번, 차례"
-    PartOfSpeech: "명사"
+  - target: "順番"
+    reading: "じゅんばん"
+    meaning: "순번, 차례"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "状況"
-    Reading: "じょうきょう"
-    Meaning: "상황"
-    PartOfSpeech: "명사"
+  - target: "状況"
+    reading: "じょうきょう"
+    meaning: "상황"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "正直"
-    Reading: "しょうじき"
-    Meaning: "정직"
-    PartOfSpeech: "명사"
+  - target: "正直"
+    reading: "しょうじき"
+    meaning: "정직"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "招待"
-    Reading: "しょうたい"
-    Meaning: "초대"
-    PartOfSpeech: "명사"
+  - target: "招待"
+    reading: "しょうたい"
+    meaning: "초대"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "商品"
-    Reading: "しょうひん"
-    Meaning: "상품"
-    PartOfSpeech: "명사"
+  - target: "商品"
+    reading: "しょうひん"
+    meaning: "상품"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "省略"
-    Reading: "しょうりゃく"
-    Meaning: "생략"
-    PartOfSpeech: "명사"
+  - target: "省略"
+    reading: "しょうりゃく"
+    meaning: "생략"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "審判"
-    Reading: "しんぱん"
-    Meaning: "심판"
-    PartOfSpeech: "명사"
+  - target: "審判"
+    reading: "しんぱん"
+    meaning: "심판"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "森林"
-    Reading: "しんりん"
-    Meaning: "삼림"
-    PartOfSpeech: "명사"
+  - target: "森林"
+    reading: "しんりん"
+    meaning: "삼림"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "人類"
-    Reading: "じんるい"
-    Meaning: "인류"
-    PartOfSpeech: "명사"
+  - target: "人類"
+    reading: "じんるい"
+    meaning: "인류"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "成功"
-    Reading: "せいこう"
-    Meaning: "성공"
-    PartOfSpeech: "명사"
+  - target: "成功"
+    reading: "せいこう"
+    meaning: "성공"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "相互"
-    Reading: "そうご"
-    Meaning: "상호"
-    PartOfSpeech: "명사"
+  - target: "相互"
+    reading: "そうご"
+    meaning: "상호"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "操作"
-    Reading: "そうさ"
-    Meaning: "조작"
-    PartOfSpeech: "명사"
+  - target: "操作"
+    reading: "そうさ"
+    meaning: "조작"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "想像"
-    Reading: "そうぞう"
-    Meaning: "상상"
-    PartOfSpeech: "명사"
+  - target: "想像"
+    reading: "そうぞう"
+    meaning: "상상"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "装置"
-    Reading: "そうち"
-    Meaning: "장치"
-    PartOfSpeech: "명사"
+  - target: "装置"
+    reading: "そうち"
+    meaning: "장치"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "尊重"
-    Reading: "そんちょう"
-    Meaning: "존중"
-    PartOfSpeech: "명사"
+  - target: "尊重"
+    reading: "そんちょう"
+    meaning: "존중"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "代表"
-    Reading: "だいひょう"
-    Meaning: "대표"
-    PartOfSpeech: "명사"
+  - target: "代表"
+    reading: "だいひょう"
+    meaning: "대표"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "中古"
-    Reading: "ちゅうこ"
-    Meaning: "중고"
-    PartOfSpeech: "명사"
+  - target: "中古"
+    reading: "ちゅうこ"
+    meaning: "중고"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "注文"
-    Reading: "ちゅうもん"
-    Meaning: "주문"
-    PartOfSpeech: "명사"
+  - target: "注文"
+    reading: "ちゅうもん"
+    meaning: "주문"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "調査"
-    Reading: "ちょうさ"
-    Meaning: "조사"
-    PartOfSpeech: "명사"
+  - target: "調査"
+    reading: "ちょうさ"
+    meaning: "조사"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "著者"
-    Reading: "ちょしゃ"
-    Meaning: "저자"
-    PartOfSpeech: "명사"
+  - target: "著者"
+    reading: "ちょしゃ"
+    meaning: "저자"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "都合"
-    Reading: "つごう"
-    Meaning: "형편, 사정"
-    PartOfSpeech: "명사"
+  - target: "都合"
+    reading: "つごう"
+    meaning: "형편, 사정"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "展示"
-    Reading: "てんじ"
-    Meaning: "전시"
-    PartOfSpeech: "명사"
+  - target: "展示"
+    reading: "てんじ"
+    meaning: "전시"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "天然"
-    Reading: "てんねん"
-    Meaning: "천연"
-    PartOfSpeech: "명사"
+  - target: "天然"
+    reading: "てんねん"
+    meaning: "천연"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "途中"
-    Reading: "とちゅう"
-    Meaning: "도중"
-    PartOfSpeech: "명사"
+  - target: "途中"
+    reading: "とちゅう"
+    meaning: "도중"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "荷物"
-    Reading: "にもつ"
-    Meaning: "짐"
-    PartOfSpeech: "명사"
+  - target: "荷物"
+    reading: "にもつ"
+    meaning: "짐"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "販売"
-    Reading: "はんばい"
-    Meaning: "판매"
-    PartOfSpeech: "명사"
+  - target: "販売"
+    reading: "はんばい"
+    meaning: "판매"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "被害"
-    Reading: "ひがい"
-    Meaning: "피해"
-    PartOfSpeech: "명사"
+  - target: "被害"
+    reading: "ひがい"
+    meaning: "피해"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "光"
-    Reading: "ひかり"
-    Meaning: "빛"
-    PartOfSpeech: "명사"
+  - target: "光"
+    reading: "ひかり"
+    meaning: "빛"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "舞台"
-    Reading: "ぶたい"
-    Meaning: "무대"
-    PartOfSpeech: "명사"
+  - target: "舞台"
+    reading: "ぶたい"
+    meaning: "무대"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "部品"
-    Reading: "ぶひん"
-    Meaning: "부품"
-    PartOfSpeech: "명사"
+  - target: "部品"
+    reading: "ぶひん"
+    meaning: "부품"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "貿易"
-    Reading: "ぼうえき"
-    Meaning: "무역"
-    PartOfSpeech: "명사"
+  - target: "貿易"
+    reading: "ぼうえき"
+    meaning: "무역"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "法律"
-    Reading: "ほうりつ"
-    Meaning: "법률"
-    PartOfSpeech: "명사"
+  - target: "法律"
+    reading: "ほうりつ"
+    meaning: "법률"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "募集"
-    Reading: "ぼしゅう"
-    Meaning: "모집"
-    PartOfSpeech: "명사"
+  - target: "募集"
+    reading: "ぼしゅう"
+    meaning: "모집"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "保存"
-    Reading: "ほぞん"
-    Meaning: "보존"
-    PartOfSpeech: "명사"
+  - target: "保存"
+    reading: "ほぞん"
+    meaning: "보존"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "窓"
-    Reading: "まど"
-    Meaning: "창"
-    PartOfSpeech: "명사"
+  - target: "窓"
+    reading: "まど"
+    meaning: "창"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "優勝"
-    Reading: "ゆうしょう"
-    Meaning: "우승"
-    PartOfSpeech: "명사"
+  - target: "優勝"
+    reading: "ゆうしょう"
+    meaning: "우승"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "流行"
-    Reading: "りゅうこう"
-    Meaning: "유행"
-    PartOfSpeech: "명사"
+  - target: "流行"
+    reading: "りゅうこう"
+    meaning: "유행"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "礼儀"
-    Reading: "れいぎ"
-    Meaning: "예의"
-    PartOfSpeech: "명사"
+  - target: "礼儀"
+    reading: "れいぎ"
+    meaning: "예의"
+    partOfSpeech: "명사"
     tags:
       - Noun
-  - Target: "歴史"
-    Reading: "れきし"
-    Meaning: "역사"
-    PartOfSpeech: "명사"
+  - target: "歴史"
+    reading: "れきし"
+    meaning: "역사"
+    partOfSpeech: "명사"
     tags:
       - Noun

@@ -21,7 +21,7 @@ RSpec.describe Amgi::Application::LintDeck do
     result = described_class.call(loaded.value)
 
     expect(result).not_to be_success
-    expect(result.errors.join("\n")).to include('Missing required field `Meaning`')
+    expect(result.errors.join("\n")).to include('Missing required field `meaning`')
   end
 
   it 'rejects unknown template placeholders' do
@@ -29,6 +29,16 @@ RSpec.describe Amgi::Application::LintDeck do
     result = described_class.call(loaded.value)
 
     expect(result).not_to be_success
-    expect(result.errors.join("\n")).to include('Unknown template placeholder `UnknownField`')
+    expect(result.errors.join("\n")).to include('Unknown template placeholder `unknownField`')
+  end
+
+  it 'rejects field declarations that do not start with lowercase' do
+    loaded = Amgi::Application::LoadDeck.call(fixture_path('invalid_field_name'))
+    result = described_class.call(loaded.value)
+
+    expect(result).not_to be_success
+    expect(result.errors.join("\n")).to include(
+      'Field names must start with a lowercase letter: Target'
+    )
   end
 end

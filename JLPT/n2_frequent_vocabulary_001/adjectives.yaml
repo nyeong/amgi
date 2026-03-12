@@ -1,31 +1,31 @@
 notes:
-  - Target: "忙しい"
-    Reading: "いそがしい"
-    Meaning: "바쁘다"
-    PartOfSpeech: "형용사"
+  - target: "忙しい"
+    reading: "いそがしい"
+    meaning: "바쁘다"
+    partOfSpeech: "형용사"
     tags:
       - Adjective
-  - Target: "涼しい"
-    Reading: "すずしい"
-    Meaning: "선선하다"
-    PartOfSpeech: "형용사"
+  - target: "涼しい"
+    reading: "すずしい"
+    meaning: "선선하다"
+    partOfSpeech: "형용사"
     tags:
       - Adjective
-  - Target: "乏しい"
-    Reading: "とぼしい"
-    Meaning: "결핍되다, 모자라다"
-    PartOfSpeech: "형용사"
+  - target: "乏しい"
+    reading: "とぼしい"
+    meaning: "결핍되다, 모자라다"
+    partOfSpeech: "형용사"
     tags:
       - Adjective
-  - Target: "貧しい"
-    Reading: "まずしい"
-    Meaning: "가난하다"
-    PartOfSpeech: "형용사"
+  - target: "貧しい"
+    reading: "まずしい"
+    meaning: "가난하다"
+    partOfSpeech: "형용사"
     tags:
       - Adjective
-  - Target: "珍しい"
-    Reading: "めずらしい"
-    Meaning: "드물다, 별나다"
-    PartOfSpeech: "형용사"
+  - target: "珍しい"
+    reading: "めずらしい"
+    meaning: "드물다, 별나다"
+    partOfSpeech: "형용사"
     tags:
       - Adjective

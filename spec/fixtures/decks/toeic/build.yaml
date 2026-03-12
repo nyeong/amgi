@@ -1,19 +1,19 @@
 schema: amgi_v1
 name: TOEIC_Vocabulary
 required_fields:
-  - Target
-  - Meaning
+  - target
+  - meaning
 optional_fields:
-  - Example
-  - BlankExample
+  - example
+  - blankExample
 global_tags:
   - TOEIC
 templates:
   - name: Card 1
     front: |
-      <div class="target">{{Target}}</div>
+      <div class="target">{{target}}</div>
     back: |
       {{FrontSide}}
       <hr id=answer>
-      <div class="meaning">{{Meaning}}</div>
-      <div class="example">{{Example}}</div>
+      <div class="meaning">{{meaning}}</div>
+      <div class="example">{{example}}</div>

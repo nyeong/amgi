@@ -5,6 +5,7 @@ module Amgi
     class LintDeck
       PLACEHOLDER_PATTERN = /{{\s*([A-Za-z][A-Za-z0-9_]*)\s*}}/
       ALLOWED_TEMPLATE_TOKENS = %w[FrontSide].freeze
+      FIELD_NAME_PATTERN = /\A[a-z][A-Za-z0-9]*\z/
 
       ValidatedDeck = Struct.new(:deck_source, :note_count, keyword_init: true)
 
@@ -33,11 +34,19 @@ module Amgi
         errors << 'Deck name is required.' if blank_string?(config.name)
         errors << 'At least one required field is required.' if config.required_fields.empty?
         errors << 'At least one template is required.' if config.templates.empty?
+        validate_field_name_convention(config.all_fields, errors)
 
         overlap = config.required_fields & config.optional_fields
         return if overlap.empty?
 
         errors << "Fields cannot be both required and optional: #{overlap.join(', ')}"
+      end
+
+      def validate_field_name_convention(fields, errors)
+        invalid_fields = fields.grep_v(FIELD_NAME_PATTERN)
+        return if invalid_fields.empty?
+
+        errors << "Field names must start with a lowercase letter: #{invalid_fields.join(', ')}"
       end
 
       def validate_templates(config, errors)

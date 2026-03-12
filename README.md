@@ -56,38 +56,38 @@ Each deck directory contains:
 - `build.yaml`
 - one or more note YAML files
 
-Example `build.yaml`:
+example `build.yaml`:
 
 ```yaml
 schema: amgi_v1
 name: TOEIC_Vocabulary
 required_fields:
-  - Target
-  - Meaning
+  - target
+  - meaning
 optional_fields:
-  - Example
-  - BlankExample
+  - example
+  - blankExample
 global_tags:
   - TOEIC
 templates:
   - name: Card 1
     front: |
-      <div class="target">{{Target}}</div>
+      <div class="target">{{target}}</div>
     back: |
       {{FrontSide}}
       <hr id=answer>
-      <div class="meaning">{{Meaning}}</div>
-      <div class="example">{{Example}}</div>
+      <div class="meaning">{{meaning}}</div>
+      <div class="example">{{example}}</div>
 ```
 
-Example note file:
+example note file:
 
 ```yaml
 notes:
-  - Target: comply
-    Meaning: 준수하다, 따르다
-    Example: All employees must comply with the rules.
-    BlankExample: All employees must {} with the rules.
+  - target: comply
+    meaning: 준수하다, 따르다
+    example: All employees must comply with the rules.
+    blankExample: All employees must {} with the rules.
     tags:
       - Part5
 ```
@@ -95,6 +95,7 @@ notes:
 Validation rules:
 
 - `schema` must be `amgi_v1`
+- field names must use lowerCamelCase and start with a lowercase letter
 - every required field must be present in every note
 - note keys must be declared in `required_fields` or `optional_fields`, except `tags`
 - `tags` must be a string array when present

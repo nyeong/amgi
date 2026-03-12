@@ -1,133 +1,133 @@
 notes:
-  - Target: "与える"
-    Reading: "あたえる"
-    Meaning: "부여하다, 끼치다"
-    PartOfSpeech: "동사"
+  - target: "与える"
+    reading: "あたえる"
+    meaning: "부여하다, 끼치다"
+    partOfSpeech: "동사"
     tags:
       - Verb
-  - Target: "誤る"
-    Reading: "あやまる"
-    Meaning: "잘못하다"
-    PartOfSpeech: "동사"
+  - target: "誤る"
+    reading: "あやまる"
+    meaning: "잘못하다"
+    partOfSpeech: "동사"
     tags:
       - Verb
-  - Target: "争う"
-    Reading: "あらそう"
-    Meaning: "경쟁하다, 겨루다"
-    PartOfSpeech: "동사"
+  - target: "争う"
+    reading: "あらそう"
+    meaning: "경쟁하다, 겨루다"
+    partOfSpeech: "동사"
     tags:
       - Verb
-  - Target: "重ねる"
-    Reading: "かさねる"
-    Meaning: "겹치다, 거듭하다"
-    PartOfSpeech: "동사"
+  - target: "重ねる"
+    reading: "かさねる"
+    meaning: "겹치다, 거듭하다"
+    partOfSpeech: "동사"
     tags:
       - Verb
-  - Target: "傾く"
-    Reading: "かたむく"
-    Meaning: "기울다, 쏠리다"
-    PartOfSpeech: "동사"
+  - target: "傾く"
+    reading: "かたむく"
+    meaning: "기울다, 쏠리다"
+    partOfSpeech: "동사"
     tags:
       - Verb
-  - Target: "決まる"
-    Reading: "きまる"
-    Meaning: "정해지다"
-    PartOfSpeech: "동사"
+  - target: "決まる"
+    reading: "きまる"
+    meaning: "정해지다"
+    partOfSpeech: "동사"
     tags:
       - Verb
-  - Target: "異なる"
-    Reading: "ことなる"
-    Meaning: "다르다"
-    PartOfSpeech: "동사"
+  - target: "異なる"
+    reading: "ことなる"
+    meaning: "다르다"
+    partOfSpeech: "동사"
     tags:
       - Verb
-  - Target: "備える"
-    Reading: "そなえる"
-    Meaning: "갖추다, 구비하다, 대비하다"
-    PartOfSpeech: "동사"
+  - target: "備える"
+    reading: "そなえる"
+    meaning: "갖추다, 구비하다, 대비하다"
+    partOfSpeech: "동사"
     tags:
       - Verb
-  - Target: "耕す"
-    Reading: "たがやす"
-    Meaning: "일구다, 갈다"
-    PartOfSpeech: "동사"
+  - target: "耕す"
+    reading: "たがやす"
+    meaning: "일구다, 갈다"
+    partOfSpeech: "동사"
     tags:
       - Verb
-  - Target: "疲れる"
-    Reading: "つかれる"
-    Meaning: "피곤하다"
-    PartOfSpeech: "동사"
+  - target: "疲れる"
+    reading: "つかれる"
+    meaning: "피곤하다"
+    partOfSpeech: "동사"
     tags:
       - Verb
-  - Target: "続く"
-    Reading: "つづく"
-    Meaning: "계속하다"
-    PartOfSpeech: "동사"
+  - target: "続く"
+    reading: "つづく"
+    meaning: "계속하다"
+    partOfSpeech: "동사"
     tags:
       - Verb
-  - Target: "届く"
-    Reading: "とどく"
-    Meaning: "닿다, 미치다"
-    PartOfSpeech: "동사"
+  - target: "届く"
+    reading: "とどく"
+    meaning: "닿다, 미치다"
+    partOfSpeech: "동사"
     tags:
       - Verb
-  - Target: "流す"
-    Reading: "ながす"
-    Meaning: "흘리다, 흐르게 하다"
-    PartOfSpeech: "동사"
+  - target: "流す"
+    reading: "ながす"
+    meaning: "흘리다, 흐르게 하다"
+    partOfSpeech: "동사"
     tags:
       - Verb
-  - Target: "悩む"
-    Reading: "なやむ"
-    Meaning: "고민하다"
-    PartOfSpeech: "동사"
+  - target: "悩む"
+    reading: "なやむ"
+    meaning: "고민하다"
+    partOfSpeech: "동사"
     tags:
       - Verb
-  - Target: "塗る"
-    Reading: "ぬる"
-    Meaning: "칠하다"
-    PartOfSpeech: "동사"
+  - target: "塗る"
+    reading: "ぬる"
+    meaning: "칠하다"
+    partOfSpeech: "동사"
     tags:
       - Verb
-  - Target: "拾う"
-    Reading: "ひろう"
-    Meaning: "줍다"
-    PartOfSpeech: "동사"
+  - target: "拾う"
+    reading: "ひろう"
+    meaning: "줍다"
+    partOfSpeech: "동사"
     tags:
       - Verb
-  - Target: "含める"
-    Reading: "ふくめる"
-    Meaning: "포함시키다"
-    PartOfSpeech: "동사"
+  - target: "含める"
+    reading: "ふくめる"
+    meaning: "포함시키다"
+    partOfSpeech: "동사"
     tags:
       - Verb
-  - Target: "守る"
-    Reading: "まもる"
-    Meaning: "지키다"
-    PartOfSpeech: "동사"
+  - target: "守る"
+    reading: "まもる"
+    meaning: "지키다"
+    partOfSpeech: "동사"
     tags:
       - Verb
-  - Target: "認める"
-    Reading: "みとめる"
-    Meaning: "인정하다"
-    PartOfSpeech: "동사"
+  - target: "認める"
+    reading: "みとめる"
+    meaning: "인정하다"
+    partOfSpeech: "동사"
     tags:
       - Verb
-  - Target: "求める"
-    Reading: "もとめる"
-    Meaning: "구하다, 요구하다"
-    PartOfSpeech: "동사"
+  - target: "求める"
+    reading: "もとめる"
+    meaning: "구하다, 요구하다"
+    partOfSpeech: "동사"
     tags:
       - Verb
-  - Target: "雇う"
-    Reading: "やとう"
-    Meaning: "고용하다"
-    PartOfSpeech: "동사"
+  - target: "雇う"
+    reading: "やとう"
+    meaning: "고용하다"
+    partOfSpeech: "동사"
     tags:
       - Verb
-  - Target: "喜ぶ"
-    Reading: "よろこぶ"
-    Meaning: "기뻐하다"
-    PartOfSpeech: "동사"
+  - target: "喜ぶ"
+    reading: "よろこぶ"
+    meaning: "기뻐하다"
+    partOfSpeech: "동사"
     tags:
       - Verb

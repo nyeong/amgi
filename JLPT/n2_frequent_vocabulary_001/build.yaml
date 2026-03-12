@@ -1,12 +1,12 @@
 schema: amgi_v1
 name: JLPT_N2_Frequent_Vocabulary_001
 required_fields:
-  - Target
-  - Reading
-  - Meaning
-  - PartOfSpeech
+  - target
+  - reading
+  - meaning
+  - partOfSpeech
 optional_fields:
-  - Notes
+  - notes
 global_tags:
   - JLPT
   - N2
@@ -14,21 +14,21 @@ global_tags:
 templates:
   - name: JP to KO
     front: |
-      <div class="prompt prompt-jp">{{Target}}</div>
+      <div class="prompt prompt-jp">{{target}}</div>
     back: |
       {{FrontSide}}
       <hr id=answer>
-      <div class="reading">{{Reading}}</div>
-      <div class="meaning">{{Meaning}}</div>
-      <div class="part-of-speech">{{PartOfSpeech}}</div>
-      <div class="notes">{{Notes}}</div>
+      <div class="reading">{{reading}}</div>
+      <div class="meaning">{{meaning}}</div>
+      <div class="part-of-speech">{{partOfSpeech}}</div>
+      <div class="notes">{{notes}}</div>
   - name: KO to JP
     front: |
-      <div class="prompt prompt-ko">{{Meaning}}</div>
-      <div class="part-of-speech">{{PartOfSpeech}}</div>
+      <div class="prompt prompt-ko">{{meaning}}</div>
+      <div class="part-of-speech">{{partOfSpeech}}</div>
     back: |
       {{FrontSide}}
       <hr id=answer>
-      <div class="target">{{Target}}</div>
-      <div class="reading">{{Reading}}</div>
-      <div class="notes">{{Notes}}</div>
+      <div class="target">{{target}}</div>
+      <div class="reading">{{reading}}</div>
+      <div class="notes">{{notes}}</div>
