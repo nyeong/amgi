@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+if [[ -n "${AMGI_PRE_COMMIT_CONFIG:-}" ]]; then
+  exec pre-commit run --all-files --config "$AMGI_PRE_COMMIT_CONFIG" "$@"
+fi
+
 ruby bin/lint-yaml
 bin/lint
 bin/test
