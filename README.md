@@ -122,8 +122,7 @@ nix develop -c bin/amgi build <deck_dir> --out <output_dir>
 ## Project Layout
 
 ```text
-bin/        shell entrypoints for development and CLI usage
-exe/        Ruby CLI entrypoint
+bin/        executable entrypoints for development and CLI usage
 lib/        application, domain, infrastructure, and interface code
 spec/       RSpec tests and fixture decks
 flake.nix   Nix development shell definition

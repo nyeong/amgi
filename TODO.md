@@ -19,7 +19,7 @@ Updated: 2026-03-12
 - [x] `amgi_v1` schema loading
 - [x] deck lint pipeline
 - [x] minimal `.apkg` build pipeline
-- [x] shell wrapper `bin/amgi`
+- [x] direct CLI entrypoint `bin/amgi`
 
 ## Known Gaps
 
