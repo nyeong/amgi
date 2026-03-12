@@ -92,6 +92,30 @@ RSpec.describe Amgi::Application::BuildDeck do
     end
   end
 
+  it 'derives ruby fields from target and reading when the schema asks for them' do
+    Dir.mktmpdir do |dir|
+      deck_path = File.expand_path('../fixtures/decks/jlpt_ruby', __dir__)
+      result = described_class.call(deck_path, output_path: File.join(dir, 'jlpt_ruby.apkg'))
+
+      expect(result).to be_success
+
+      collection_path = File.join(dir, 'collection.anki2')
+      Zip::File.open(result.value.output_path) do |zip_file|
+        zip_file.extract('collection.anki2', collection_path)
+      end
+
+      db = SQLite3::Database.new(collection_path)
+      fields = db.get_first_value('SELECT flds FROM notes').split("\x1F")
+
+      aggregate_failures do
+        expect(fields[4]).to eq('<ruby>与<rt>あた</rt></ruby>える')
+        expect(fields[5]).to eq('大きな影響を<ruby>与<rt>あた</rt></ruby>える')
+      end
+    ensure
+      db&.close
+    end
+  end
+
   it 'uses amgi.yaml output when no explicit output path is given' do
     deck_path = File.expand_path('../fixtures/decks/toeic_with_output', __dir__)
     result = described_class.call(deck_path, cwd: Dir.tmpdir)
