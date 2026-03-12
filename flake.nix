@@ -59,10 +59,36 @@
               ];
               inherit text;
             };
+          amgiPackage = pkgs.stdenvNoCC.mkDerivation {
+            pname = "amgi";
+            version = "0.1.0";
+            dontUnpack = true;
+            installPhase = ''
+              mkdir -p $out/bin $out/lib $out/libexec
+              cp ${./Gemfile} $out/Gemfile
+              cp ${./Gemfile.lock} $out/Gemfile.lock
+              cp ${./bin/amgi} $out/libexec/amgi
+              cp -R ${./lib}/. $out/lib/
+              chmod +x $out/libexec/amgi
+              cat > $out/bin/amgi <<EOF
+              #!${pkgs.bash}/bin/bash
+              set -euo pipefail
+              export BUNDLE_GEMFILE="$out/Gemfile"
+              export BUNDLE_IGNORE_CONFIG=1
+              exec ${env}/bin/bundle exec ${ruby}/bin/ruby "$out/libexec/amgi" "\$@"
+              EOF
+              chmod +x $out/bin/amgi
+            '';
+            meta = {
+              mainProgram = "amgi";
+              platforms = pkgs.lib.platforms.all;
+            };
+          };
         in
         {
           inherit pkgs;
           inherit env ruby;
+          inherit amgiPackage;
           bundixCli = bundix.packages.${system}.default;
           bundleLock = mkRubyCommand "bundle-lock" ''
             export BUNDLE_IGNORE_CONFIG=1
@@ -119,6 +145,36 @@
                 always_run = true;
                 pass_filenames = false;
               };
+            };
+          };
+        }
+      );
+
+      packages = forAllSystems (
+        system:
+        let
+          rubyContext = mkRubyContext system;
+        in
+        {
+          default = rubyContext.amgiPackage;
+          amgi = rubyContext.amgiPackage;
+        }
+      );
+
+      apps = forAllSystems (
+        system: {
+          default = {
+            type = "app";
+            program = "${self.packages.${system}.default}/bin/amgi";
+            meta = {
+              description = "Run the Amgi CLI";
+            };
+          };
+          amgi = {
+            type = "app";
+            program = "${self.packages.${system}.amgi}/bin/amgi";
+            meta = {
+              description = "Run the Amgi CLI";
             };
           };
         }

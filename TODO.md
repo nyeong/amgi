@@ -4,6 +4,7 @@ Updated: 2026-03-12
 
 ## Verification Checklist
 
+- [x] `nix run . -- lint spec/fixtures/decks/toeic` completed successfully on 2026-03-12
 - [x] `nix develop -c bundix` generated `gemset.nix` on 2026-03-12
 - [x] `nix develop` installs the `git-hooks.nix` pre-commit hook on 2026-03-12
 - [x] `nix develop -c bin/check` completed successfully through pre-commit on 2026-03-12
@@ -22,6 +23,7 @@ Updated: 2026-03-12
 ## Current Status
 
 - [x] `ruby-nix` workflow + `bundlerEnv`-backed Ruby development environment
+- [x] `nix run`-ready `amgi` app packaging
 - [x] `gemset.nix` committed as the Nix-side gem source of truth
 - [x] `git-hooks.nix`-managed repository validation
 - [x] RuboCop formatter/lint harness
