@@ -175,6 +175,7 @@ This also means deck templates should differ by exam.
 Development commands:
 
 ```bash
+nix develop -c ruby bin/lint-yaml
 nix develop -c bin/lint
 nix develop -c bin/format
 nix develop -c bin/test
