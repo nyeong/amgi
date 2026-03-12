@@ -5,8 +5,7 @@ note_schema:
     - Target
   optional_fields: []
 cards:
-  - id: cardOne
-    name: Card 1
+  - name: Card 1
     default: true
     front: "{{Target}}"
     back: "{{FrontSide}}"

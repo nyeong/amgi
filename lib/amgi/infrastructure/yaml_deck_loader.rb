@@ -34,7 +34,6 @@ module Amgi
         note_schema = data.fetch('note_schema')
         cards = Array(data.fetch('cards')).map do |card|
           Domain::Template.new(
-            id: card.fetch('id'),
             name: card.fetch('name'),
             front: card.fetch('front'),
             back: card.fetch('back'),

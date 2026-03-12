@@ -57,12 +57,4 @@ RSpec.describe Amgi::Application::LintDeck do
     expect(result).not_to be_success
     expect(result.errors.join("\n")).to include('At least one card is required.')
   end
-
-  it 'rejects a note with an unknown card id' do
-    loaded = Amgi::Application::LoadDeck.call(fixture_path('invalid_unknown_card_id'))
-    result = described_class.call(loaded.value)
-
-    expect(result).not_to be_success
-    expect(result.errors.join("\n")).to include('Unknown card id(s) `missingCard`')
-  end
 end

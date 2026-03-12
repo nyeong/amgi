@@ -364,10 +364,7 @@ module Amgi
 
       def note_signature(config, note)
         field_signature = config.all_fields.map { |field| "#{field}=#{note[field]}" }
-        meta_signature = [
-          "tags=#{Array(note['tags']).join(',')}",
-          "cardIds=#{Array(note['cardIds']).join(',')}"
-        ]
+        meta_signature = ["tags=#{Array(note['tags']).join(',')}"]
 
         (field_signature + meta_signature).join('|')
       end
@@ -448,8 +445,16 @@ module Amgi
       end
 
       def active_cards(config, note)
-        selected_ids = config.default_cards.map(&:id) + Array(note['cardIds'])
-        config.cards.select { |card| selected_ids.include?(card.id) }
+        config.cards.select do |card|
+          card.default? || fields_present?(note, card.front_fields)
+        end
+      end
+
+      def fields_present?(note, fields)
+        fields.all? do |field|
+          value = note[field]
+          !value.nil? && !value.to_s.strip.empty?
+        end
       end
     end
   end

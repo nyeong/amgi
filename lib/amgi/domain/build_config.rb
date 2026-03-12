@@ -29,10 +29,6 @@ module Amgi
       def default_cards
         cards.select(&:default?)
       end
-
-      def card_ids
-        cards.map(&:id)
-      end
     end
   end
 end

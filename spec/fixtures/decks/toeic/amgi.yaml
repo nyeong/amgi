@@ -10,8 +10,7 @@ note_schema:
     - example
     - blankExample
 cards:
-  - id: recallMeaning
-    name: Recall Meaning
+  - name: Recall Meaning
     default: true
     front: |
       <div class="target">{{target}}</div>
@@ -20,8 +19,7 @@ cards:
       <hr id=answer>
       <div class="meaning">{{meaning}}</div>
       <div class="example">{{example}}</div>
-  - id: clozeExample
-    name: Cloze Example
+  - name: Cloze Example
     front: |
       <div class="example">{{blankExample}}</div>
     back: |

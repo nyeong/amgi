@@ -16,8 +16,7 @@ note_schema:
     - meaning
   optional_fields: []
 cards:
-  - id: recallMeaning
-    name: Card 1
+  - name: Card 1
     default: true
     front: |
       <div class="target">{{target}}</div>
