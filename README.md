@@ -71,6 +71,13 @@ Run the full repository check:
 nix develop -c bin/check
 ```
 
+Run the packaged CLI directly without entering the dev shell:
+
+```bash
+nix run . -- lint spec/fixtures/decks/toeic
+nix run . -- build spec/fixtures/decks/toeic
+```
+
 Run the same checks in a sandboxed Nix derivation:
 
 ```bash
@@ -239,6 +246,8 @@ nix develop -c bin/amgi build <deck_dir> --out <output_dir>
 ### Development Commands
 
 ```bash
+nix run . -- lint <deck_dir>
+nix run . -- build <deck_dir>
 nix develop -c bundle-lock
 nix develop -c bundle-update
 nix develop -c bundix
