@@ -19,7 +19,7 @@ Amgi currently supports:
 - a single-deck YAML workflow
 - `amgi_v1` validation through `amgi.yaml`
 - one `note_schema` per deck
-- one default card plus note-specific expansion cards
+- one default card plus automatically derived expansion cards
 - minimal `.apkg` export with `collection.anki2` and `media`
 
 Amgi does not yet support:
@@ -79,8 +79,7 @@ note_schema:
   optional_fields: []
 
 cards:
-  - id: recallMeaning
-    name: Recall Meaning
+  - name: Recall Meaning
     default: true
     front: |
       <div>{{target}}</div>
@@ -89,8 +88,7 @@ cards:
       <hr id=answer>
       <div>{{meaning}}</div>
 
-  - id: recallTarget
-    name: Recall Target
+  - name: Recall Target
     front: |
       <div>{{meaning}}</div>
     back: |
@@ -98,8 +96,7 @@ cards:
       <hr id=answer>
       <div>{{target}}</div>
 
-  - id: clozeContext
-    name: Cloze Context
+  - name: Cloze Context
     front: |
       <div>{{clozeContext}}</div>
     back: |
@@ -120,15 +117,13 @@ notes:
     clozeContext: "_____を守る"
     translation: "환경을 지키다"
     memo: "환경 보호, 환경 개선처럼 같이 붙는 표현도 함께 외운다."
-    cardIds:
-      - clozeContext
     tags:
       - Noun
 ```
 
 `cards` is the deck-level menu of possible card types. Each note always gets
-the one `default: true` card, and can opt into extra cards through `cardIds`
-when a specific failure mode justifies it.
+the one `default: true` card. Additional cards are derived automatically when
+the note has the front-side fields needed to render that card.
 
 ## Validation Rules
 
@@ -139,12 +134,10 @@ Amgi currently enforces these rules:
 - `note_schema.required_fields` must contain at least one field
 - `cards` must contain at least one card definition
 - exactly one card must have `default: true`
-- card ids must be unique
 - field names must use lowerCamelCase and start with a lowercase letter
 - every required field must be present in every note
-- note keys must be declared in `note_schema.required_fields` or `note_schema.optional_fields`, except `tags` and `cardIds`
+- note keys must be declared in `note_schema.required_fields` or `note_schema.optional_fields`, except `tags`
 - `tags` must be a string array when present
-- `cardIds` must be a string array of known card ids when present
 - card placeholders must reference declared fields or `FrontSide`
 
 ## SSoT Authoring Model

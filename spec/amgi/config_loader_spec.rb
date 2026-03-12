@@ -18,7 +18,6 @@ RSpec.describe Amgi::Application::LoadDeck do
     expect(deck.config.required_fields).to eq(%w[target meaning])
     expect(deck.config.optional_fields).to eq(%w[example blankExample])
     expect(deck.config.all_fields).to eq(%w[target meaning example blankExample])
-    expect(deck.config.default_cards.map(&:id)).to eq(['recallMeaning'])
     expect(deck.config.cards.map(&:name)).to eq(['Recall Meaning', 'Cloze Example'])
     expect(deck.note_sources.map(&:source_path)).to all(end_with('.yaml'))
     expect(deck.note_sources.flat_map(&:notes).size).to eq(2)

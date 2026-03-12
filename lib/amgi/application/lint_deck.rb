@@ -6,7 +6,7 @@ module Amgi
       PLACEHOLDER_PATTERN = /{{\s*([A-Za-z][A-Za-z0-9_]*)\s*}}/
       ALLOWED_TEMPLATE_TOKENS = %w[FrontSide].freeze
       FIELD_NAME_PATTERN = /\A[a-z][A-Za-z0-9]*\z/
-      RESERVED_NOTE_KEYS = %w[tags cardIds].freeze
+      RESERVED_NOTE_KEYS = %w[tags].freeze
 
       ValidatedDeck = Struct.new(:deck_source, :note_count, keyword_init: true)
 
@@ -73,11 +73,6 @@ module Amgi
       end
 
       def validate_cards_shape(config, errors)
-        validate_field_name_convention(config.card_ids, errors)
-
-        duplicate_ids = duplicate_values(config.card_ids)
-        errors << "Card ids must be unique: #{duplicate_ids.join(', ')}" unless duplicate_ids.empty?
-
         default_count = config.default_cards.size
         return if default_count == 1
 
@@ -111,29 +106,12 @@ module Amgi
         end
 
         validate_tags(note, source_path, index, errors)
-        validate_card_ids(config, note, source_path, index, errors)
       end
 
       def validate_tags(note, source_path, index, errors)
         return if note['tags'].nil? || string_array?(note['tags'])
 
         errors << "#{source_path}:note##{index + 1} `tags` must be a string array"
-      end
-
-      def validate_card_ids(config, note, source_path, index, errors)
-        return if note['cardIds'].nil?
-
-        unless string_array?(note['cardIds'])
-          errors << "#{source_path}:note##{index + 1} `cardIds` must be a string array"
-          return
-        end
-
-        unknown_card_ids = note['cardIds'] - config.card_ids
-        return if unknown_card_ids.empty?
-
-        message = "#{source_path}:note##{index + 1} " \
-                  "Unknown card id(s) `#{unknown_card_ids.join(', ')}`"
-        errors << message
       end
 
       def blank_string?(value)
@@ -146,10 +124,6 @@ module Amgi
 
       def string_array?(value)
         value.is_a?(Array) && value.all? { |item| item.is_a?(String) }
-      end
-
-      def duplicate_values(values)
-        values.group_by(&:itself).select { |_value, group| group.size > 1 }.keys
       end
     end
   end

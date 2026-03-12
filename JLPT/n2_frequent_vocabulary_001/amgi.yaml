@@ -166,8 +166,7 @@ note_schema:
     - memo
   optional_fields: []
 cards:
-  - id: recallMeaning
-    name: Recall Meaning
+  - name: Recall Meaning
     default: true
     front: |
       <div class="sheet">
@@ -207,8 +206,7 @@ cards:
         <div class="section-label">3D Memo</div>
         <div class="memo">{{memo}}</div>
       </div>
-  - id: recallTarget
-    name: Recall Target
+  - name: Recall Target
     front: |
       <div class="sheet">
         <div class="deck-label">Recall Target</div>
