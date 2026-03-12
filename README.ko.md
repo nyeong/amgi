@@ -35,8 +35,6 @@ flowchart TD
 
 하나의 학습 항목에서 여러 카드를 만들 수도 있습니다. 예를 들어 외국어 학습에서는 출발어를 보고 도착어를 맞히는 카드와, 도착어를 보고 출발어를 떠올리는 카드를 함께 생성할 수 있습니다.
 
-각 note는 `target`을 key로 삼기 때문에 데이터셋 자체가 note identity의 SSoT가 됩니다. `meaning`, `memo`, 예문을 수정해도 같은 note로 유지되고, `target`을 바꾸면 새 note가 됩니다.
-
 또한 각 dataset 파일은 루트의 `_cards` 배열로 non-default 카드를 opt-in할 수 있습니다. `_cards`가 없으면 그 파일의 note들은 default 카드만 생성되고, `_cards`에 포함된 카드는 해당 note의 front 필드가 모두 있을 때만 추가 생성됩니다.
 
 이 규칙은 파일 단위로 적용됩니다. 예를 들어 `a.yaml`은 `_cards` 없이 default 카드만 만들고, `b.yaml`은 `_cards: ["Recall Target"]`를 두어 default 카드와 `Recall Target`을 함께 만들 수 있습니다. 실제 JLPT 예시에서도 [verbs.yaml](JLPT/n2_frequent_vocabulary_001/verbs.yaml)은 `Recall Target`을 opt-in하고, `_cards`가 없는 파일들은 default 카드만 생성합니다.
@@ -72,7 +70,6 @@ nix run github:nyeong/amgi -- lint JLPT/n2_frequent_vocabulary_001
 2. 수집: 스키마에 맞춰 정형화된 YAML 데이터셋을 작성합니다.
    - 필드 정의는 [Amgi v1 Schema](docs/amgi-v1-schema.md)를 참고하세요.
    - 예시는 [JLPT 예시 데이터셋](JLPT/n2_frequent_vocabulary_001)을 참고하세요.
-   - note는 `notes:` 아래에서 `target`을 key로 두고 작성합니다.
    - 특정 파일에서만 추가 카드를 만들고 싶다면 루트에 `_cards:` 배열을 둡니다.
 3. 생성: 정의된 카드 규칙에 따라 `.apkg`를 만들고 Anki로 가져옵니다.
 
