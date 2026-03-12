@@ -1,64 +1,86 @@
 # Amgi
 
-Amgi is a Ruby-based Anki deck builder for SSoT-style study datasets.
+Amgi is a Ruby-based Anki deck builder for study datasets managed as a single
+source of truth.
 
-Its core idea is simple:
+It is for people who want to:
 
-- `notes:` hold the facts you want to memorize exactly once
-- `cards:` define possible Anki card shapes derived from that dataset
-- Amgi validates the structure and builds a reproducible `.apkg`
+- keep each word, expression, or concept in one place
+- derive multiple Anki card styles from that dataset
+- build `.apkg` files reproducibly from plain YAML
 
-This keeps the source of truth in the dataset, while letting one note generate
-multiple review angles such as recognition, reverse recall, and cloze-style
-prompts when they are actually needed.
+In short:
 
-## What It Does Today
+- the dataset is the source of truth
+- cards are derived review views of that dataset
+- Amgi validates the structure and builds an importable deck
 
-Amgi currently supports:
+## Why This Project Exists
 
-- a single-deck YAML workflow
-- `amgi_v1` validation through `amgi.yaml`
-- one `note_schema` per deck
-- one default card plus automatically derived expansion cards
-- minimal `.apkg` export with `collection.anki2` and `media`
+Many Anki workflows turn the card itself into the thing you edit. That works at
+first, but it gets painful when:
 
-Amgi does not yet support:
+- the same fact appears in several cards
+- one correction needs to be applied in multiple places
+- card counts grow faster than understanding
 
-- media assets
-- multiple note schemas in one deck
-- repository-wide deck discovery
-- richer Anki metadata compatibility
+Amgi takes the opposite approach.
+
+You define the thing you want to memorize once in `notes:` and then describe
+how that note can be reviewed through deck-level `cards:` templates.
+
+This is especially useful when:
+
+- building JLPT vocabulary decks from reading and practice mistakes
+- building TOEIC expression decks from collocations and test context
+- maintaining a long-lived study dataset without duplicated cards
+
+## How It Works
+
+Each deck directory contains:
+
+- one `amgi.yaml` config file
+- one or more dataset YAML files containing `notes:`
+
+Amgi reads the deck, validates it, and builds an `.apkg`.
+
+The design model is:
+
+1. capture layer: collect items you got wrong or want to remember
+2. knowledge layer: normalize them into clean `notes:`
+3. card layer: derive review cards from that dataset
+
+The important idea is that the dataset stays primary.
+
+- one note represents one memorization target
+- one default card is always created
+- additional cards are derived from the same note
 
 ## Quick Start
 
-Run the full local check:
+Enter the development shell and run the full check:
 
 ```bash
 nix develop -c bin/check
 ```
 
-Lint a sample deck:
+Lint a deck:
 
 ```bash
 nix develop -c bin/amgi lint spec/fixtures/decks/toeic
 ```
 
-Build a sample deck:
+Build a deck:
 
 ```bash
 nix develop -c bin/amgi build spec/fixtures/decks/toeic
 ```
 
-By default, the built package is written to the deck's `dist/` directory.
+The built `.apkg` is written to the deck's `dist/` directory by default.
 
-## Deck Format
+## Example Deck
 
-Each deck directory contains:
-
-- `amgi.yaml`
-- one or more dataset YAML files with `notes:`
-
-Example `amgi.yaml`:
+`amgi.yaml` defines the deck name, note schema, and card templates:
 
 ```yaml
 schema: amgi_v1
@@ -106,7 +128,7 @@ cards:
       <div>{{target}}</div>
 ```
 
-Example dataset file:
+A dataset file contains only the memorization data:
 
 ```yaml
 notes:
@@ -121,68 +143,79 @@ notes:
       - Noun
 ```
 
-`cards` is the deck-level menu of possible card types. Each note always gets
-the one `default: true` card. Additional cards are derived automatically when
-the note has the front-side fields needed to render that card.
+This means:
+
+- `環境` is defined once
+- the default card is always created
+- extra cards can be derived from the same note
+
+## Deck Format
+
+### `amgi.yaml`
+
+`amgi.yaml` is the only config file for a deck.
+
+It defines:
+
+- `schema`: currently `amgi_v1`
+- `name`: Anki deck name
+- `global_tags`: tags applied to all notes
+- `note_schema.required_fields`
+- `note_schema.optional_fields`
+- `cards`: the set of possible card templates
+
+### Dataset Files
+
+Dataset files are normal YAML files with a top-level `notes:` key.
+
+Each note must follow the schema declared in `amgi.yaml`.
+
+Reserved note-level metadata fields must start with `_`.
+
+Current reserved fields include:
+
+- `_tags`: array of note-specific tags
+
+## Card Derivation Model
+
+Amgi is built around the idea that not every note should explode into every
+possible card.
+
+Current behavior:
+
+- exactly one card must be marked `default: true`
+- every note gets that default card
+- additional cards are derived automatically when the note has the front-side
+  fields needed to render that card
+
+This keeps the note as the thing you maintain, while letting one note support
+different recall angles such as:
+
+- recognition
+- reverse recall
+- context recall
+- cloze-style prompts
 
 ## Validation Rules
 
-Amgi currently enforces these rules:
+Amgi currently checks:
 
-- `schema` must be `amgi_v1`
-- `amgi.yaml` must exist in the deck root
-- `note_schema.required_fields` must contain at least one field
-- `cards` must contain at least one card definition
-- exactly one card must have `default: true`
-- field names must use lowerCamelCase and start with a lowercase letter
-- every required field must be present in every note
-- note keys must be declared in `note_schema.required_fields` or `note_schema.optional_fields`, except underscore-prefixed reserved fields such as `_tags`
-- reserved note fields must start with `_`
-- `_tags` must be a string array when present
-- card placeholders must reference declared fields or `FrontSide`
-
-## SSoT Authoring Model
-
-Amgi is designed around three layers:
-
-- capture layer: jot down unfamiliar items encountered in real problems or reading
-- knowledge layer: normalize them into a clean `notes:` dataset
-- card layer: derive only the review angles that match the actual failure mode
-
-The goal is not to generate as many cards as possible. The goal is to stop
-repeating the same mistake.
-
-This is why Amgi treats the dataset as the source of truth and cards as
-derivations:
-
-- one word, expression, or concept should be maintained once
-- cards should be added because of a failure pattern, not because more is better
-- not every note should generate every card type
-
-Typical expansion patterns:
-
-- reading failure -> add a reading-focused card
-- context failure -> add an example or cloze card
-- confusable items -> add a comparison card
-
-This also means deck templates should differ by exam.
-
-- JLPT decks often need reading, kanji, meaning, and short context
-- TOEIC decks often need collocation, expression usage, and test-style context
+- `amgi.yaml` exists at the deck root
+- `schema` is `amgi_v1`
+- `note_schema.required_fields` is not empty
+- `cards` is not empty
+- exactly one card has `default: true`
+- field names start with a lowercase letter and use lower camel case
+- every note includes all required fields
+- notes do not contain undeclared fields except underscore-prefixed reserved
+  fields
+- `_tags`, when present, is an array of strings
+- card placeholders reference declared fields or `FrontSide`
+- repository YAML files are valid YAML syntax through `bin/lint-yaml`
 
 ## Commands
 
-Development commands:
-
-```bash
-nix develop -c ruby bin/lint-yaml
-nix develop -c bin/lint
-nix develop -c bin/format
-nix develop -c bin/test
-nix develop -c bin/check
-```
-
-Application commands:
+### Main Commands
 
 ```bash
 nix develop -c bin/amgi lint <deck_dir>
@@ -190,30 +223,50 @@ nix develop -c bin/amgi build <deck_dir>
 nix develop -c bin/amgi build <deck_dir> --out <output_dir>
 ```
 
-Optional local GUI smoke test with Anki Desktop:
+### Development Commands
+
+```bash
+nix develop -c ruby bin/lint-yaml
+nix develop -c bin/lint
+nix develop -c bin/test
+nix develop -c bin/check
+nix develop -c bin/format
+```
+
+### Optional Anki Smoke Test
+
+If Anki Desktop is installed locally, you can run:
 
 ```bash
 nix develop -c bin/smoke-import-anki path/to/deck.apkg
 ```
 
-This command is intentionally separate from `bin/check`. It assumes:
+This launches Anki with a temporary profile, imports the deck, checks the deck
+and note/card counts, and then quits.
 
-- Anki Desktop is installed locally
-- Anki is not already running
-- the machine can launch the GUI app
+## Current Scope
 
-By default it looks for `/Applications/Anki.app`, launches Anki with a temporary
-base/profile, imports the provided `.apkg`, verifies the imported deck and
-note/card counts, and then quits Anki.
+Amgi currently supports:
+
+- one deck per directory
+- one `note_schema` per deck
+- YAML-based dataset authoring
+- minimal `.apkg` export with `collection.anki2` and `media`
+
+Amgi does not yet support:
+
+- media asset packaging
+- multiple note schemas in one deck
+- repository-wide deck discovery
+- full Anki metadata compatibility beyond the current minimal export
 
 ## Project Layout
 
 ```text
-bin/        executable entrypoints for development and CLI usage
+bin/        CLI and development scripts
 lib/        application, domain, infrastructure, and interface code
-spec/       RSpec tests and fixture decks
-flake.nix   Nix development shell definition
-Gemfile     Ruby dependencies
-TODO.md     implementation tracking and verification checklist
-AGENTS.md   working instructions for future coding sessions
+spec/       automated tests and fixture decks
+JLPT/       example real-world deck content
+TODO.md     implementation tracking
+AGENTS.md   coding-session instructions for contributors
 ```
