@@ -2,15 +2,21 @@
 
 Goal-oriented Anki deck builder.
 
-The current milestone is not the deck builder itself yet. This repository is
-bootstrapped with a reproducible Ruby development environment, a quality
-harness, and lightweight working rules so the actual deck-building features can
-be developed with TDD from the next step onward.
+The repository now includes the first working v1 slice:
+
+- load deck YAML
+- lint schema and note data
+- build a minimal `.apkg`
+
+The implementation is intentionally small. It focuses on a stable schema,
+repeatable local development, and TDD-friendly iteration speed.
 
 ## Current Result
 
 - `nix develop -c` provides the Ruby development environment.
 - `bin/lint`, `bin/format`, `bin/test`, `bin/check` are ready.
+- `bin/amgi lint <deck_dir>` validates a deck.
+- `bin/amgi build <deck_dir> [--out DIR]` writes a minimal `.apkg`.
 - Ruby quality checks use `RuboCop + RSpec`.
 - The repository is prepared for small, test-first iterations.
 
@@ -28,6 +34,13 @@ Run each tool separately:
 nix develop -c bin/lint
 nix develop -c bin/format
 nix develop -c bin/test
+```
+
+Lint and build a deck:
+
+```bash
+nix develop -c bin/amgi lint spec/fixtures/decks/toeic
+nix develop -c bin/amgi build spec/fixtures/decks/toeic
 ```
 
 ## Development Workflow
@@ -55,33 +68,28 @@ This repository follows a small-loop workflow:
 
 ```text
 bin/        executable development commands
+exe/        Ruby CLI entry point
 lib/        Ruby entry points and application code
 spec/       RSpec tests
 flake.nix   Nix development shell
 Gemfile     Ruby dependencies for local tooling
 ```
 
-## Next Milestone
+## v1 Schema
 
-The next implementation milestone is the actual deck builder:
-
-1. Load deck YAML.
-2. Lint schema and note data.
-3. Build `.apkg`.
-
-The intended v1 schema direction is:
+`build.yaml`
 
 ```yaml
 schema: amgi_v1
 name: JLPT_Vocabulary
 required_fields:
-  - Target
-  - Meaning
+  - target
+  - meaning
 optional_fields:
-  - Reading
-  - Context
-  - Translation
-  - Memo
+  - reading
+  - context
+  - translation
+  - memo
 global_tags:
   - JLPT
 templates:
@@ -94,5 +102,28 @@ templates:
       <div class="meaning">{{Meaning}}</div>
 ```
 
-That schema is documented here as the current design target, not as a completed
-feature.
+`notes` YAML
+
+```yaml
+notes:
+  - Target: comply
+    Meaning: 준수하다, 따르다
+    Example: All employees must comply with the rules.
+    BlankExample: All employees must {} with the rules.
+    tags:
+      - Part5
+```
+
+Rules:
+
+- `schema` must be `amgi_v1`
+- `required_fields` are mandatory in every note
+- `optional_fields` may be omitted
+- note keys outside declared fields and `tags` are rejected
+- template placeholders must reference declared fields or `FrontSide`
+
+## Current Limits
+
+- media files are not supported yet
+- output `.apkg` is a minimal package, not a feature-complete Anki exporter
+- multi-deck discovery and multiple note types are not implemented yet
