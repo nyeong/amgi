@@ -171,7 +171,7 @@ module Amgi
       end
 
       def note_row(config:, note:, note_id:, model_id:, guid:, timestamp:)
-        tags = merged_tags(config.global_tags, note['tags'])
+        tags = merged_tags(config.global_tags, note['_tags'])
         joined_fields = config.all_fields.map { |field| note[field].to_s }.join("\x1F")
         sort_field = note[config.required_fields.first].to_s
 
@@ -364,7 +364,7 @@ module Amgi
 
       def note_signature(config, note)
         field_signature = config.all_fields.map { |field| "#{field}=#{note[field]}" }
-        meta_signature = ["tags=#{Array(note['tags']).join(',')}"]
+        meta_signature = ["_tags=#{Array(note['_tags']).join(',')}"]
 
         (field_signature + meta_signature).join('|')
       end
