@@ -8,6 +8,38 @@ RSpec.describe 'amgi CLI' do
   let(:executable) { File.join(root, 'bin', 'amgi') }
   let(:deck_path) { File.join(root, 'spec', 'fixtures', 'decks', 'toeic') }
   let(:invalid_path) { File.join(root, 'spec', 'fixtures', 'decks', 'invalid_missing_required') }
+  let(:help_lines) do
+    [
+      'Usage:',
+      'amgi help',
+      'amgi lint <deck_dir>',
+      'amgi build <deck_dir> [--out <output_dir>]'
+    ]
+  end
+
+  it 'prints help when requested explicitly' do
+    stdout, stderr, status = Open3.capture3(executable, 'help', chdir: root)
+
+    expect(status.exitstatus).to eq(0)
+    expect(stderr).not_to include('Unknown command')
+    help_lines.each { |line| expect(stdout).to include(line) }
+  end
+
+  it 'prints help when requested with --help' do
+    stdout, stderr, status = Open3.capture3(executable, '--help', chdir: root)
+
+    expect(status.exitstatus).to eq(0)
+    expect(stderr).not_to include('Unknown command')
+    help_lines.each { |line| expect(stdout).to include(line) }
+  end
+
+  it 'prints help when no command is given' do
+    stdout, stderr, status = Open3.capture3(executable, chdir: root)
+
+    expect(status.exitstatus).to eq(0)
+    expect(stderr).not_to include('Unknown command')
+    help_lines.each { |line| expect(stdout).to include(line) }
+  end
 
   it 'lints a valid deck successfully' do
     stdout, stderr, status = Open3.capture3(executable, 'lint', deck_path, chdir: root)

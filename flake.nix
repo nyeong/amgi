@@ -73,9 +73,10 @@
               cat > $out/bin/amgi <<EOF
               #!${pkgs.bash}/bin/bash
               set -euo pipefail
-              export BUNDLE_GEMFILE="$out/Gemfile"
               export BUNDLE_IGNORE_CONFIG=1
-              exec ${env}/bin/bundle exec ${ruby}/bin/ruby "$out/libexec/amgi" "\$@"
+              export GEM_HOME="${env}/${ruby.gemPath}"
+              export GEM_PATH="${env}/${ruby.gemPath}"
+              exec ${ruby}/bin/ruby "$out/libexec/amgi" "\$@"
               EOF
               chmod +x $out/bin/amgi
             '';
