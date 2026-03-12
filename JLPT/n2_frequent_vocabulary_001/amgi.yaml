@@ -191,6 +191,10 @@ cards:
       {{FrontSide}}
       <hr id=answer>
       <div class="section">
+        <div class="section-label">Reading</div>
+        <div class="reading">{{reading}}</div>
+      </div>
+      <div class="section">
         <div class="section-label">Meaning</div>
         <div class="meaning">{{meaning}}</div>
       </div>
@@ -234,10 +238,8 @@ cards:
       <div class="section">
         <div class="section-label">Target</div>
         <div class="sheet-header">
-          <input id="show-reading-reverse-back" class="furigana-check" type="checkbox">
-          <label class="furigana-toggle" for="show-reading-reverse-back">✓ 후리가나</label>
           <div class="target">{{target}}</div>
-          <div class="reading reading-toggle-target">{{reading}}</div>
+          <div class="reading">{{reading}}</div>
         </div>
       </div>
       <div class="section">
