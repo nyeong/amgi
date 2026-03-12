@@ -1,11 +1,11 @@
 notes:
-  - Target: comply
-    Meaning: 준수하다, 따르다
-    Example: All employees must comply with the rules.
-    BlankExample: All employees must {} with the rules.
+  - target: comply
+    meaning: 준수하다, 따르다
+    example: All employees must comply with the rules.
+    blankExample: All employees must {} with the rules.
     tags:
       - Part5
-  - Target: invoice
-    Meaning: 송장, 청구서
+  - target: invoice
+    meaning: 송장, 청구서
     tags:
       - Part7

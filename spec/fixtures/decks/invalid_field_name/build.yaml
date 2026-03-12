@@ -1,0 +1,9 @@
+schema: amgi_v1
+name: Broken_Field_Name
+required_fields:
+  - Target
+optional_fields: []
+templates:
+  - name: Card 1
+    front: "{{Target}}"
+    back: "{{FrontSide}}"

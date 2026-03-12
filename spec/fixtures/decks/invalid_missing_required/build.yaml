@@ -1,11 +1,11 @@
 schema: amgi_v1
 name: Broken_Deck
 required_fields:
-  - Target
-  - Meaning
+  - target
+  - meaning
 optional_fields:
-  - Example
+  - example
 templates:
   - name: Card 1
-    front: "{{Target}}"
-    back: "{{Meaning}}"
+    front: "{{target}}"
+    back: "{{meaning}}"
