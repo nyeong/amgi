@@ -32,6 +32,8 @@ jobs:
         env:
           REPOSITORY: ${{ github.repository }}
           SERVER_URL: ${{ github.server_url }}
+          EVENT_CLONE_URL: ${{ github.event.repository.clone_url }}
+          EVENT_HTML_URL: ${{ github.event.repository.html_url }}
           FETCH_SHA: ${{ github.sha }}
           AUTH_TOKEN: ${{ github.token }}
         run: |
@@ -41,7 +43,14 @@ jobs:
           # cannot reach the forwarded loopback endpoint.
           git config --global --add safe.directory "$PWD"
 
-          repo_url="${SERVER_URL}/${REPOSITORY}.git"
+          repo_url="${EVENT_CLONE_URL:-}"
+          if [[ -z "$repo_url" ]]; then
+            repo_url="${EVENT_HTML_URL:-${SERVER_URL}/${REPOSITORY}}"
+          fi
+          case "$repo_url" in
+            *.git) ;;
+            *) repo_url="${repo_url}.git" ;;
+          esac
           auth_args=()
 
           if [[ -n "${AUTH_TOKEN:-}" ]]; then
@@ -49,7 +58,7 @@ jobs:
             auth_args=(-c "http.extraHeader=Authorization: Basic ${basic_auth}")
           fi
 
-          git init .
+          git init -b main .
           git remote add origin "$repo_url"
           git "${auth_args[@]}" fetch --depth=1 --no-tags origin "$FETCH_SHA"
           git checkout --detach FETCH_HEAD
