@@ -232,22 +232,44 @@ module Amgi
         config = validated_deck.deck_source.config
         db = SQLite3::Database.new(collection_path)
 
-        ANKI_COLLECTION_SCHEMA.each { |statement| db.execute(statement) }
-        db.execute(
-          'INSERT INTO col VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-          collection_row(config)
-        )
-        note_rows.each do |row|
-          db.execute('INSERT INTO notes VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', row)
-        end
-        card_rows.each do |row|
-          db.execute(
-            'INSERT INTO cards VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-            row
-          )
+        configure_build_database(db)
+        db.transaction do
+          ANKI_COLLECTION_SCHEMA.each { |statement| db.execute(statement) }
+          insert_collection_row(db, config)
+          insert_note_rows(db, note_rows)
+          insert_card_rows(db, card_rows)
         end
       ensure
         db&.close
+      end
+
+      def configure_build_database(db)
+        db.execute('PRAGMA journal_mode = MEMORY')
+        db.execute('PRAGMA synchronous = OFF')
+        db.execute('PRAGMA temp_store = MEMORY')
+      end
+
+      def insert_collection_row(db, config)
+        statement = db.prepare('INSERT INTO col VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)')
+        statement.execute(*collection_row(config))
+      ensure
+        statement&.close
+      end
+
+      def insert_note_rows(db, note_rows)
+        statement = db.prepare('INSERT INTO notes VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)')
+        note_rows.each { |row| statement.execute(*row) }
+      ensure
+        statement&.close
+      end
+
+      def insert_card_rows(db, card_rows)
+        statement = db.prepare(
+          'INSERT INTO cards VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+        )
+        card_rows.each { |row| statement.execute(*row) }
+      ensure
+        statement&.close
       end
 
       def collection_row(config)

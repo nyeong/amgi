@@ -38,6 +38,7 @@ module Amgi
         end
 
         def lint(deck_path)
+          load_lint_dependencies
           load_result = Application::LoadDeck.call(deck_path)
           return print_errors(load_result.errors) unless load_result.success?
 
@@ -49,6 +50,7 @@ module Amgi
         end
 
         def build(deck_path, args)
+          load_build_dependencies
           output_path = parse_output_path(args)
           result = Application::BuildDeck.call(deck_path, output_path: output_path, cwd: Dir.pwd)
           return print_errors(result.errors) unless result.success?
@@ -69,6 +71,30 @@ module Amgi
         def print_errors(errors)
           Array(errors).each { |error| warn error }
           1
+        end
+
+        def load_lint_dependencies
+          return if defined?(Application::LoadDeck) && defined?(Application::LintDeck)
+
+          require_relative '../../application/result'
+          require_relative '../../domain/build_config'
+          require_relative '../../domain/deck_source'
+          require_relative '../../domain/note_source'
+          require_relative '../../domain/note_schema'
+          require_relative '../../domain/template'
+          require_relative '../../infrastructure/yaml_deck_loader'
+          require_relative '../../application/load_deck'
+          require_relative '../../application/lint_deck'
+        end
+
+        def load_build_dependencies
+          return if defined?(Application::BuildDeck)
+
+          load_lint_dependencies
+          require_relative '../../domain/build_artifact'
+          require_relative '../../infrastructure/furigana_formatter'
+          require_relative '../../infrastructure/apkg_builder'
+          require_relative '../../application/build_deck'
         end
       end
     end
