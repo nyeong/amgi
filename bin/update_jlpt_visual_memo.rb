@@ -94,7 +94,7 @@ TYPE_LABELS = {
   "会意兼指事" => "회의겸지사자"
 }.freeze
 
-TARGET_LINE = /^  (?:"(.+)"|([^:]+)):\s*$/.freeze
+TARGET_LINE = /^  - target: (?:"(.+)"|(.+))\s*$/.freeze
 MEMO_START_LINE = /^    memo: \|$/.freeze
 VISUAL_LINE = /^      \[1차원\/시각\]/.freeze
 
@@ -258,8 +258,8 @@ end
 
 def note_lines_by_target(path, dictionary, ids, cache)
   notes = YAML.load_file(path).fetch("notes")
-  notes.to_h do |target, note|
-    [target, visual_line_for(note.merge("target" => target), dictionary, ids, cache)]
+  notes.to_h do |note|
+    [note.fetch("target"), visual_line_for(note, dictionary, ids, cache)]
   end
 end
 
@@ -291,7 +291,9 @@ ids = load_ids(IDS_PATH)
 cache = load_cache(KANJIPEDIA_CACHE_PATH)
 yaml_files = Dir[DECK_DIR.join("*.yaml")].reject { |path| path.end_with?('amgi.yaml') }.sort
 unique_characters = yaml_files.flat_map do |file|
-  YAML.load_file(file).fetch("notes").keys.flat_map { |target| target.scan(/\p{Han}/) }
+  YAML.load_file(file).fetch("notes").flat_map do |note|
+    note.fetch("target").scan(/\p{Han}/)
+  end
 end.uniq.reject { |character| character == "々" }
 
 unique_characters.each_with_index do |character, index|

@@ -45,6 +45,7 @@ module Amgi
           schema: data.fetch('schema'),
           name: data.fetch('name'),
           note_schema: Domain::NoteSchema.new(
+            id: note_schema.fetch('id'),
             required_fields: Array(note_schema.fetch('required_fields')),
             optional_fields: Array(note_schema.fetch('optional_fields'))
           ),
@@ -78,25 +79,21 @@ module Amgi
       def normalize_notes(source_path, notes)
         return [] if notes.nil?
 
-        unless notes.is_a?(Hash)
-          raise KeyError, "#{source_path}: `notes` must be a mapping keyed by target"
+        unless notes.is_a?(Array)
+          raise KeyError, "#{source_path}: `notes` must be a list of note mappings"
         end
 
-        notes.map do |target, attributes|
-          normalize_note(source_path, target, attributes)
+        notes.map.with_index do |note, index|
+          normalize_note(source_path, note, index)
         end
       end
 
-      def normalize_note(source_path, target, attributes)
-        unless attributes.nil? || attributes.is_a?(Hash)
-          raise KeyError, "#{source_path}: note `#{target}` must be a mapping"
+      def normalize_note(source_path, note, index)
+        unless note.is_a?(Hash)
+          raise KeyError, "#{source_path}:note##{index + 1} must be a mapping"
         end
 
-        if attributes&.key?('target')
-          raise KeyError, "#{source_path}: note `#{target}` must not redefine `target` in the body"
-        end
-
-        (attributes || {}).merge('target' => target.to_s)
+        note.transform_keys(&:to_s)
       end
     end
   end

@@ -1,17 +1,13 @@
 schema: amgi_v1
-name: StableIdentity
-global_tags: []
+name: InvalidNoteScalar
 note_schema:
   id: "{{target}}"
   required_fields:
     - target
     - meaning
-  optional_fields:
-    - memo
+  optional_fields: []
 cards:
   - name: Recall Meaning
     default: true
     front: "{{target}}"
-    back: |
-      {{meaning}}
-      <div>{{memo}}</div>
+    back: "{{meaning}}"

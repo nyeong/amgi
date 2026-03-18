@@ -65,4 +65,20 @@ RSpec.describe Amgi::Application::LintDeck do
     expect(result).not_to be_success
     expect(result.errors.join("\n")).to include('Unknown dataset `_cards`: Reverse')
   end
+
+  it 'rejects duplicate note identities according to note_schema.id' do
+    loaded = Amgi::Application::LoadDeck.call(fixture_path('invalid_duplicate_note_id'))
+    result = described_class.call(loaded.value)
+
+    expect(result).not_to be_success
+    expect(result.errors.join("\n")).to include('Duplicate note id `pain-original`')
+  end
+
+  it 'rejects unknown placeholders in note_schema.id' do
+    loaded = Amgi::Application::LoadDeck.call(fixture_path('invalid_note_id_placeholder'))
+    result = described_class.call(loaded.value)
+
+    expect(result).not_to be_success
+    expect(result.errors.join("\n")).to include('Unknown note id placeholder(s): unknownField')
+  end
 end

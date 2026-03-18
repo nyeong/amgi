@@ -76,10 +76,11 @@ nix run github:nyeong/amgi -- lint JLPT/n2_frequent_vocabulary_001
 JLPT 시험을 위해 단어를 암기해야한다고 합시다:
 
 1. 무엇을 어떤 정보와 함께 외울지 정합니다. 한자 단어를 뜻, 후리가나, 예문, 부수 정보와 함께 외운다고 합시다.
-2. 그 구조를 `amgi.yaml`의 `note_schema.required_fields`, `note_schema.optional_fields`에 정의합니다. 
+2. 그 구조를 `amgi.yaml`의 `note_schema.id`, `note_schema.required_fields`, `note_schema.optional_fields`에 정의합니다.
    - 자세한 규칙은 [Amgi v1 Schema](docs/amgi-v1-schema.md)를 참고하세요.
 3. 스키마에 맞는 데이터셋을 YAML로 수집합니다.
    - 대충 단어장 사진으로 찍은 후에 Codex에게 읽도록 시키고 `amgi.yaml` 구조에 맞게 yaml로 뽑아달라고 해도 잘 됩니다.
+   - 예를 들면 `notes:` 아래에 `- target: "痛み"` 같은 항목들을 두는 형태입니다.
 4. 같은 스키마를 바탕으로 Anki에서 어떤 카드가 생성될지 정의합니다.
    - 자세한 카드 생성 규칙은 [Amgi v1 Schema](docs/amgi-v1-schema.md)를 참고하세요.
    - 대충 Codex한테 까리하게 만들어달라고 하면 잘 해줍니다.

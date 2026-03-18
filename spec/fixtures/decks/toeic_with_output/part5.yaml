@@ -1,13 +1,13 @@
 _cards:
   - Cloze Example
 notes:
-  comply:
+  - target: comply
     meaning: 준수하다, 따르다
     example: All employees must comply with the rules.
     blankExample: All employees must {} with the rules.
     _tags:
       - Part5
-  invoice:
+  - target: invoice
     meaning: 송장, 청구서
     _tags:
       - Part7

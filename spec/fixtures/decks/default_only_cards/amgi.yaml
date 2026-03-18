@@ -2,6 +2,7 @@ schema: amgi_v1
 name: DefaultOnlyCards
 global_tags: []
 note_schema:
+  id: "{{target}}"
   required_fields:
     - target
     - meaning

@@ -177,6 +177,55 @@ RSpec.describe Amgi::Application::BuildDeck do
     end
   end
 
+  it 'changes note and card identities when note_schema.id changes output' do
+    original_deck_path = File.expand_path(
+      '../fixtures/decks/configurable_identity_original',
+      __dir__
+    )
+    updated_deck_path = File.expand_path(
+      '../fixtures/decks/configurable_identity_updated',
+      __dir__
+    )
+
+    Dir.mktmpdir do |dir|
+      original = described_class.call(
+        original_deck_path,
+        output_path: File.join(dir, 'original.apkg')
+      )
+      updated = described_class.call(updated_deck_path, output_path: File.join(dir, 'updated.apkg'))
+
+      original_collection = extract_collection(
+        original.value.output_path,
+        dir,
+        'original-custom.anki2'
+      )
+      updated_collection = extract_collection(
+        updated.value.output_path,
+        dir,
+        'updated-custom.anki2'
+      )
+
+      original_db = SQLite3::Database.new(original_collection)
+      updated_db = SQLite3::Database.new(updated_collection)
+
+      original_note = original_db.get_first_row('SELECT id, guid FROM notes')
+      updated_note = updated_db.get_first_row('SELECT id, guid FROM notes')
+      original_card_id = original_db.get_first_value('SELECT id FROM cards')
+      updated_card_id = updated_db.get_first_value('SELECT id FROM cards')
+
+      aggregate_failures do
+        expect(original).to be_success
+        expect(updated).to be_success
+        expect(original_note[0]).not_to eq(updated_note[0])
+        expect(original_note[1]).not_to eq(updated_note[1])
+        expect(original_card_id).not_to eq(updated_card_id)
+      end
+    ensure
+      original_db&.close
+      updated_db&.close
+    end
+  end
+
   it 'builds only default cards when a dataset file does not opt into extra cards' do
     deck_path = File.expand_path('../fixtures/decks/default_only_cards', __dir__)
 

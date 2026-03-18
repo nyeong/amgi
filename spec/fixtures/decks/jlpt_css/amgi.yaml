@@ -11,6 +11,7 @@ css: |
 global_tags:
   - JLPT
 note_schema:
+  id: "{{target}}"
   required_fields:
     - target
     - meaning

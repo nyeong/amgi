@@ -1,4 +1,4 @@
 _cards: Recall Meaning
 notes:
-  pain:
+  - target: pain
     meaning: "통증"

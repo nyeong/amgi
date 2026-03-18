@@ -14,6 +14,7 @@ RSpec.describe Amgi::Application::LoadDeck do
     expect(deck.config.name).to eq('TOEIC_Vocabulary')
     expect(deck.config.css).to be_nil
     expect(deck.config.output).to be_nil
+    expect(deck.config.note_schema.id).to eq('{{target}}')
     expect(deck.config.note_schema.required_fields).to eq(%w[target meaning])
     expect(deck.config.note_schema.optional_fields).to eq(%w[example blankExample])
     expect(deck.config.required_fields).to eq(%w[target meaning])
@@ -54,24 +55,24 @@ RSpec.describe Amgi::Application::LoadDeck do
     end
   end
 
-  context 'when a dataset file uses list-style notes' do
-    let(:deck_path) { File.expand_path('../fixtures/decks/invalid_notes_list', __dir__) }
+  context 'when a dataset file uses mapping-style notes' do
+    let(:deck_path) { File.expand_path('../fixtures/decks/invalid_notes_mapping', __dir__) }
 
     it 'returns a load error' do
       expect(result).not_to be_success
       expect(result.errors).to include(
-        "#{File.join(deck_path, 'cards.yaml')}: `notes` must be a mapping keyed by target"
+        "#{File.join(deck_path, 'cards.yaml')}: `notes` must be a list of note mappings"
       )
     end
   end
 
-  context 'when a dataset note redefines target in the body' do
-    let(:deck_path) { File.expand_path('../fixtures/decks/invalid_redefined_target', __dir__) }
+  context 'when a dataset note is not a mapping' do
+    let(:deck_path) { File.expand_path('../fixtures/decks/invalid_note_scalar', __dir__) }
 
     it 'returns a load error' do
       expect(result).not_to be_success
       expect(result.errors).to include(
-        "#{File.join(deck_path, 'cards.yaml')}: note `pain` must not redefine `target` in the body"
+        "#{File.join(deck_path, 'cards.yaml')}:note#1 must be a mapping"
       )
     end
   end

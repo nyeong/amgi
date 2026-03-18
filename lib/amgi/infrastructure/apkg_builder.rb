@@ -155,7 +155,11 @@ module Amgi
         validated_deck.deck_source.note_sources.each do |note_source|
           note_source.notes.each do |note|
             active_cards = active_cards(config, note_source, note)
-            note_id, guid = note_identity(note: note, deck_seed: deck_seed)
+            note_id, guid = note_identity(
+              note: note,
+              note_schema: config.note_schema,
+              deck_seed: deck_seed
+            )
             note_rows << note_row(
               config: config,
               note: note,
@@ -431,8 +435,8 @@ module Amgi
         end
       end
 
-      def note_identity(note:, deck_seed:)
-        note_key = note.fetch('target').to_s
+      def note_identity(note:, note_schema:, deck_seed:)
+        note_key = note_schema.render_id(note)
         note_id = deterministic_integer("note:#{deck_seed}:#{note_key}")
         guid = Digest::SHA1.hexdigest("guid:#{deck_seed}:#{note_key}")[0, 20]
         [note_id, guid]

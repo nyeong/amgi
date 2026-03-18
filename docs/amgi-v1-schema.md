@@ -11,6 +11,7 @@ global_tags:
   - N2
 
 note_schema:
+  id: "{{target}}"
   required_fields:
     - target
     - reading
@@ -70,7 +71,8 @@ Tags applied to all notes in the deck.
 
 Defines the allowed note fields.
 
-- `required_fields`: fields every note must have. `target` must be included and is populated from each note key.
+- `id`: a template used to derive the stable note identity and to lint uniqueness
+- `required_fields`: fields every note must have
 - `optional_fields`: fields that may appear on notes
 
 ### `cards`
@@ -91,8 +93,7 @@ Card generation rules:
 
 ## Dataset Files
 
-Dataset files are YAML files with a top-level `notes:` mapping.
-Each note key is the stable `target` and is injected into the note fields automatically.
+Dataset files are YAML files with a top-level `notes:` list.
 They may also define a root-level `_cards` string array to opt into extra non-default cards for that file.
 
 ```yaml
@@ -100,7 +101,7 @@ _cards:
   - "Cloze Context"
 
 notes:
-  "環境":
+  - target: "環境"
     reading: "かんきょう"
     meaning: "environment, conditions"
     context: "環境を守る"
@@ -116,7 +117,7 @@ You can use different card sets per source file. For example:
 ```yaml
 # a.yaml
 notes:
-  "痛み":
+  - target: "痛み"
     reading: "いたみ"
     meaning: "pain"
 ```
@@ -127,7 +128,7 @@ _cards:
   - "Recall Target"
 
 notes:
-  "症状":
+  - target: "症状"
     reading: "しょうじょう"
     meaning: "symptom"
 ```
@@ -142,9 +143,10 @@ All other fields must be declared in `amgi.yaml`.
 
 Identity rules:
 
-- Amgi uses the note key, which is the `target`, as the stable note identity inside a deck
-- changing `meaning`, `memo`, `context`, or tags does not create a new note
-- renaming the note key creates a new note identity
+- Amgi renders `note_schema.id` for each note and uses that value as the stable note identity inside a deck
+- lint fails when two notes render the same note id
+- `id: "{{target}}"` keeps identity stable when other fields change
+- `id: "{{target}}-{{memo}}"` makes `memo` part of the identity, so changing `memo` creates a new note identity
 
 Current reserved fields:
 

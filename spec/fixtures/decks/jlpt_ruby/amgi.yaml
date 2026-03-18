@@ -1,6 +1,7 @@
 schema: amgi_v1
 name: JLPT_Ruby_Fixture
 note_schema:
+  id: "{{target}}"
   required_fields:
     - target
     - reading

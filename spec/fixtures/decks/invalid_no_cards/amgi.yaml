@@ -1,6 +1,7 @@
 schema: amgi_v1
 name: Broken_No_Cards
 note_schema:
+  id: "{{target}}"
   required_fields:
     - target
   optional_fields: []

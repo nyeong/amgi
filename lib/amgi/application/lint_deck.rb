@@ -33,6 +33,7 @@ module Amgi
       def validate_schema(config, errors)
         errors << 'Unsupported schema. Expected `amgi_v1`.' unless config.schema == 'amgi_v1'
         errors << 'Deck name is required.' if blank_string?(config.name)
+        validate_note_id_schema(config, errors)
         errors << 'At least one required field is required.' if config.required_fields.empty?
         errors << 'At least one card is required.' if config.cards.empty?
         validate_css(config, errors)
@@ -43,6 +44,17 @@ module Amgi
         return if overlap.empty?
 
         errors << "Fields cannot be both required and optional: #{overlap.join(', ')}"
+      end
+
+      def validate_note_id_schema(config, errors)
+        note_id = config.note_schema.id
+        errors << '`note_schema.id` is required.' if note_id.nil?
+        errors << '`note_schema.id` must be a string.' unless note_id.nil? || note_id.is_a?(String)
+
+        unknown_tokens = config.note_schema.id_fields - config.all_fields
+        return if unknown_tokens.empty?
+
+        errors << "Unknown note id placeholder(s): #{unknown_tokens.join(', ')}"
       end
 
       def validate_css(config, errors)
@@ -80,10 +92,12 @@ module Amgi
       end
 
       def validate_note_sources(config, note_sources, errors)
+        seen_note_ids = {}
+
         note_sources.each do |note_source|
           validate_note_source(config, note_source, errors)
           note_source.notes.each_with_index do |note, index|
-            validate_note(config, note_source.source_path, note, index, errors)
+            validate_note(config, note_source.source_path, note, index, seen_note_ids, errors)
           end
         end
       end
@@ -102,7 +116,7 @@ module Amgi
         )
       end
 
-      def validate_note(config, source_path, note, index, errors)
+      def validate_note(config, source_path, note, index, seen_note_ids, errors)
         unless note.is_a?(Hash)
           errors << "#{source_path}:note##{index + 1} must be a mapping"
           return
@@ -121,12 +135,31 @@ module Amgi
         end
 
         validate_tags(note, source_path, index, errors)
+        validate_note_identity(config, note, source_path, index, seen_note_ids, errors)
       end
 
       def validate_tags(note, source_path, index, errors)
         return if note['_tags'].nil? || string_array?(note['_tags'])
 
         errors << "#{source_path}:note##{index + 1} `_tags` must be a string array"
+      end
+
+      def validate_note_identity(config, note, source_path, index, seen_note_ids, errors)
+        note_id = config.note_schema.render_id(note)
+
+        if blank_string?(note_id)
+          errors << "#{source_path}:note##{index + 1} Rendered note id must not be blank"
+          return
+        end
+
+        return unless seen_note_ids.key?(note_id)
+
+        errors << (
+          "#{source_path}:note##{index + 1} Duplicate note id `#{note_id}` " \
+          "(already used by #{seen_note_ids.fetch(note_id)})"
+        )
+      ensure
+        seen_note_ids[note_id] ||= "#{source_path}:note##{index + 1}" if note_id
       end
 
       def blank_string?(value)

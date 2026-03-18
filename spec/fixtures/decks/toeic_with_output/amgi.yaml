@@ -4,6 +4,7 @@ output: build/toeic-from-config.apkg
 global_tags:
   - TOEIC
 note_schema:
+  id: "{{target}}"
   required_fields:
     - target
     - meaning

@@ -84,7 +84,8 @@ vocabulary.
 1. Decide what each note should contain, such as the word, meaning, furigana,
    example sentences, and extra explanation.
 2. Define that structure in `amgi.yaml` using
-   `note_schema.required_fields` and `note_schema.optional_fields`.
+   `note_schema.id`, `note_schema.required_fields`, and
+   `note_schema.optional_fields`.
 3. Collect the dataset as YAML.
    - Since the source format is text-based, it fits well with workflows such as
      extracting text from photos and asking an LLM to structure it.
@@ -92,7 +93,7 @@ vocabulary.
 
 ```yaml
 notes:
-  "痛み":
+  - target: "痛み"
     meaning: "pain"
 ```
 

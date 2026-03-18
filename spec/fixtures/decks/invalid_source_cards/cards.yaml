@@ -1,5 +1,5 @@
 _cards:
   - Reverse
 notes:
-  pain:
+  - target: pain
     meaning: "통증"

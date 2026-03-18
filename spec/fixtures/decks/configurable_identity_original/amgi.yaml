@@ -1,13 +1,17 @@
 schema: amgi_v1
-name: InvalidRedefinedTarget
+name: ConfigurableIdentity
 global_tags: []
 note_schema:
+  id: "{{target}}-{{memo}}"
   required_fields:
     - target
     - meaning
+    - memo
   optional_fields: []
 cards:
   - name: Recall Meaning
     default: true
     front: "{{target}}"
-    back: "{{meaning}}"
+    back: |
+      {{meaning}}
+      <div>{{memo}}</div>

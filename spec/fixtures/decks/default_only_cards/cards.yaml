@@ -1,7 +1,7 @@
 notes:
-  alpha:
+  - target: alpha
     meaning: "A"
     blankExample: "a _"
-  beta:
+  - target: beta
     meaning: "B"
     blankExample: "b _"
