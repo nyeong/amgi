@@ -2,6 +2,7 @@
 
 require 'digest/sha1'
 require 'fileutils'
+require 'json'
 require 'sqlite3'
 require 'tmpdir'
 require 'zip'
