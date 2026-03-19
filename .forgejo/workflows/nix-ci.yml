@@ -1,18 +1,16 @@
 name: nix-ci
 
 on:
-  pull_request:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   checks:
     runs-on:
       - self-hosted
       - nixbox
-    env:
-      NIX_CONFIG: accept-flake-config = true
     steps:
       - name: Checkout
         env:
