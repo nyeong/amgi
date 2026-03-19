@@ -29,6 +29,20 @@ RSpec.describe Amgi::Application::LoadDeck do
     expect(deck.note_sources.first.enabled_cards).to eq(['Cloze Example'])
   end
 
+  it 'ignores root-level dataset `_meta` fields' do
+    expect(result).to be_success
+
+    note_source = result.value.note_sources.find do |source|
+      File.basename(source.source_path) == 'part5.yaml'
+    end
+
+    aggregate_failures do
+      expect(note_source).not_to be_nil
+      expect(note_source.notes.map { |note| note['target'] }).to eq(%w[comply invoice])
+      expect(note_source.enabled_cards).to eq(['Cloze Example'])
+    end
+  end
+
   context 'when amgi.yaml defines an output path' do
     let(:deck_path) { File.expand_path('../fixtures/decks/toeic_with_output', __dir__) }
 

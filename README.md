@@ -41,6 +41,8 @@ underlying note.
 
 If a specific dataset file should produce extra cards, add `_cards:` to that
 file. See the real example in [part5.yaml](examples/toeic/part5.yaml).
+If you want human-only notes about that dataset file, add `_meta:` at the
+root. Amgi ignores `_meta`.
 
 ## Usage
 
@@ -74,6 +76,7 @@ Build output precedence:
    - See [Amgi v1 Schema](docs/amgi-v1-schema.md).
    - See the [example dataset](examples/toeic).
    - Add `_cards:` when that file should emit extra card templates.
+   - Add `_meta:` for a description, source notes, or other file-level metadata that Amgi should ignore.
 3. Build the `.apkg` and import it into Anki.
 
 ## Example Use Case
@@ -92,6 +95,9 @@ vocabulary.
    - Example:
 
 ```yaml
+_meta:
+  description: "Words from lesson 12"
+
 notes:
   - target: "痛み"
     meaning: "pain"

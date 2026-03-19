@@ -36,6 +36,7 @@ flowchart TD
 하나의 학습 항목에서 여러 카드를 만들 수도 있습니다. 예를 들어 외국어 학습에서는 출발어를 보고 도착어를 맞히는 카드와, 도착어를 보고 출발어를 떠올리는 카드를 함께 생성할 수 있습니다.
 
 특정 데이터 파일에서만 추가 카드를 만들고 싶다면 그 파일에 `_cards:`를 적으면 됩니다. 실제 예시는 [part5.yaml](examples/toeic/part5.yaml)을 참고하세요.
+이 YAML 파일 자체에 대한 설명이나 출처 메모를 남기고 싶다면 루트에 `_meta:`를 둘 수 있습니다. Amgi는 `_meta`를 읽지 않습니다.
 
 ## 사용
 
@@ -69,6 +70,7 @@ nix run github:nyeong/amgi -- lint examples/toeic
    - 필드 정의는 [Amgi v1 Schema](docs/amgi-v1-schema.md)를 참고하세요.
    - 예시는 [공개 예시 데이터셋](examples/toeic)을 참고하세요.
    - 특정 파일에서만 추가 카드를 만들고 싶다면 `_cards:`를 함께 적습니다.
+   - 파일 설명, 출처, 작업 메모처럼 Amgi가 무시해야 하는 정보는 `_meta:`에 넣습니다.
 3. 생성: 정의된 카드 규칙에 따라 `.apkg`를 만들고 Anki로 가져옵니다.
 
 ## 활용 예시
@@ -80,7 +82,16 @@ JLPT 시험을 위해 단어를 암기해야한다고 합시다:
    - 자세한 규칙은 [Amgi v1 Schema](docs/amgi-v1-schema.md)를 참고하세요.
 3. 스키마에 맞는 데이터셋을 YAML로 수집합니다.
    - 대충 단어장 사진으로 찍은 후에 Codex에게 읽도록 시키고 `amgi.yaml` 구조에 맞게 yaml로 뽑아달라고 해도 잘 됩니다.
-   - 예를 들면 `notes:` 아래에 `- target: "痛み"` 같은 항목들을 두는 형태입니다.
+   - 예를 들면 아래처럼 `notes:` 아래에 `- target: "痛み"` 같은 항목들을 두는 형태입니다.
+
+```yaml
+_meta:
+  description: "12과 단어들"
+
+notes:
+  - target: "痛み"
+    meaning: "pain"
+```
 4. 같은 스키마를 바탕으로 Anki에서 어떤 카드가 생성될지 정의합니다.
    - 자세한 카드 생성 규칙은 [Amgi v1 Schema](docs/amgi-v1-schema.md)를 참고하세요.
    - 대충 Codex한테 까리하게 만들어달라고 하면 잘 해줍니다.

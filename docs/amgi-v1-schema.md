@@ -95,8 +95,14 @@ Card generation rules:
 
 Dataset files are YAML files with a top-level `notes:` list.
 They may also define a root-level `_cards` string array to opt into extra non-default cards for that file.
+They may define a root-level `_meta` mapping for human-only metadata about that YAML file.
+Amgi ignores `_meta` completely.
 
 ```yaml
+_meta:
+  description: "Vocabulary from chapter 3"
+  source: "textbook page 42"
+
 _cards:
   - "Cloze Context"
 
@@ -152,3 +158,4 @@ Current reserved fields:
 
 - `_tags`: note-specific tags
 - dataset root `_cards`: card names enabled for every note in that source file
+- dataset root `_meta`: freeform human metadata for that YAML file; ignored by Amgi
