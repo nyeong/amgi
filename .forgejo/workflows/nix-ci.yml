@@ -1,0 +1,49 @@
+name: nix-ci
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  checks:
+    runs-on:
+      - self-hosted
+      - nixbox
+    env:
+      NIX_CONFIG: accept-flake-config = true
+    steps:
+      - name: Checkout
+        env:
+          REPOSITORY: ${{ github.repository }}
+          REVISION: ${{ github.sha }}
+          TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          server_url="http://127.0.0.1:5505"
+          remote_url="${server_url}/${REPOSITORY}"
+          auth_header="$(printf 'x-access-token:%s' "${TOKEN}" | base64 | tr -d '\n')"
+
+          git init .
+          git config --global --add safe.directory "$PWD"
+          git remote add origin "${remote_url}"
+          git -c core.hooksPath=/dev/null \
+            -c "http.${server_url}/.extraheader=AUTHORIZATION: basic ${auth_header}" \
+            fetch --no-tags --prune --depth=1 origin "${REVISION}"
+          git -c core.hooksPath=/dev/null checkout --progress --force FETCH_HEAD
+
+      - name: Nix Version
+        run: nix --version
+
+      - name: Build Package
+        run: |
+          set -euo pipefail
+          nix build .#amgi
+
+      - name: Run Checks
+        run: |
+          set -euo pipefail
+          nix flake check
+          nix develop -c bin/check

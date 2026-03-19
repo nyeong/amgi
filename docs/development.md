@@ -5,7 +5,7 @@
 Enter the Nix development shell:
 
 ```bash
-nix develop
+nix --accept-flake-config develop
 ```
 
 This shell provides:
@@ -14,6 +14,10 @@ This shell provides:
 - locked gems from `gemset.nix`
 - the project scripts in `bin/`
 - Git hooks installed through `git-hooks.nix`
+
+The flake advertises the shared binary cache at
+`https://cache.nyeong.me/nixbox`. If you prefer a persistent local setting,
+enable `accept-flake-config = true` in your `nix.conf`.
 
 ## Main Development Commands
 
@@ -46,7 +50,7 @@ nix develop -c bundix
 Run the Nix-level validation suite:
 
 ```bash
-nix flake check
+nix flake check --accept-flake-config
 ```
 
 ## Optional Smoke Test

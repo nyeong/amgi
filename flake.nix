@@ -1,6 +1,15 @@
 {
   description = "Amgi Ruby development environment";
 
+  nixConfig = {
+    extra-substituters = [
+      "https://cache.nyeong.me/nixbox"
+    ];
+    extra-trusted-public-keys = [
+      "nixbox:FoHxaBba7k5YKS1n6UuzXoDqX0H8l+YbVPPDshTmGuc="
+    ];
+  };
+
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     ruby-nix = {

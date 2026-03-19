@@ -61,6 +61,13 @@ nix run github:nyeong/amgi -- lint <deck_dir>
 nix run github:nyeong/amgi -- lint examples/toeic
 ```
 
+If you build from a checkout, let Nix accept this repository's flake config so
+it can use the shared binary cache at `https://cache.nyeong.me/nixbox`:
+
+```bash
+nix --accept-flake-config develop
+```
+
 Build output precedence:
 
 1. `-o <output_path>` (or `--out`)
