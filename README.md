@@ -40,7 +40,7 @@ generate both source-to-target cards and target-to-source cards from the same
 underlying note.
 
 If a specific dataset file should produce extra cards, add `_cards:` to that
-file. See the real example in [verbs.yaml](JLPT/n2_frequent_vocabulary_001/verbs.yaml).
+file. See the real example in [part5.yaml](examples/toeic/part5.yaml).
 
 ## Usage
 
@@ -51,12 +51,12 @@ nix run github:nyeong/amgi -- help
 
 # Build a deck
 nix run github:nyeong/amgi -- build <deck_dir>
-nix run github:nyeong/amgi -- build JLPT/n2_frequent_vocabulary_001
-nix run github:nyeong/amgi -- build JLPT/n2_frequent_vocabulary_001 -o /tmp/jlpt.apkg
+nix run github:nyeong/amgi -- build examples/toeic
+nix run github:nyeong/amgi -- build examples/toeic -o /tmp/toeic.apkg
 
 # Lint a deck
 nix run github:nyeong/amgi -- lint <deck_dir>
-nix run github:nyeong/amgi -- lint JLPT/n2_frequent_vocabulary_001
+nix run github:nyeong/amgi -- lint examples/toeic
 ```
 
 Build output precedence:
@@ -69,10 +69,10 @@ Build output precedence:
 
 1. Plan the deck in `amgi.yaml`.
    - See [Amgi v1 Schema](docs/amgi-v1-schema.md).
-   - See the [JLPT example deck](JLPT/n2_frequent_vocabulary_001/amgi.yaml).
+   - See the [example deck](examples/toeic/amgi.yaml).
 2. Collect the dataset as structured YAML files.
    - See [Amgi v1 Schema](docs/amgi-v1-schema.md).
-   - See the [JLPT example dataset](JLPT/n2_frequent_vocabulary_001).
+   - See the [example dataset](examples/toeic).
    - Add `_cards:` when that file should emit extra card templates.
 3. Build the `.apkg` and import it into Anki.
 
@@ -105,6 +105,7 @@ notes:
 ## Documentation
 
 - [Amgi v1 Schema](docs/amgi-v1-schema.md)
+- [CI Usage](docs/ci-usage.md)
 - [CLI Commands](docs/cli-commands.md)
 - [Dependencies and Installation](docs/dependencies.md)
 - [Development Workflow](docs/development.md)

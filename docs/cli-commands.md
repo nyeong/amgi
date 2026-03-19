@@ -23,7 +23,7 @@ nix run github:nyeong/amgi -- lint <deck_dir>
 Example:
 
 ```bash
-nix run github:nyeong/amgi -- lint JLPT/n2_frequent_vocabulary_001
+nix run github:nyeong/amgi -- lint examples/toeic
 ```
 
 ## Build
@@ -37,7 +37,7 @@ nix run github:nyeong/amgi -- build <deck_dir>
 Example:
 
 ```bash
-nix run github:nyeong/amgi -- build JLPT/n2_frequent_vocabulary_001
+nix run github:nyeong/amgi -- build examples/toeic
 ```
 
 Output path precedence:
@@ -55,5 +55,5 @@ nix run github:nyeong/amgi -- build <deck_dir> -o <output_path>
 Example:
 
 ```bash
-nix run github:nyeong/amgi -- build JLPT/n2_frequent_vocabulary_001 -o /tmp/amgi-output/jlpt.apkg
+nix run github:nyeong/amgi -- build examples/toeic -o /tmp/amgi-output/toeic.apkg
 ```

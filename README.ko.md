@@ -35,7 +35,7 @@ flowchart TD
 
 하나의 학습 항목에서 여러 카드를 만들 수도 있습니다. 예를 들어 외국어 학습에서는 출발어를 보고 도착어를 맞히는 카드와, 도착어를 보고 출발어를 떠올리는 카드를 함께 생성할 수 있습니다.
 
-특정 데이터 파일에서만 추가 카드를 만들고 싶다면 그 파일에 `_cards:`를 적으면 됩니다. 실제 예시는 [verbs.yaml](JLPT/n2_frequent_vocabulary_001/verbs.yaml)을 참고하세요.
+특정 데이터 파일에서만 추가 카드를 만들고 싶다면 그 파일에 `_cards:`를 적으면 됩니다. 실제 예시는 [part5.yaml](examples/toeic/part5.yaml)을 참고하세요.
 
 ## 사용
 
@@ -46,12 +46,12 @@ nix run github:nyeong/amgi -- help
 
 # build
 nix run github:nyeong/amgi -- build <덱_디렉토리>
-nix run github:nyeong/amgi -- build JLPT/n2_frequent_vocabulary_001
-nix run github:nyeong/amgi -- build JLPT/n2_frequent_vocabulary_001 -o /tmp/jlpt.apkg
+nix run github:nyeong/amgi -- build examples/toeic
+nix run github:nyeong/amgi -- build examples/toeic -o /tmp/toeic.apkg
 
 # lint
 nix run github:nyeong/amgi -- lint <덱_디렉토리>
-nix run github:nyeong/amgi -- lint JLPT/n2_frequent_vocabulary_001
+nix run github:nyeong/amgi -- lint examples/toeic
 ```
 
 빌드 결과 파일의 경로 우선순위는 다음과 같습니다.
@@ -64,10 +64,10 @@ nix run github:nyeong/amgi -- lint JLPT/n2_frequent_vocabulary_001
 
 1. 계획: 외울 내용을 정리하고 `amgi.yaml`에 덱 스키마를 정의합니다.
    - 필드 정의는 [Amgi v1 Schema](docs/amgi-v1-schema.md)를 참고하세요.
-   - 예시는 [JLPT 예시 덱](JLPT/n2_frequent_vocabulary_001/amgi.yaml)을 참고하세요.
+   - 예시는 [공개 예시 덱](examples/toeic/amgi.yaml)을 참고하세요.
 2. 수집: 스키마에 맞춰 정형화된 YAML 데이터셋을 작성합니다.
    - 필드 정의는 [Amgi v1 Schema](docs/amgi-v1-schema.md)를 참고하세요.
-   - 예시는 [JLPT 예시 데이터셋](JLPT/n2_frequent_vocabulary_001)을 참고하세요.
+   - 예시는 [공개 예시 데이터셋](examples/toeic)을 참고하세요.
    - 특정 파일에서만 추가 카드를 만들고 싶다면 `_cards:`를 함께 적습니다.
 3. 생성: 정의된 카드 규칙에 따라 `.apkg`를 만들고 Anki로 가져옵니다.
 

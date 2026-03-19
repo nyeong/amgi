@@ -38,8 +38,8 @@ RSpec.describe Amgi::Application::LoadDeck do
     end
   end
 
-  context 'when loading the JLPT example deck' do
-    let(:deck_path) { File.expand_path('../../JLPT/n2_frequent_vocabulary_001', __dir__) }
+  context 'when loading a deck with the furigana toggle UI' do
+    let(:deck_path) { File.expand_path('../fixtures/decks/furigana_toggle', __dir__) }
 
     it 'includes the furigana toggle UI in the card templates' do
       expect(result).to be_success

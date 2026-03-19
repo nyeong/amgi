@@ -1,0 +1,23 @@
+schema: amgi_v1
+name: Furigana_Toggle_Fixture
+css: |
+  .card.is-furigana-hidden ruby rt {
+    visibility: hidden;
+  }
+note_schema:
+  id: "{{target}}"
+  required_fields:
+    - target
+    - meaning
+  optional_fields: []
+cards:
+  - name: Recall Meaning
+    default: true
+    front: |
+      <button type="button" data-furigana-toggle onclick="amgi.jlpt.showFurigana = !amgi.jlpt.showFurigana">
+        Toggle
+      </button>
+      <div class="target">{{target}}</div>
+    back: |
+      {{FrontSide}}
+      <div class="meaning">{{meaning}}</div>

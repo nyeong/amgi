@@ -4,11 +4,11 @@
 
 ```yaml
 schema: amgi_v1
-name: JLPT_N2_Frequent_Vocabulary_001
-output: build/jlpt.apkg
+name: Japanese_Vocabulary
+output: build/japanese-vocabulary.apkg
 global_tags:
-  - JLPT
-  - N2
+  - Vocabulary
+  - Intermediate
 
 note_schema:
   id: "{{target}}"
