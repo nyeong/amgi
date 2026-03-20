@@ -1,0 +1,25 @@
+schema: amgi_v1
+name: LegacySourceDeck
+note_schema:
+  id: "{{target}}"
+  required_fields:
+    - target
+    - meaning
+  optional_fields: []
+cards:
+  - name: Recall Meaning
+    default: true
+    front: |
+      <div class="target">{{target}}</div>
+    back: |
+      {{FrontSide}}
+      <hr id=answer>
+      <div class="meaning">{{meaning}}</div>
+  - name: Reverse
+    default: false
+    front: |
+      <div class="meaning">{{meaning}}</div>
+    back: |
+      {{FrontSide}}
+      <hr id=answer>
+      <div class="target">{{target}}</div>

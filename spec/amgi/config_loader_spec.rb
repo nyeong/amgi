@@ -29,7 +29,7 @@ RSpec.describe Amgi::Application::LoadDeck do
     expect(deck.note_sources.first.enabled_cards).to eq(['Cloze Example'])
   end
 
-  it 'ignores root-level dataset `_meta` fields' do
+  it 'ignores root-level dataset `meta` fields' do
     expect(result).to be_success
 
     note_source = result.value.note_sources.find do |source|
@@ -69,7 +69,7 @@ RSpec.describe Amgi::Application::LoadDeck do
     end
   end
 
-  context 'when a dataset file defines `_name`' do
+  context 'when a dataset file defines `name`' do
     let(:deck_path) { File.expand_path('../fixtures/decks/source_named_subdecks', __dir__) }
 
     it 'branches that dataset into a subdeck name under the amgi deck name' do
@@ -89,6 +89,22 @@ RSpec.describe Amgi::Application::LoadDeck do
     end
   end
 
+  context 'when a dataset file uses legacy root metadata keys' do
+    let(:deck_path) { File.expand_path('../fixtures/decks/legacy_source_metadata', __dir__) }
+
+    it 'still loads `_meta`, `_cards`, and `_name`' do
+      expect(result).to be_success
+
+      note_source = result.value.note_sources.first
+
+      aggregate_failures do
+        expect(note_source.enabled_cards).to eq(['Reverse'])
+        expect(note_source.deck_name).to eq('LegacySourceDeck::Legacy Branch')
+        expect(note_source.notes.map { |note| note['target'] }).to eq(['legacy'])
+      end
+    end
+  end
+
   context 'when a dataset file uses mapping-style notes' do
     let(:deck_path) { File.expand_path('../fixtures/decks/invalid_notes_mapping', __dir__) }
 
@@ -100,13 +116,13 @@ RSpec.describe Amgi::Application::LoadDeck do
     end
   end
 
-  context 'when a dataset file defines a blank `_name`' do
+  context 'when a dataset file defines a blank `name`' do
     let(:deck_path) { File.expand_path('../fixtures/decks/invalid_source_name_blank', __dir__) }
 
     it 'returns a load error' do
       expect(result).not_to be_success
       expect(result.errors).to include(
-        "#{File.join(deck_path, 'cards.yaml')}: `_name` must not be blank"
+        "#{File.join(deck_path, 'cards.yaml')}: `name` must not be blank"
       )
     end
   end
@@ -122,12 +138,14 @@ RSpec.describe Amgi::Application::LoadDeck do
     end
   end
 
-  context 'when a dataset file defines `_cards` as a scalar' do
+  context 'when a dataset file defines `cards` as a scalar' do
     let(:deck_path) { File.expand_path('../fixtures/decks/invalid_source_cards_scalar', __dir__) }
 
     it 'returns a load error' do
       expect(result).not_to be_success
-      expect(result.errors).to include('`_cards` must be a string array')
+      expect(result.errors).to include(
+        "#{File.join(deck_path, 'cards.yaml')}: `cards` must be a string array"
+      )
     end
   end
 

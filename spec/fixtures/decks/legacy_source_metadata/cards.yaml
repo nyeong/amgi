@@ -1,0 +1,8 @@
+_meta:
+  source: old fixture
+_name: Legacy Branch
+_cards:
+  - Reverse
+notes:
+  - target: legacy
+    meaning: legacy meaning

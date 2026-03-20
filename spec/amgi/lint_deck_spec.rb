@@ -63,7 +63,7 @@ RSpec.describe Amgi::Application::LintDeck do
     result = described_class.call(loaded.value)
 
     expect(result).not_to be_success
-    expect(result.errors.join("\n")).to include('Unknown dataset `_cards`: Reverse')
+    expect(result.errors.join("\n")).to include('Unknown dataset `cards`: Reverse')
   end
 
   it 'rejects duplicate note identities according to note_schema.id' do

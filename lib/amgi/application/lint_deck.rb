@@ -104,7 +104,7 @@ module Amgi
 
       def validate_note_source(config, note_source, errors)
         unless string_array?(note_source.enabled_cards)
-          errors << "#{note_source.source_path}: `_cards` must be a string array"
+          errors << "#{note_source.source_path}: `cards` must be a string array"
           return
         end
 
@@ -112,7 +112,7 @@ module Amgi
         return if unknown_cards.empty?
 
         errors << (
-          "#{note_source.source_path}: Unknown dataset `_cards`: #{unknown_cards.join(', ')}"
+          "#{note_source.source_path}: Unknown dataset `cards`: #{unknown_cards.join(', ')}"
         )
       end
 

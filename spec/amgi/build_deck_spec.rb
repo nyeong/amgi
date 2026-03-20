@@ -237,7 +237,7 @@ RSpec.describe Amgi::Application::BuildDeck do
     end
   end
 
-  it 'branches cards into dataset subdecks when a source defines `_name`' do
+  it 'branches cards into dataset subdecks when a source defines `name`' do
     deck_path = File.expand_path('../fixtures/decks/source_named_subdecks', __dir__)
 
     Dir.mktmpdir do |dir|

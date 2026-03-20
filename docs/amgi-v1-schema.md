@@ -87,27 +87,28 @@ Defines the card templates that will be derived from each note.
 Card generation rules:
 
 - the `default: true` card is always generated
-- non-default cards must be enabled per dataset file through the root-level `_cards` list
+- non-default cards must be enabled per dataset file through the root-level `cards` list
 - an enabled non-default card is generated only when every field referenced on its `front` is present
-- use `_cards` plus optional fields on `front` to create expansion cards only in the source files that need them
+- use `cards` plus optional fields on `front` to create expansion cards only in the source files that need them
 
 ## Dataset Files
 
 Dataset files are YAML files with a top-level `notes:` list.
-They may also define a root-level `_cards` string array to opt into extra non-default cards for that file.
-They may define a root-level `_name` string to branch those cards into
-`<amgi.yaml name>::<_name>`.
-They may define a root-level `_meta` mapping for human-only metadata about that YAML file.
-Amgi ignores `_meta` completely.
+They may also define a root-level `cards` string array to opt into extra non-default cards for that file.
+They may define a root-level `name` string to branch those cards into
+`<amgi.yaml name>::<name>`.
+They may define a root-level `meta` mapping for human-only metadata about that YAML file.
+Amgi ignores `meta` completely.
+Legacy `_cards`, `_name`, and `_meta` are still accepted for compatibility.
 
 ```yaml
-_meta:
+meta:
   description: "Vocabulary from chapter 3"
   source: "textbook page 42"
 
-_name: "Chapter 3"
+name: "Chapter 3"
 
-_cards:
+cards:
   - "Cloze Context"
 
 notes:
@@ -134,9 +135,9 @@ notes:
 
 ```yaml
 # b.yaml
-_name: "Symptoms"
+name: "Symptoms"
 
-_cards:
+cards:
   - "Recall Target"
 
 notes:
@@ -151,7 +152,7 @@ deck, while `b.yaml` generates the default card plus `Recall Target` in
 
 ## Note Rules
 
-Fields that start with `_` are reserved metadata fields.
+Inside `notes:`, fields that start with `_` are reserved metadata fields.
 All other fields must be declared in `amgi.yaml`.
 
 Identity rules:
@@ -164,6 +165,6 @@ Identity rules:
 Current reserved fields:
 
 - `_tags`: note-specific tags
-- dataset root `_cards`: card names enabled for every note in that source file
-- dataset root `_name`: child deck suffix for every card generated from that source file
-- dataset root `_meta`: freeform human metadata for that YAML file; ignored by Amgi
+- dataset root `cards`: card names enabled for every note in that source file
+- dataset root `name`: child deck suffix for every card generated from that source file
+- dataset root `meta`: freeform human metadata for that YAML file; ignored by Amgi
