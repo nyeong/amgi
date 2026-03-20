@@ -41,6 +41,8 @@ underlying note.
 
 If a specific dataset file should produce extra cards, add `_cards:` to that
 file. See the real example in [part5.yaml](examples/toeic/part5.yaml).
+If a dataset file should build into a child deck, add `_name:` at the root and
+Amgi will place its cards under `<amgi name>::<dataset _name>`.
 If you want human-only notes about that dataset file, add `_meta:` at the
 root. Amgi ignores `_meta`.
 
@@ -83,6 +85,7 @@ Build output precedence:
    - See [Amgi v1 Schema](docs/amgi-v1-schema.md).
    - See the [example dataset](examples/toeic).
    - Add `_cards:` when that file should emit extra card templates.
+   - Add `_name:` when that file should branch into a child deck.
    - Add `_meta:` for a description, source notes, or other file-level metadata that Amgi should ignore.
 3. Build the `.apkg` and import it into Anki.
 
@@ -105,12 +108,15 @@ vocabulary.
 _meta:
   description: "Words from lesson 12"
 
+_name: "Lesson 12"
+
 notes:
   - target: "痛み"
     meaning: "pain"
 ```
 
    - Add `_cards:` only to the files that should emit extra templates.
+   - Add `_name:` only to the files that should build into child decks.
 4. Define how cards should be rendered in Anki from the same schema.
    - See [Amgi v1 Schema](docs/amgi-v1-schema.md) for the exact card-generation rules.
 5. Build the `.apkg`, import it into Anki, and study.

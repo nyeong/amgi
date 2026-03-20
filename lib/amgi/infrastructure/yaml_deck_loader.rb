@@ -8,11 +8,13 @@ module Amgi
       CONFIG_FILE = 'amgi.yaml'
 
       def call(deck_path)
+        config = load_build_config(deck_path)
+
         Application::Result.success(
           Domain::DeckSource.new(
             deck_path: deck_path,
-            config: load_build_config(deck_path),
-            note_sources: load_note_sources(deck_path)
+            config: config,
+            note_sources: load_note_sources(deck_path, base_deck_name: config.name)
           )
         )
       rescue Psych::SyntaxError => e
@@ -56,7 +58,7 @@ module Amgi
         )
       end
 
-      def load_note_sources(deck_path)
+      def load_note_sources(deck_path, base_deck_name:)
         Dir.glob(File.join(deck_path, '*.yaml'), sort: true).filter_map do |path|
           next if File.basename(path) == CONFIG_FILE
 
@@ -64,7 +66,8 @@ module Amgi
           Domain::NoteSource.new(
             source_path: path,
             notes: normalize_notes(path, data['notes']),
-            enabled_cards: normalize_enabled_cards(data['_cards'])
+            enabled_cards: normalize_enabled_cards(data['_cards']),
+            deck_name: normalize_deck_name(path, base_deck_name, data['_name'])
           )
         end
       end
@@ -74,6 +77,16 @@ module Amgi
         raise KeyError, '`_cards` must be a string array' unless enabled_cards.is_a?(Array)
 
         enabled_cards.map(&:to_s)
+      end
+
+      def normalize_deck_name(source_path, base_deck_name, source_name)
+        return base_deck_name if source_name.nil?
+        raise KeyError, "#{source_path}: `_name` must be a string" unless source_name.is_a?(String)
+
+        source_name = source_name.strip
+        raise KeyError, "#{source_path}: `_name` must not be blank" if source_name.empty?
+
+        "#{base_deck_name}::#{source_name}"
       end
 
       def normalize_notes(source_path, notes)
@@ -89,9 +102,7 @@ module Amgi
       end
 
       def normalize_note(source_path, note, index)
-        unless note.is_a?(Hash)
-          raise KeyError, "#{source_path}:note##{index + 1} must be a mapping"
-        end
+        raise KeyError, "#{source_path}:note##{index + 1} must be a mapping" unless note.is_a?(Hash)
 
         note.transform_keys(&:to_s)
       end

@@ -120,6 +120,7 @@ module Amgi
 
       def call(validated_deck, output_path:)
         FileUtils.mkdir_p(File.dirname(output_path))
+        deck_names = collection_deck_names(validated_deck.deck_source)
         note_rows, card_rows = build_rows(validated_deck)
 
         Dir.mktmpdir('amgi-build') do |tmp_dir|
@@ -127,6 +128,7 @@ module Amgi
           build_collection(
             collection_path: collection_path,
             validated_deck: validated_deck,
+            deck_names: deck_names,
             note_rows: note_rows,
             card_rows: card_rows
           )
@@ -147,43 +149,25 @@ module Amgi
       def build_rows(validated_deck)
         config = validated_deck.deck_source.config
         deck_seed = config.name
-        model_id = deterministic_integer("model:#{deck_seed}")
-        deck_id = deterministic_integer("deck:#{deck_seed}")
-        timestamp = Time.now.to_i
+        build_context = {
+          config: config,
+          deck_seed: deck_seed,
+          model_id: deterministic_integer("model:#{deck_seed}"),
+          timestamp: Time.now.to_i,
+          note_rows: [],
+          card_rows: []
+        }
         due = 1
-        note_rows = []
-        card_rows = []
+
         validated_deck.deck_source.note_sources.each do |note_source|
-          note_source.notes.each do |note|
-            active_cards = active_cards(config, note_source, note)
-            note_id, guid = note_identity(
-              note: note,
-              note_schema: config.note_schema,
-              deck_seed: deck_seed
-            )
-            note_rows << note_row(
-              config: config,
-              note: note,
-              note_id: note_id,
-              model_id: model_id,
-              guid: guid,
-              timestamp: timestamp
-            )
-            due = append_card_rows(
-              config: config,
-              active_cards: active_cards,
-              card_rows: card_rows,
-              card_context: {
-                guid: guid,
-                note_id: note_id,
-                deck_id: deck_id,
-                due: due,
-                timestamp: timestamp
-              }
-            )
-          end
+          due = append_note_source_rows(
+            note_source: note_source,
+            due: due,
+            build_context: build_context
+          )
         end
-        [note_rows, card_rows]
+
+        [build_context.fetch(:note_rows), build_context.fetch(:card_rows)]
       end
 
       def note_row(config:, note:, note_id:, model_id:, guid:, timestamp:)
@@ -229,14 +213,14 @@ module Amgi
         ]
       end
 
-      def build_collection(collection_path:, validated_deck:, note_rows:, card_rows:)
+      def build_collection(collection_path:, validated_deck:, deck_names:, note_rows:, card_rows:)
         config = validated_deck.deck_source.config
         db = SQLite3::Database.new(collection_path)
 
         configure_build_database(db)
         db.transaction do
           ANKI_COLLECTION_SCHEMA.each { |statement| db.execute(statement) }
-          insert_collection_row(db, config)
+          insert_collection_row(db, config, deck_names)
           insert_note_rows(db, note_rows)
           insert_card_rows(db, card_rows)
         end
@@ -250,9 +234,9 @@ module Amgi
         db.execute('PRAGMA temp_store = MEMORY')
       end
 
-      def insert_collection_row(db, config)
+      def insert_collection_row(db, config, deck_names)
         statement = db.prepare('INSERT INTO col VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)')
-        statement.execute(*collection_row(config))
+        statement.execute(*collection_row(config, deck_names))
       ensure
         statement&.close
       end
@@ -273,9 +257,8 @@ module Amgi
         statement&.close
       end
 
-      def collection_row(config)
+      def collection_row(config, deck_names)
         timestamp = Time.now.to_i
-        deck_id = deterministic_integer("deck:#{config.name}")
         model_id = deterministic_integer("model:#{config.name}")
         [
           1,
@@ -288,7 +271,7 @@ module Amgi
           0,
           '{}',
           JSON.generate(models_payload(config, model_id)),
-          JSON.generate(decks_payload(config, deck_id)),
+          JSON.generate(decks_payload(deck_names)),
           JSON.generate(deck_config_payload),
           '{}'
         ]
@@ -317,12 +300,15 @@ module Amgi
         }
       end
 
-      def decks_payload(config, deck_id)
-        {
-          deck_id.to_s => {
+      def decks_payload(deck_names)
+        timestamp = Time.now.to_i
+
+        deck_names.each_with_object({}) do |deck_name, payload|
+          deck_id = deterministic_integer("deck:#{deck_name}")
+          payload[deck_id.to_s] = {
             id: deck_id,
-            name: config.name,
-            mod: Time.now.to_i,
+            name: deck_name,
+            mod: timestamp,
             usn: 0,
             desc: '',
             dyn: 0,
@@ -336,7 +322,7 @@ module Amgi
             lrnToday: [0, 0],
             timeToday: [0, 0]
           }
-        }
+        end
       end
 
       def deck_config_payload
@@ -465,6 +451,53 @@ module Amgi
         [note_id, guid]
       end
 
+      def append_note_source_rows(note_source:, due:, build_context:)
+        deck_id = deterministic_integer("deck:#{note_source.deck_name}")
+
+        note_source.notes.each do |note|
+          due = append_note_rows(
+            note_source: note_source,
+            note: note,
+            deck_id: deck_id,
+            due: due,
+            build_context: build_context
+          )
+        end
+
+        due
+      end
+
+      def append_note_rows(note_source:, note:, deck_id:, due:, build_context:)
+        config = build_context.fetch(:config)
+        active_cards = active_cards(config, note_source, note)
+        note_id, guid = note_identity(
+          note: note,
+          note_schema: config.note_schema,
+          deck_seed: build_context.fetch(:deck_seed)
+        )
+        build_context.fetch(:note_rows) << note_row(
+          config: config,
+          note: note,
+          note_id: note_id,
+          model_id: build_context.fetch(:model_id),
+          guid: guid,
+          timestamp: build_context.fetch(:timestamp)
+        )
+
+        append_card_rows(
+          config: config,
+          active_cards: active_cards,
+          card_rows: build_context.fetch(:card_rows),
+          card_context: {
+            guid: guid,
+            note_id: note_id,
+            deck_id: deck_id,
+            due: due,
+            timestamp: build_context.fetch(:timestamp)
+          }
+        )
+      end
+
       def append_card_rows(config:, active_cards:, card_rows:, card_context:)
         due = card_context.fetch(:due)
 
@@ -486,6 +519,20 @@ module Amgi
 
       def furigana_formatter
         @furigana_formatter ||= FuriganaFormatter.new
+      end
+
+      def collection_deck_names(deck_source)
+        ([deck_source.config.name] + deck_source.note_sources.flat_map do |note_source|
+          deck_hierarchy(note_source.deck_name)
+        end).uniq
+      end
+
+      def deck_hierarchy(deck_name)
+        parts = deck_name.split('::')
+
+        parts.each_index.map do |index|
+          parts[0..index].join('::')
+        end
       end
 
       def active_cards(config, note_source, note)

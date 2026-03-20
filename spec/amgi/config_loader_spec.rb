@@ -69,6 +69,26 @@ RSpec.describe Amgi::Application::LoadDeck do
     end
   end
 
+  context 'when a dataset file defines `_name`' do
+    let(:deck_path) { File.expand_path('../fixtures/decks/source_named_subdecks', __dir__) }
+
+    it 'branches that dataset into a subdeck name under the amgi deck name' do
+      expect(result).to be_success
+
+      root_source = result.value.note_sources.find do |source|
+        File.basename(source.source_path) == 'a_root.yaml'
+      end
+      branch_source = result.value.note_sources.find do |source|
+        File.basename(source.source_path) == 'b_branch.yaml'
+      end
+
+      aggregate_failures do
+        expect(root_source.deck_name).to eq('SourceNamedDeck')
+        expect(branch_source.deck_name).to eq('SourceNamedDeck::Verbs')
+      end
+    end
+  end
+
   context 'when a dataset file uses mapping-style notes' do
     let(:deck_path) { File.expand_path('../fixtures/decks/invalid_notes_mapping', __dir__) }
 
@@ -76,6 +96,17 @@ RSpec.describe Amgi::Application::LoadDeck do
       expect(result).not_to be_success
       expect(result.errors).to include(
         "#{File.join(deck_path, 'cards.yaml')}: `notes` must be a list of note mappings"
+      )
+    end
+  end
+
+  context 'when a dataset file defines a blank `_name`' do
+    let(:deck_path) { File.expand_path('../fixtures/decks/invalid_source_name_blank', __dir__) }
+
+    it 'returns a load error' do
+      expect(result).not_to be_success
+      expect(result.errors).to include(
+        "#{File.join(deck_path, 'cards.yaml')}: `_name` must not be blank"
       )
     end
   end

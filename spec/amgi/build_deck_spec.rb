@@ -237,6 +237,34 @@ RSpec.describe Amgi::Application::BuildDeck do
     end
   end
 
+  it 'branches cards into dataset subdecks when a source defines `_name`' do
+    deck_path = File.expand_path('../fixtures/decks/source_named_subdecks', __dir__)
+
+    Dir.mktmpdir do |dir|
+      result = described_class.call(deck_path, output_path: File.join(dir, 'source_named.apkg'))
+
+      expect(result).to be_success
+
+      collection_path = extract_collection(result.value.output_path, dir, 'source_named.anki2')
+      db = SQLite3::Database.new(collection_path)
+      decks = JSON.parse(db.get_first_value('SELECT decks FROM col'))
+      id_to_name = decks.values.to_h { |deck| [deck.fetch('id'), deck.fetch('name')] }
+      card_deck_names = db.execute('SELECT did FROM cards ORDER BY due').flatten.map do |deck_id|
+        id_to_name.fetch(deck_id)
+      end
+
+      aggregate_failures do
+        expect(decks.values.map { |deck| deck.fetch('name') }).to include(
+          'SourceNamedDeck',
+          'SourceNamedDeck::Verbs'
+        )
+        expect(card_deck_names).to eq(['SourceNamedDeck', 'SourceNamedDeck::Verbs'])
+      end
+    ensure
+      db&.close
+    end
+  end
+
   def extract_collection(apkg_path, dir, filename)
     collection_path = File.join(dir, filename)
     Zip::File.open(apkg_path) do |zip_file|

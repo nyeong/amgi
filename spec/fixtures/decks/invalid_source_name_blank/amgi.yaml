@@ -1,0 +1,17 @@
+schema: amgi_v1
+name: InvalidSourceName
+note_schema:
+  id: "{{target}}"
+  required_fields:
+    - target
+    - meaning
+  optional_fields: []
+cards:
+  - name: Recall Meaning
+    default: true
+    front: |
+      <div class="target">{{target}}</div>
+    back: |
+      {{FrontSide}}
+      <hr id=answer>
+      <div class="meaning">{{meaning}}</div>

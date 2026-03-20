@@ -156,7 +156,7 @@ module Amgi
 
         errors << (
           "#{source_path}:note##{index + 1} Duplicate note id `#{note_id}` " \
-          "(already used by #{seen_note_ids.fetch(note_id)})"
+            "(already used by #{seen_note_ids.fetch(note_id)})"
         )
       ensure
         seen_note_ids[note_id] ||= "#{source_path}:note##{index + 1}" if note_id

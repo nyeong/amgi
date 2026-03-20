@@ -3,6 +3,7 @@ AllCops:
   SuggestExtensions: false
   TargetRubyVersion: 3.3
   Exclude:
+    - "result/**/*"
     - "vendor/**/*"
     - "bin/update_jlpt_visual_memo.rb"
 
