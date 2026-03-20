@@ -265,6 +265,40 @@ RSpec.describe Amgi::Application::BuildDeck do
     end
   end
 
+  it 'keeps named-dataset cards attached to models that default to the same deck' do
+    deck_path = File.expand_path('../fixtures/decks/source_named_subdecks', __dir__)
+
+    Dir.mktmpdir do |dir|
+      result = described_class.call(deck_path, output_path: File.join(dir, 'source_named.apkg'))
+
+      expect(result).to be_success
+
+      collection_path = extract_collection(result.value.output_path, dir, 'source_named.anki2')
+      db = SQLite3::Database.new(collection_path)
+      models = JSON.parse(db.get_first_value('SELECT models FROM col')).transform_values do |model|
+        model.fetch('did')
+      end
+      note_rows = db.execute('SELECT id, flds, mid FROM notes ORDER BY id').to_h do |id, flds, mid|
+        [id, { target: flds.split("\x1F").first, model_deck_id: models.fetch(mid.to_s) }]
+      end
+      note_deck_ids = db.execute('SELECT nid, did FROM cards ORDER BY due').to_h do |nid, did|
+        target = note_rows.fetch(nid).fetch(:target)
+        [target, { card_deck_id: did, model_deck_id: note_rows.fetch(nid).fetch(:model_deck_id) }]
+      end
+
+      aggregate_failures do
+        expect(note_deck_ids.fetch('root')).to include(
+          card_deck_id: note_deck_ids.fetch('root').fetch(:model_deck_id)
+        )
+        expect(note_deck_ids.fetch('branch')).to include(
+          card_deck_id: note_deck_ids.fetch('branch').fetch(:model_deck_id)
+        )
+      end
+    ensure
+      db&.close
+    end
+  end
+
   def extract_collection(apkg_path, dir, filename)
     collection_path = File.join(dir, filename)
     Zip::File.open(apkg_path) do |zip_file|

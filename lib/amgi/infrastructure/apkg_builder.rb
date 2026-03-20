@@ -121,6 +121,7 @@ module Amgi
       def call(validated_deck, output_path:)
         FileUtils.mkdir_p(File.dirname(output_path))
         deck_names = collection_deck_names(validated_deck.deck_source)
+        model_ids = model_ids_by_deck(validated_deck.deck_source.note_sources.map(&:deck_name))
         note_rows, card_rows = build_rows(validated_deck)
 
         Dir.mktmpdir('amgi-build') do |tmp_dir|
@@ -129,6 +130,7 @@ module Amgi
             collection_path: collection_path,
             validated_deck: validated_deck,
             deck_names: deck_names,
+            model_ids: model_ids,
             note_rows: note_rows,
             card_rows: card_rows
           )
@@ -152,7 +154,7 @@ module Amgi
         build_context = {
           config: config,
           deck_seed: deck_seed,
-          model_id: deterministic_integer("model:#{deck_seed}"),
+          model_ids: model_ids_by_deck(validated_deck.deck_source.note_sources.map(&:deck_name)),
           timestamp: Time.now.to_i,
           note_rows: [],
           card_rows: []
@@ -213,14 +215,21 @@ module Amgi
         ]
       end
 
-      def build_collection(collection_path:, validated_deck:, deck_names:, note_rows:, card_rows:)
+      def build_collection(
+        collection_path:,
+        validated_deck:,
+        deck_names:,
+        model_ids:,
+        note_rows:,
+        card_rows:
+      )
         config = validated_deck.deck_source.config
         db = SQLite3::Database.new(collection_path)
 
         configure_build_database(db)
         db.transaction do
           ANKI_COLLECTION_SCHEMA.each { |statement| db.execute(statement) }
-          insert_collection_row(db, config, deck_names)
+          insert_collection_row(db, config, deck_names, model_ids)
           insert_note_rows(db, note_rows)
           insert_card_rows(db, card_rows)
         end
@@ -234,9 +243,9 @@ module Amgi
         db.execute('PRAGMA temp_store = MEMORY')
       end
 
-      def insert_collection_row(db, config, deck_names)
+      def insert_collection_row(db, config, deck_names, model_ids)
         statement = db.prepare('INSERT INTO col VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)')
-        statement.execute(*collection_row(config, deck_names))
+        statement.execute(*collection_row(config, deck_names, model_ids))
       ensure
         statement&.close
       end
@@ -257,9 +266,8 @@ module Amgi
         statement&.close
       end
 
-      def collection_row(config, deck_names)
+      def collection_row(config, deck_names, model_ids)
         timestamp = Time.now.to_i
-        model_id = deterministic_integer("model:#{config.name}")
         [
           1,
           timestamp,
@@ -270,23 +278,25 @@ module Amgi
           0,
           0,
           '{}',
-          JSON.generate(models_payload(config, model_id)),
+          JSON.generate(models_payload(config, model_ids)),
           JSON.generate(decks_payload(deck_names)),
           JSON.generate(deck_config_payload),
           '{}'
         ]
       end
 
-      def models_payload(config, model_id)
-        {
-          model_id.to_s => {
+      def models_payload(config, model_ids)
+        model_ids.each_with_object({}) do |(deck_name, model_id), payload|
+          deck_id = deterministic_integer("deck:#{deck_name}")
+
+          payload[model_id.to_s] = {
             id: model_id,
-            name: config.name,
+            name: deck_name,
             type: 0,
             mod: Time.now.to_i,
             usn: 0,
             sortf: 0,
-            did: deterministic_integer("deck:#{config.name}"),
+            did: deck_id,
             css: config.css || DEFAULT_MODEL_CSS,
             latexPre: DEFAULT_LATEX_PRE,
             latexPost: DEFAULT_LATEX_POST,
@@ -294,10 +304,10 @@ module Amgi
             req: required_fields_payload(config),
             tags: [],
             vers: [],
-            tmpls: template_payloads(config),
+            tmpls: template_payloads(config, deck_id),
             flds: field_payloads(config)
           }
-        }
+        end
       end
 
       def decks_payload(deck_names)
@@ -414,7 +424,7 @@ module Amgi
         end
       end
 
-      def template_payloads(config)
+      def template_payloads(config, _deck_id)
         config.cards.each_with_index.map do |card, index|
           {
             name: card.name,
@@ -479,7 +489,7 @@ module Amgi
           config: config,
           note: note,
           note_id: note_id,
-          model_id: build_context.fetch(:model_id),
+          model_id: build_context.fetch(:model_ids).fetch(note_source.deck_name),
           guid: guid,
           timestamp: build_context.fetch(:timestamp)
         )
@@ -525,6 +535,12 @@ module Amgi
         ([deck_source.config.name] + deck_source.note_sources.flat_map do |note_source|
           deck_hierarchy(note_source.deck_name)
         end).uniq
+      end
+
+      def model_ids_by_deck(deck_names)
+        deck_names.uniq.each_with_object({}) do |deck_name, model_ids|
+          model_ids[deck_name] = deterministic_integer("model:#{deck_name}")
+        end
       end
 
       def deck_hierarchy(deck_name)
