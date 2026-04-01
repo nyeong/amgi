@@ -77,6 +77,7 @@ module Amgi
           return if defined?(Application::LoadDeck) && defined?(Application::LintDeck)
 
           require_relative '../../application/result'
+          require_relative '../../domain/blank_field_dsl'
           require_relative '../../domain/build_config'
           require_relative '../../domain/deck_source'
           require_relative '../../domain/note_source'

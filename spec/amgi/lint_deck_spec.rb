@@ -81,4 +81,15 @@ RSpec.describe Amgi::Application::LintDeck do
     expect(result).not_to be_success
     expect(result.errors.join("\n")).to include('Unknown note id placeholder(s): unknownField')
   end
+
+  it 'rejects invalid blank field DSL and direct writes to derived blank fields' do
+    loaded = Amgi::Application::LoadDeck.call(fixture_path('invalid_blank_field_dsl'))
+    result = described_class.call(loaded.value)
+
+    expect(result).not_to be_success
+    aggregate_failures do
+      expect(result.errors.join("\n")).to include('Invalid blank field DSL in `example`')
+      expect(result.errors.join("\n")).to include('`exampleBlank` is derived from `example`')
+    end
+  end
 end

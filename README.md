@@ -39,6 +39,11 @@ One learning note can produce multiple cards. For example, a language deck can
 generate both source-to-target cards and target-to-source cards from the same
 underlying note.
 
+Amgi also supports a small blank-field DSL for fill-in-the-blank cards. You can
+author a sentence once with markers like `[[answer]]` or `[[answer|hint]]`,
+then render the revealed text from the base field and the masked text from a
+derived `...Blank` field. See [Blank Field DSL](docs/blank-field-dsl.md).
+
 If a specific dataset file should produce extra cards, add `cards:` to that
 file. See the real example in [part5.yaml](examples/toeic/part5.yaml).
 If a dataset file should build into a child deck, add `name:` at the root and
@@ -85,6 +90,9 @@ Build output precedence:
    - See [Amgi v1 Schema](docs/amgi-v1-schema.md).
    - See the [example dataset](examples/toeic).
    - Add `cards:` when that file should emit extra card templates.
+   - For blank cards, write the sentence once in the base field and mark hidden
+     spans with `[[...]]`; render the masked side from a sibling `...Blank`
+     field.
    - Add `name:` when that file should branch into a child deck.
    - Add `meta:` for a description, source notes, or other file-level metadata that Amgi should ignore.
 3. Build the `.apkg` and import it into Anki.
@@ -119,11 +127,13 @@ notes:
    - Add `name:` only to the files that should build into child decks.
 4. Define how cards should be rendered in Anki from the same schema.
    - See [Amgi v1 Schema](docs/amgi-v1-schema.md) for the exact card-generation rules.
+   - See [Blank Field DSL](docs/blank-field-dsl.md) for the blank-card syntax.
 5. Build the `.apkg`, import it into Anki, and study.
 
 ## Documentation
 
 - [Amgi v1 Schema](docs/amgi-v1-schema.md)
+- [Blank Field DSL](docs/blank-field-dsl.md)
 - [CI Usage](docs/ci-usage.md)
 - [CLI Commands](docs/cli-commands.md)
 - [Dependencies and Installation](docs/dependencies.md)

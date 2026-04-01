@@ -10,7 +10,7 @@ note_schema:
     - meaning
   optional_fields:
     - example
-    - blankExample
+    - exampleBlank
 cards:
   - name: Recall Meaning
     default: true
@@ -21,9 +21,9 @@ cards:
       <hr id=answer>
       <div class="meaning">{{meaning}}</div>
       <div class="example">{{example}}</div>
-  - name: Cloze Example
+  - name: Blank Example
     front: |
-      <div class="example">{{blankExample}}</div>
+      <div class="example">{{exampleBlank}}</div>
     back: |
       {{FrontSide}}
       <hr id=answer>

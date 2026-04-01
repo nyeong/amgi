@@ -14,13 +14,10 @@ note_schema:
   id: "{{target}}"
   required_fields:
     - target
-    - reading
     - meaning
-    - context
-    - translation
-    - memo
   optional_fields:
-    - clozeContext
+    - example
+    - exampleBlank
 
 cards:
   - name: Recall Meaning
@@ -31,23 +28,17 @@ cards:
       {{FrontSide}}
       <hr id=answer>
       <div>{{meaning}}</div>
+      <div>{{example}}</div>
 
-  - name: Recall Target
+  - name: Blank Example
     front: |
+      <div>{{exampleBlank}}</div>
+    back: |
+      {{FrontSide}}
+      <hr id=answer>
+      <div>{{example}}</div>
+      <div>{{target}}</div>
       <div>{{meaning}}</div>
-    back: |
-      {{FrontSide}}
-      <hr id=answer>
-      <div>{{target}}</div>
-
-  - name: Cloze Context
-    front: |
-      <div>{{clozeContext}}</div>
-    back: |
-      {{FrontSide}}
-      <hr id=answer>
-      <div>{{context}}</div>
-      <div>{{target}}</div>
 ```
 
 ### `schema`
@@ -91,6 +82,28 @@ Card generation rules:
 - an enabled non-default card is generated only when every field referenced on its `front` is present
 - use `cards` plus optional fields on `front` to create expansion cards only in the source files that need them
 
+### Blank Field DSL
+
+Amgi supports a small DSL for fill-in-the-blank cards.
+
+- Author the sentence once in a base field such as `example`
+- Declare a sibling derived field such as `exampleBlank`
+- Use `{{example}}` for the revealed text
+- Use `{{exampleBlank}}` for the masked text
+
+Example note value:
+
+```yaml
+example: "All employees must [[comply]] with the rules."
+```
+
+That renders as:
+
+- `{{example}}` -> `All employees must comply with the rules.`
+- `{{exampleBlank}}` -> `All employees must [...] with the rules.`
+
+See [Blank Field DSL](blank-field-dsl.md) for the full syntax and validation rules.
+
 ## Dataset Files
 
 Dataset files are YAML files with a top-level `notes:` list.
@@ -109,16 +122,12 @@ meta:
 name: "Chapter 3"
 
 cards:
-  - "Cloze Context"
+  - "Blank Example"
 
 notes:
   - target: "環境"
-    reading: "かんきょう"
     meaning: "environment, conditions"
-    context: "環境を守る"
-    clozeContext: "_____を守る"
-    translation: "protect the environment"
-    memo: "Memorize common collocations as well."
+    example: "環境を[[守る]]"
     _tags:
       - Noun
 ```

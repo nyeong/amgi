@@ -9,5 +9,8 @@
 - Work in small TDD loops: failing test -> minimal code -> `bin/check` -> refactor.
 - Keep code split by responsibility and layer; avoid one-file blobs.
 - Prefer clean architecture, but do not over-engineer.
+- The blank-card DSL is documented in `docs/blank-field-dsl.md`. If you change
+  its syntax or rendering rules, update that doc, `docs/amgi-v1-schema.md`, and
+  `README.md` in the same unit of work.
 - Use actual emoji gitmoji in commit messages.
 - Commit immediately when one meaningful unit of work is complete.

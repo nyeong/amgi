@@ -1,10 +1,9 @@
 cards:
-  - Cloze Example
+  - Blank Example
 notes:
   - target: comply
     meaning: 준수하다, 따르다
-    example: All employees must comply with the rules.
-    blankExample: All employees must {} with the rules.
+    example: All employees must [[comply]] with the rules.
     _tags:
       - Part5
   - target: invoice

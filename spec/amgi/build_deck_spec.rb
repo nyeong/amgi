@@ -28,6 +28,9 @@ RSpec.describe Amgi::Application::BuildDeck do
       db = SQLite3::Database.new(collection_path)
       note_count = db.get_first_value('SELECT COUNT(*) FROM notes')
       card_count = db.get_first_value('SELECT COUNT(*) FROM cards')
+      note_fields = db.execute('SELECT flds FROM notes ORDER BY id').map do |row|
+        row.first.split("\x1F", -1)
+      end
       tables = db.execute("SELECT name FROM sqlite_master WHERE type = 'table'").flatten
       models_json = db.get_first_value('SELECT models FROM col')
       decks_json = db.get_first_value('SELECT decks FROM col')
@@ -40,6 +43,22 @@ RSpec.describe Amgi::Application::BuildDeck do
       aggregate_failures do
         expect(note_count).to eq(2)
         expect(card_count).to eq(3)
+        expect(note_fields.first).to eq(
+          [
+            'comply',
+            '준수하다, 따르다',
+            'All employees must comply with the rules.',
+            'All employees must [...] with the rules.'
+          ]
+        )
+        expect(note_fields.last).to eq(
+          [
+            'invoice',
+            '송장, 청구서',
+            '',
+            ''
+          ]
+        )
         expect(tables).to include('col', 'notes', 'cards', 'revlog', 'graves')
         expect(JSON.parse(media_json)).to eq({})
         expect(model.fetch('css')).to be_a(String)

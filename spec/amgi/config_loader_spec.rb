@@ -16,17 +16,17 @@ RSpec.describe Amgi::Application::LoadDeck do
     expect(deck.config.output).to be_nil
     expect(deck.config.note_schema.id).to eq('{{target}}')
     expect(deck.config.note_schema.required_fields).to eq(%w[target meaning])
-    expect(deck.config.note_schema.optional_fields).to eq(%w[example blankExample])
+    expect(deck.config.note_schema.optional_fields).to eq(%w[example exampleBlank])
     expect(deck.config.required_fields).to eq(%w[target meaning])
-    expect(deck.config.optional_fields).to eq(%w[example blankExample])
-    expect(deck.config.all_fields).to eq(%w[target meaning example blankExample])
-    expect(deck.config.cards.map(&:name)).to eq(['Recall Meaning', 'Cloze Example'])
+    expect(deck.config.optional_fields).to eq(%w[example exampleBlank])
+    expect(deck.config.all_fields).to eq(%w[target meaning example exampleBlank])
+    expect(deck.config.cards.map(&:name)).to eq(['Recall Meaning', 'Blank Example'])
     expect(deck.note_sources.map(&:source_path)).to all(end_with('.yaml'))
     expect(deck.note_sources.flat_map(&:notes).size).to eq(2)
     expect(deck.note_sources.flat_map(&:notes).map { |note| note['target'] }).to eq(
       %w[comply invoice]
     )
-    expect(deck.note_sources.first.enabled_cards).to eq(['Cloze Example'])
+    expect(deck.note_sources.first.enabled_cards).to eq(['Blank Example'])
   end
 
   it 'ignores root-level dataset `meta` fields' do
@@ -39,7 +39,7 @@ RSpec.describe Amgi::Application::LoadDeck do
     aggregate_failures do
       expect(note_source).not_to be_nil
       expect(note_source.notes.map { |note| note['target'] }).to eq(%w[comply invoice])
-      expect(note_source.enabled_cards).to eq(['Cloze Example'])
+      expect(note_source.enabled_cards).to eq(['Blank Example'])
     end
   end
 

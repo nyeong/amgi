@@ -174,8 +174,8 @@ module Amgi
 
       def note_row(config:, note:, note_id:, model_id:, guid:, timestamp:)
         tags = merged_tags(config.global_tags, note['_tags'])
-        joined_fields = config.all_fields.map { |field| field_value(note, field) }.join("\x1F")
-        sort_field = note[config.required_fields.first].to_s
+        joined_fields = rendered_fields(config, note).join("\x1F")
+        sort_field = field_value(config, note, config.required_fields.first)
 
         [
           note_id,
@@ -386,17 +386,37 @@ module Amgi
         (Array(global_tags) + Array(local_tags)).uniq
       end
 
-      def field_value(note, field)
-        return note[field].to_s if note.key?(field) && !note[field].nil?
-
-        derived_field_value(note, field)
+      def rendered_fields(config, note)
+        config.all_fields.map { |field| field_value(config, note, field) }
       end
 
-      def derived_field_value(note, field)
-        builder = DERIVED_FIELD_BUILDERS[field]
-        return '' unless builder
+      def field_value(config, note, field)
+        if note.key?(field) && !note[field].nil?
+          return resolved_field_value(config, field, note[field])
+        end
 
-        builder.call(note, furigana_formatter)
+        derived_field_value(config, note, field)
+      end
+
+      def resolved_field_value(config, field, value)
+        return value.to_s unless config.blank_source_field?(field)
+
+        Domain::BlankFieldDsl.parse(value).full_text
+      end
+
+      def derived_field_value(config, note, field)
+        builder = DERIVED_FIELD_BUILDERS[field]
+        return builder.call(note, furigana_formatter) if builder
+        return derived_blank_field_value(config, note, field) if config.derived_blank_field?(field)
+
+        ''
+      end
+
+      def derived_blank_field_value(config, note, field)
+        base_field = config.base_field_for_blank(field)
+        return '' unless note.key?(base_field) && !note[base_field].nil?
+
+        Domain::BlankFieldDsl.parse(note[base_field]).blank_text
       end
 
       def format_tags(tags)
@@ -555,7 +575,7 @@ module Amgi
         config.cards.select do |card|
           card.default? || (
             source_enabled_card?(note_source, card) &&
-            fields_present?(note, card.front_fields)
+            fields_present?(config, note, card.front_fields)
           )
         end
       end
@@ -564,9 +584,9 @@ module Amgi
         note_source.enabled_cards.include?(card.name)
       end
 
-      def fields_present?(note, fields)
+      def fields_present?(config, note, fields)
         fields.all? do |field|
-          !field_value(note, field).strip.empty?
+          !field_value(config, note, field).strip.empty?
         end
       end
     end

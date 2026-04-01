@@ -1,0 +1,7 @@
+notes:
+  - target: comply
+    meaning: 준수하다, 따르다
+    example: All employees must [[comply with the rules.
+  - target: invoice
+    meaning: 송장, 청구서
+    exampleBlank: Invoice [...]

@@ -38,6 +38,7 @@ module Amgi
         errors << 'At least one card is required.' if config.cards.empty?
         validate_css(config, errors)
         validate_field_name_convention(config.all_fields, errors)
+        validate_blank_field_schema(config, errors)
         validate_cards_shape(config, errors)
 
         overlap = config.required_fields & config.optional_fields
@@ -81,6 +82,15 @@ module Amgi
               errors << "Unknown card placeholder `#{token}` in card `#{card.name}`"
             end
           end
+        end
+      end
+
+      def validate_blank_field_schema(config, errors)
+        config.all_fields.grep(/Blank\z/).each do |field|
+          base_field = config.base_field_for_blank(field)
+          next if config.all_fields.include?(base_field)
+
+          errors << "Derived blank field `#{field}` requires base field `#{base_field}`."
         end
       end
 
@@ -135,6 +145,7 @@ module Amgi
         end
 
         validate_tags(note, source_path, index, errors)
+        validate_blank_fields(config, note, source_path, index, errors)
         validate_note_identity(config, note, source_path, index, seen_note_ids, errors)
       end
 
@@ -142,6 +153,52 @@ module Amgi
         return if note['_tags'].nil? || string_array?(note['_tags'])
 
         errors << "#{source_path}:note##{index + 1} `_tags` must be a string array"
+      end
+
+      def validate_blank_fields(config, note, source_path, index, errors)
+        validate_direct_blank_field_writes(config, note, source_path, index, errors)
+        validate_blank_field_sources(config, note, source_path, index, errors)
+      end
+
+      def validate_direct_blank_field_writes(config, note, source_path, index, errors)
+        config.derived_blank_fields.each do |field|
+          next unless note.key?(field)
+
+          errors << (
+            "#{source_path}:note##{index + 1} `#{field}` is derived from " \
+              "`#{config.base_field_for_blank(field)}` and must not be set directly"
+          )
+        end
+      end
+
+      def validate_blank_field_sources(config, note, source_path, index, errors)
+        blank_source_fields(config).each do |field|
+          next unless note.key?(field) && !note[field].nil?
+
+          validate_blank_field_source(config, note[field], field, source_path, index, errors)
+        end
+      end
+
+      def blank_source_fields(config)
+        config.derived_blank_fields.map { |field| config.base_field_for_blank(field) }.uniq
+      end
+
+      def validate_blank_field_source(config, value, field, source_path, index, errors)
+        unless value.is_a?(String)
+          errors << (
+            "#{source_path}:note##{index + 1} `#{field}` must be a string when paired with " \
+              "`#{config.derived_blank_field_name(field)}`"
+          )
+          return
+        end
+
+        parsed = Domain::BlankFieldDsl.parse(value)
+        return if parsed.valid?
+
+        errors << (
+          "#{source_path}:note##{index + 1} Invalid blank field DSL in `#{field}`: " \
+            "#{parsed.errors.join(' ')}"
+        )
       end
 
       def validate_note_identity(config, note, source_path, index, seen_note_ids, errors)
